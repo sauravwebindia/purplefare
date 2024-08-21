@@ -66,6 +66,7 @@ export default function HotelsListing(props){
             setTraceId(responseData.data.traceId);
             localStorage.setItem('traceId',responseData.data.traceId);
             localStorage.setItem('cityName',responseData.data.cityName);
+            localStorage.setItem('searchParams',JSON.stringify(params));
             setCurrentPage(responseData.data.hotelResults.current_page);
             setCityName(responseData.data.cityName);
             let lastPage = parseInt(responseData.data.hotelResults.last_page);
@@ -107,6 +108,7 @@ export default function HotelsListing(props){
                 setTraceId(responseData.data.traceId);
                 localStorage.setItem('traceId',responseData.data.traceId);
                 localStorage.setItem('cityName',responseData.data.cityName);
+                localStorage.setItem('searchParams',JSON.stringify(params));
             }
             setCityName(responseData.data.cityName);
             setCurrentPage(responseData.data.hotelResults.current_page);
@@ -177,13 +179,13 @@ export default function HotelsListing(props){
                             {item.price>item.sale_price?
                                 <span className="hOffPrice" style={{display:'none'}}>Only 5 rooms left at this price on our site</span>
                             :''}
-                            {item.Facilities!=null?item.Facilities.length>0?
-                                <div className="hfacility" style={{display:"none"}}>
-                                    <img src={`${baseStoreURL}/images/wifi.png`} alt="" className="" />
-                                    <img src={`${baseStoreURL}/images/meal.png`} alt="" className="" />
-                                    <img src={`${baseStoreURL}/images/drink.png`} alt="" className="" />
-                                    <img src={`${baseStoreURL}/images/tv.png`} alt="" className="" />
-                                    <img src={`${baseStoreURL}/images/gym.png`} alt="" className="" />
+                            {item.Facilities!=undefined && item.Facilities!=null ?item.Facilities.length>0?
+                                <div className="hfacility">
+                                    <ul>
+                                        {item.Facilities.map((facility,k) => (
+                                            <li key={k}>{facility}</li>
+                                        ))}
+                                    </ul>
                                 </div>
                             :'':''}
                             

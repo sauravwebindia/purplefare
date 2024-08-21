@@ -45,6 +45,8 @@ function CustomTabPanel(props) {
 
 function HomeSearch(){
 	const Router = useRouter();
+	const [searchBtnDisable,setSearchBtnDisable] = useState("none");
+	const [searchBtnCursor, setSearchBtnCursor] = useState("default");
 	const [value, setValue] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [text,setText] = useState('');
@@ -65,6 +67,9 @@ function HomeSearch(){
 	const [searchSource,setSearchSource] = useState(null);
 	const [roomInputPlaceHolder,setRoomInputPlaceHolder] = useState(adultCount+" Adults, "+roomCount+" Room");
 	const [open, setOpen] = useState(false);
+	const [datepickerArray,setDatepickerArray] = useState([]);
+	const [isOpen, setIsOpen] = useState(false);
+	const [datepickerCount, setDatePickerCount] = useState(0);
 	const [autocompleteLoading, setAutoCompleteLoading] = useState(false);
 	const handleAdultDropdown = () => {
 		setAdultDropdownToogle(true);
@@ -74,13 +79,24 @@ function HomeSearch(){
 	};
 
 	const onTextChanged = (e) => {
-		if(e.target.value!=null && e.target.value!=undefined && e.target.value!=''){
-			const lowercasedValue = e.target.value.toLowerCase().trim();
-			if(e.target.value.length>2){
-				setAutoCompleteLoading(true);
-				fetchDestinations(lowercasedValue);
+		try{
+			localStorage.removeItem('cityName');
+			localStorage.removeItem('traceId');
+			localStorage.removeItem('searchParams');
+		}catch(e){
+
+		}
+		if(e!=null && e!=undefined && e!=''){
+			if(e.target!=null && e.target!=undefined && e.target!=''){
+				if(e.target.value!=null && e.target.value!=undefined && e.target.value!=''){
+					const lowercasedValue = e.target.value.toLowerCase().trim();
+					if(e.target.value.length>2){
+						setAutoCompleteLoading(true);
+						fetchDestinations(lowercasedValue);
+					}
+					setText(e.target.value);
+				}
 			}
-			setText(e.target.value);
 		}
 	}
 
@@ -107,7 +123,9 @@ function HomeSearch(){
 
 	const disableAdultDropdown = () => {
 		if(adultDropDownToogle){
-			setAdultDropdownToogle(false);			
+			setAdultDropdownToogle(false);	
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");		
 		}
 	}
 
@@ -116,14 +134,15 @@ function HomeSearch(){
 		let childAgeOutput = [];
 		let temp = childAge;
 		if(temp!=''){
-			childAgeOutput = temp.split("");
+			childAgeOutput = temp.split(",");
 		}
 		if(child>0){
 			if(e.target.value!=''){
 				childAgeOutput.push(e.target.value);
 			}
 		}	
-		let childAgeString = childAgeOutput.join();	
+		childAgeOutput = childAgeOutput.filter(function () { return true });		
+		let childAgeString = childAgeOutput.join(",");
 		setChildAge(childAgeString);
 	}
 
@@ -206,8 +225,19 @@ function HomeSearch(){
 
 	const handleChildDecreaseCount = () => {
 		let childCounting = childCount;
-		if(childCounting>=1){
-			childCounting = childCounting - 1;		
+		if(childCounting>=1){						
+			if(childCounting>0){
+				let temp = childAge;
+				if(temp!=''){
+					let childAgeOutput = temp.split(",");
+					childAgeOutput.pop();
+					let childAgeString = childAgeOutput.join(",");	
+					setChildAge(childAgeString);
+				}
+			}else{
+				setChildAge("");
+			}
+			childCounting = childCounting - 1;	
 			setChildCount(childCounting);
 			let roomInput = "";
 			if(adultCount>0 && adultCount==1){
@@ -277,8 +307,57 @@ function HomeSearch(){
 		}
 	}
 
+	const handleDatePicker = (e) => {
+		setDatePickerCount(0);
+		setDatepickerArray([]);
+		setIsOpen(!isOpen);
+	}
+
+	const handleRangeDatePicker = (value) => {
+		let temp = new Array();
+		let previouseValue = datepickerArray;
+		if(previouseValue.length==1){
+			for(let i=0;i<previouseValue.length;i++){
+				temp.push(previouseValue[i]);
+			}
+			temp.push(value);
+			setCheckInOut(temp);
+			handleCheckInOut(temp);
+		}else if(previouseValue.length==0){
+			temp.push(value);
+		}
+		if(temp.length>0){		
+			setDatepickerArray(temp);
+		}
+		let totalCount = datepickerCount;
+		let count = parseInt(totalCount);
+		count++;
+		setDatePickerCount(count);
+		if(count==1){
+			let checkIn = value;
+			let checkIndDate = new Date(checkIn);
+			let checkInDateString = checkIndDate.toLocaleDateString("en-US", { // you can use undefined as first argument
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+			});
+			setCheckInDate(checkInDateString);			
+		}
+		if(count==2){
+			let checkOut = value;
+			let checkOutdDate = new Date(checkOut);
+			let checkOutDateString = checkOutdDate.toLocaleDateString("en-US", { // you can use undefined as first argument
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+			});
+			setCheckOutDate(checkOutDateString);
+			setIsOpen(!isOpen);
+		}
+	}
+
 	const handleCheckInOut = (value) => {
-		//e.preventDefault();
+		//e.preventDefault();	
 		setCheckInOut(value);
 		let checkIn = "";
 		let checkOut = "";
@@ -299,7 +378,7 @@ function HomeSearch(){
 			month: "2-digit",
 			day: "2-digit",
 		});
-		setCheckOutDate(checkOutDateString);
+		setCheckOutDate(checkOutDateString);	
 	}
 
 	const handleInputChange = (event, value) => {
@@ -342,10 +421,10 @@ function HomeSearch(){
 						</div>
 						<Tabs value={value} className="tab_container tabBox" onChange={handleChange} aria-label="basic tabs example">
 						  <Tab className="htabIcons htHotelIcon" label="Hotel" id="simple-tab-0" aria-controls="simple-tabpanel-0"/>
-						  <Tab className="htabIcons htFlightIcon" label="Flight" id="simple-tab-1" aria-controls="simple-tabpanel-1"/>
-						  <Tab className="htabIcons htfliHotelIcon" label="Hotel + Flight" id="simple-tab-2" aria-controls="simple-tabpanel-2"/>
-						  <Tab className="htabIcons htCruiseIcon" label="Cruise" id="simple-tab-3" aria-controls="simple-tabpanel-3"/>
-						  <Tab className="htabIcons htHotelPackIcon" label="Holiday Packages" id="simple-tab-4" aria-controls="simple-tabpanel-4"/>
+						  <Tab disabled={true} className="htabIcons htFlightIcon" label="Flight" id="simple-tab-1" aria-controls="simple-tabpanel-1"/>
+						  <Tab disabled={true} className="htabIcons htfliHotelIcon" label="Hotel + Flight" id="simple-tab-2" aria-controls="simple-tabpanel-2"/>
+						  <Tab disabled={true} className="htabIcons htCruiseIcon" label="Cruise" id="simple-tab-3" aria-controls="simple-tabpanel-3"/>
+						  <Tab disabled={true} className="htabIcons htHotelPackIcon" label="Holiday Packages" id="simple-tab-4" aria-controls="simple-tabpanel-4"/>
 						</Tabs>
 						<CustomTabPanel value={value} index={0} className="tab-content borderRadiComman tabinn">
 							<form>
@@ -399,7 +478,7 @@ function HomeSearch(){
 								</div>
 								<div className="flex items-center gap-3 fildTwoCover">
 									<div className="fildTwo">
-										<DateRangePicker placeholder="Check-In & Check-Out" onChange={(e) => handleCheckInOut(e)} defaultValue={checkInOut} name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
+										<DateRangePicker placeholder="Check-In & Check-Out" onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} value={checkInOut} defaultValue={checkInOut} name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" open={isOpen} format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
 									</div>
 									<div className="fildTwo">
 										<input placeholder={roomInputPlaceHolder} readonly={true} onClick={handleAdultDropdown} className="border-0 rounded w-full adultsIcon hFormIcon"	type="text"/>
@@ -439,7 +518,7 @@ function HomeSearch(){
 									</div>
 								</div>
 								<div className="w-full mt-4 mb-0 flex justify-content-end">
-									<Link target="_blank" href={`/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn">Find Your Hotel</Link>
+									<Link target="_blank" href={`/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Find Your Hotel</Link>
 								</div>
 							</form>	
 						</CustomTabPanel>

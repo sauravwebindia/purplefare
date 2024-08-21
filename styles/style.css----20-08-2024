@@ -344,13 +344,12 @@ font-size: 14px!important;
   border-top-right-radius: 50px;
 }
 .tabBox button{
-  flex: 1;
-  font-size: 15px;
+  font-size: 18px;
   display: block;
   float: left;
   /*width: 20%;
   padding:4px 2.7em;*/
-  padding: 4px 1.1em 4px 3.4em;
+  padding: 4px 2.7em 4px 3.4em;
   color: #000;
   cursor: pointer;
   text-decoration: none;
@@ -956,29 +955,6 @@ h2.title-2 {
   right: -20px;
 }
 
-
-/*12Aug2024*/
-.hFormIcon{ position: relative;}
-.hFormIcon button.MuiAutocomplete-clearIndicator{ position: absolute; right: 10px;}
-.hSingleSlider .owl-carousel.owl-drag .owl-item{ margin-right: 0!important;}
-.hSingleSlider .owl-theme .owl-nav{ overflow: hidden;}
-.hSingleSlider .owl-theme .owl-nav button{ margin: 0!important;}
-
-.gdCover .lSlideArrow, .gdCover .row .lSlideArrow{ left: -32px!important;}
-.gdCover .rSlideArrow, .gdCover .row .rSlideArrow { right: 4px!important; }
-
-
-.hMbhCover .lSlideArrow, .hMbhCover .row .lSlideArrow{ left: -32px!important;}
-.hMbhCover .rSlideArrow, .hMbhCover .row .rSlideArrow { right: 4px!important; }
-
-.hLogoCover .lSlideArrow, .hLogoCover .row .lSlideArrow{ left: -32px!important;}
-.hLogoCover .rSlideArrow, .hLogoCover .row .rSlideArrow { right: 4px!important; }
-.hLogoCover .ssArrow, .hLogoCover .row .ssArrow{top: -35px;}
-
-
-/*End 12Aug2024*/
-
-
 /*END HOME*/
 
 
@@ -1463,25 +1439,6 @@ margin-bottom: 6px;
   display: none;
 }
 
-
-/*12Aug2024*/
-.hListnCalActin{}
-.hListnDtls{ max-width: 630px; width: 100%;}
-.hListn .owl-item{ width: 220px; height: 180px; display: flex;}
-.hListn .item{ width: 100%;}
-.hListn .hListnImg img{ width: 100%; height: 100%;}
-.hlWish{z-index: 1;}
-.cd-breadcrumb li > *, .cd-multi-steps li > *{font-size: 12px;}
-.hListn .owl-theme .owl-dots .owl-dot span{ margin: 5px 3px!important;}
-
-@media (max-width: 769px) {
-.listing { padding-top: 22px;}
-.cd-breadcrumb li > *, .cd-multi-steps li > * {font-size: 12px!important;}
-}
-@media (max-width: 480px) {
-  
-}
-/*End 12Aug2024*/
 
 /*END HOTEL LISTING*/
 

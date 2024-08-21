@@ -40,6 +40,9 @@ export default function HotelModifySearch(){
 	const [searchSource, setSearchSource] = useState(Router.query.searchSource);
 	const [roomInputPlaceHolder,setRoomInputPlaceHolder] = useState(adultCount+" Adults, "+roomCount+" Room");
 	const [open, setOpen] = useState(false);
+	const [datepickerArray,setDatepickerArray] = useState([]);
+	const [isOpen, setIsOpen] = useState(false);
+	const [datepickerCount, setDatePickerCount] = useState(0);
 	const [autocompleteLoading, setAutoCompleteLoading] = useState(false);
 	const handleAdultDropdown = () => {
 		setAdultDropdownToogle(true);
@@ -51,13 +54,13 @@ export default function HotelModifySearch(){
 
 	const handleSearchHotel = () => {
 		let params = {'cityName':text,'checkin':checkInDate,'checkout':checkOutDate,'searchSource':searchSource,'searchType':searchType,'searchValue':searchValue,'rooms':roomCount,'adults':adultCount,'child':childCount,'childAge':childAge};
-		console.log(params);
 		searchHotel(params);
 	}
 
 	async function searchHotel(params){
 		localStorage.removeItem('cityName');
 		localStorage.removeItem('traceId');
+		localStorage.removeItem('searchParams');
 		localStorage.setItem('cityName',params.cityName);
 		Router.push(`${baseStoreURL}/hotels/hotel-listing/?checkin=${params.checkin}&checkout=${params.checkout}&cityName=${params.cityName}&searchSource=${params.searchSource}&searchType=${params.searchType}&searchValue=${params.searchValue}&rooms=${params.rooms}&adults=${params.adults}&child=${params.child}&childAge=${params.childAge}`);
 		//Router.reload();
@@ -101,14 +104,14 @@ export default function HotelModifySearch(){
 		let childAgeOutput = [];
 		let temp = childAge;
 		if(temp!=''){
-			childAgeOutput = temp.split("");
+			childAgeOutput = temp.split(",");
 		}
 		if(child>0){
 			if(e.target.value!=''){
 				childAgeOutput.push(e.target.value);
 			}
 		}	
-		let childAgeString = childAgeOutput.join();	
+		let childAgeString = childAgeOutput.join(",");	
 		setChildAge(childAgeString);
 	}
 
@@ -192,6 +195,17 @@ export default function HotelModifySearch(){
 	const handleChildDecreaseCount = () => {
 		let childCounting = childCount;
 		if(childCounting>=1){
+			if(childCounting>0){
+				let temp = childAge;
+				if(temp!=''){
+					let childAgeOutput = temp.split(",");
+					childAgeOutput.pop();
+					let childAgeString = childAgeOutput.join(",");	
+					setChildAge(childAgeString);
+				}
+			}else{
+				setChildAge("");
+			}
 			childCounting = childCounting - 1;		
 			setChildCount(childCounting);
 			let roomInput = "";
@@ -262,9 +276,57 @@ export default function HotelModifySearch(){
 		}
 	}
 
+
+	const handleDatePicker = (e) => {
+		setDatePickerCount(0);
+		setDatepickerArray([]);
+		setIsOpen(!isOpen);
+	}
+
+	const handleRangeDatePicker = (value) => {
+		let temp = new Array();
+		let previouseValue = datepickerArray;
+		if(previouseValue.length==1){
+			for(let i=0;i<previouseValue.length;i++){
+				temp.push(previouseValue[i]);
+			}
+			temp.push(value);
+			setCheckInOut(temp);
+			handleCheckInOut(temp);
+		}else if(previouseValue.length==0){
+			temp.push(value);
+		}
+		if(temp.length>0){		
+			setDatepickerArray(temp);
+		}
+		let totalCount = datepickerCount;
+		let count = parseInt(totalCount);
+		count++;
+		setDatePickerCount(count);
+		if(count==1){
+			let checkIn = value;
+			let checkIndDate = new Date(checkIn);
+			let checkInDateString = checkIndDate.toLocaleDateString("en-US", { // you can use undefined as first argument
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+			});
+			setCheckInDate(checkInDateString);			
+		}
+		if(count==2){
+			let checkOut = value;
+			let checkOutdDate = new Date(checkOut);
+			let checkOutDateString = checkOutdDate.toLocaleDateString("en-US", { // you can use undefined as first argument
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+			});
+			setCheckOutDate(checkOutDateString);
+			setIsOpen(!isOpen);
+		}
+	}
+
 	const handleCheckInOut = (value) => {
-		//e.preventDefault();
-		console.log(value);
 		setCheckInOut(value);
 		let checkIn = "";
 		let checkOut = "";
@@ -383,7 +445,7 @@ export default function HotelModifySearch(){
 								</div>
 								<div className="col-md-3">
 									<div className="">
-										<DateRangePicker placeholder="Check-In & Check-Out" onChange={(e) => handleCheckInOut(e)} defaultValue={checkInOut} value={checkInOut} name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
+										<DateRangePicker placeholder="Check-In & Check-Out" open={isOpen} onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} value={checkInOut}  name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
 									</div>
 								</div>
 								<div className="col-md-3">

@@ -30,6 +30,24 @@ class HotelRepository {
         .catch((error) => ({ error: JSON.stringify(error) }));
         return reponse;     
     }
+
+    async fetchHotelBedsRooms(params){
+        const reponse = await Repository.post(`${baseUrl}/fetch-hotelbeds-rooms`,params)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => ({ error: JSON.stringify(error) }));
+        return reponse; 
+    }
+
+    async fetchHotelBedsReviewsRatings(params){
+        const reponse = await Repository.post(`${baseUrl}/fetch-hotelbeds-reviews-ratings`,params)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => ({ error: JSON.stringify(error) }));
+        return reponse; 
+    }
 }
 
 export default new HotelRepository();

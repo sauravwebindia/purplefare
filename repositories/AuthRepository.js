@@ -2,7 +2,7 @@ import Repository, { baseUrl } from './Repository';
 
 class AuthRepository {
     async Login(params) {
-       const reponse = await Repository.post(`${baseUrl}/login`,params)
+       const reponse = await Repository.post(`${baseUrl}/auth/login`,params)
         .then((response) => {
             return response.data;
         })

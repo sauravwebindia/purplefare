@@ -5,6 +5,7 @@ const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
 });
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import { baseStoreURL } from '@/repositories/Repository';
 
 export default function HomeMostBookedHotels() {
     let sliderItems = ['images/home/fullslider.jpg', 'images/home/fullslider.jpg', 'images/home/fullslider.jpg', 'images/home/fullslider.jpg','images/home/fullslider.jpg', 'images/home/fullslider.jpg', 'images/home/fullslider.jpg', 'images/home/fullslider.jpg'];
@@ -24,7 +25,7 @@ export default function HomeMostBookedHotels() {
         <div class="col-sm grabCover" key={i}>
             <div class="bg-white shadow-md border borderRadiComman dealCardInn">
                 <div class="borderRadiComman">
-                    <img src="images/deals/deals-1.jpg" alt="" class="img-fluid" />
+                    <img src={`${baseStoreURL}/images/deals/deals-1.jpg`} alt="deals-1.jpg" class="img-fluid" />
                 </div>
                 <div class="text-center px-1 dealText">
                     <h3 class=" pb-3">Register and Get Discount on Booking First Flight with Us</h3><span>Valid
@@ -46,7 +47,7 @@ export default function HomeMostBookedHotels() {
                 </div>
                 <div class="container gdCover">
                     <div class="row">
-                        <OwlCarousel className='owl-theme' margin={10} autoplay={false} responsive={responsiveObject} lazyLoad={true} slideBy={1} dots={false} navText={['<a href="javascript:void(0);" class="ssArrow lSlideArrow"><img src="images/home/left-slider-arrow.png" alt="left-slider-arrow.png" class="img-fluid"/></a>','<a href="javascript:void(0);" class="ssArrow rSlideArrow"><img src="images/home/right-slider-arrow.png" alt="right-slider-arrow.png" class="img-fluid" /></a>']} nav>
+                        <OwlCarousel className='owl-theme' margin={10} autoplay={false} responsive={responsiveObject} lazyLoad={true} slideBy={1} dots={false} navText={['<a href="javascript:void(0);" class="ssArrow lSlideArrow"><img src="'+baseStoreURL+'/images/home/left-slider-arrow.png" alt="left-slider-arrow.png" class="img-fluid"/></a>','<a href="javascript:void(0);" class="ssArrow rSlideArrow"><img src="'+baseStoreURL+'/images/home/right-slider-arrow.png" alt="right-slider-arrow.png" class="img-fluid" /></a>']} nav>
                         {BannerView}
                         </OwlCarousel>
                     </div>

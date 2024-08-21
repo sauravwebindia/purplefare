@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import dynamic from "next/dynamic";
+import { baseStoreURL } from '@/repositories/Repository';
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), {
 	ssr: false,
   });
@@ -40,7 +41,7 @@ export default function HomeTrustedPartners(){
                 </div>
 				<div className="container hLogoCover">
 					<div className="row">
-                        <OwlCarousel className='owl-theme' responsive={responsiveObject} slideBy={1} loop={false} lazyLoad={true} autoplay={false} dots={false} margin={10} navText={['<a href="javascript:void(0);" class="ssArrow lSlideArrow"><img src="images/home/left-slider-arrow.png" alt="left-slider-arrow.png" class="img-fluid"/></a>','<a href="javascript:void(0);" class="ssArrow rSlideArrow"><img src="images/home/right-slider-arrow.png" alt="right-slider-arrow.png" class="img-fluid" /></a>']} nav>
+                        <OwlCarousel className='owl-theme' responsive={responsiveObject} slideBy={1} loop={false} lazyLoad={true} autoplay={false} dots={false} margin={10} navText={['<a href="javascript:void(0);" class="ssArrow lSlideArrow"><img src="'+baseStoreURL+'/images/home/left-slider-arrow.png" alt="left-slider-arrow.png" class="img-fluid"/></a>','<a href="javascript:void(0);" class="ssArrow rSlideArrow"><img src="'+baseStoreURL+'/images/home/right-slider-arrow.png" alt="right-slider-arrow.png" class="img-fluid" /></a>']} nav>
 							{BannerView}
 						</OwlCarousel>
 					</div>
