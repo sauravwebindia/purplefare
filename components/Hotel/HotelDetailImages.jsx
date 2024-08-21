@@ -128,7 +128,7 @@ export default function HotelDetailImages(props){
 	};
 
     const handleImage = (image) => {
-        let mainImage = image.replace("https://photos.hotelbeds.com/giata/","https://photos.hotelbeds.com/giata/original/");
+        let mainImage = image.replace("https://photos.hotelbeds.com/giata/","https://photos.hotelbeds.com/giata/bigger/");
         setMainImage(mainImage);
     }
 
