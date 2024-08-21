@@ -1,4 +1,5 @@
 /*COMMAN CSS*/
+.rs-picker-popup-daterange{z-index: 9999999!important;}
 @font-face {
   font-family: 'Jost';
   src: url('../public/fonts/Jost-Bold.woff2') format('woff2'),

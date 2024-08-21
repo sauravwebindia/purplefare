@@ -34,7 +34,7 @@ export default function HotelModifySearch(){
 	const [childCount,setChildCount] = useState(parseInt(Router.query.child));
 	const [roomCount,setRoomCount] = useState(parseInt(Router.query.rooms));
 	const [checkInOut,setCheckInOut] = useState([]);
-	const [childAge, setChildAge] = useState(Router.query.childAge);
+	const [childAge, setChildAge] = useState(Router.query.childAge.split(","));
 	const [searchType, setSearchType] = useState(Router.query.searchType);
 	const [searchValue, setSearchValue] = useState(Router.query.searchValue);
 	const [searchSource, setSearchSource] = useState(Router.query.searchSource);
@@ -479,7 +479,7 @@ export default function HotelModifySearch(){
 
 											<div className="childAgeDropdowns">
 											{Array.from(Array(childCount)).map((item, idx) => (
-												<div key={idx}><select name="childAge[]" id={`child-age-${idx}`} className="child-age-dropdown" onChange={handleChildAge} required={true}><option value="">Add Child {idx+1}</option><option value="0">Infant</option><option value="1">1 Year Old</option><option value="2">2 yrs</option><option value="3">3 yrs</option><option value="4">4 yrs</option><option value="5">5 yrs</option><option value="6">6 yrs</option><option value="7">7 yrs</option><option value="8">8 yrs</option><option value="9">9 yrs</option><option value="10">10 yrs</option><option value="11">11 yrs</option><option value="12">12 yrs</option><option value="13">13 yrs</option><option value="14">14 yrs</option><option value="15">15 yrs</option><option value="16">16 yrs</option><option value="17">17 yrs</option></select></div>
+												<div key={idx}><select name="childAge[]" defaultValue={childAge[idx]} id={`child-age-${idx}`} className="child-age-dropdown" onChange={handleChildAge} required={true}><option value="">Add Child {idx+1}</option><option value="0">Infant</option><option value="1">1 Year Old</option><option value="2">2 yrs</option><option value="3">3 yrs</option><option value="4">4 yrs</option><option value="5">5 yrs</option><option value="6">6 yrs</option><option value="7">7 yrs</option><option value="8">8 yrs</option><option value="9">9 yrs</option><option value="10">10 yrs</option><option value="11">11 yrs</option><option value="12">12 yrs</option><option value="13">13 yrs</option><option value="14">14 yrs</option><option value="15">15 yrs</option><option value="16">16 yrs</option><option value="17">17 yrs</option></select></div>
 											))}
 											</div>
 											<div className="addLine"><button type="button" className="rounded-md findBtn right" onClick={disableAdultDropdown}>Apply</button></div>

@@ -22,6 +22,7 @@ import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import HotelRepository from '@/repositories/HotelRepository';
 import { useRouter } from 'next/router';
+import { baseStoreURL } from '@/repositories/Repository';
 
 function CustomTabPanel(props) {
   	const { children, value, index, ...other } = props;
@@ -403,19 +404,19 @@ function HomeSearch(){
 					<div className="col-md-12">
 					<div class="hServIcons">
 							<div className="hServIconsBox">
-								<a href="listing.html"><img src="images/hotel-mobile-icon.png" alt="" className="img-fluid" />
+								<a href={`${baseStoreURL}/hotel-search`}><img src={`${baseStoreURL}/images/hotel-mobile-icon.png`} alt="hotel-mobile-icon.png" className="img-fluid" />
 								<span>Hotel</span></a>
 							</div>
 							<div className="hServIconsBox">
-								<img src="images/flight-mobile-icon.png" alt="" className="img-fluid" />
+								<img src={`${baseStoreURL}/images/flight-mobile-icon.png`} alt="flight-mobile-icon.png" className="img-fluid" />
 								<span>Flight</span>
 							</div>
 							<div className="hServIconsBox">
-								<img src="images/cruise-mobile-icon.png" alt="" className="img-fluid" />
+								<img src={`${baseStoreURL}/images/cruise-mobile-icon.png`} alt="cruise-mobile-icon.png" className="img-fluid" />
 								<span>Cruise</span>
 							</div>
 							<div className="hServIconsBox">
-								<img src="images/holiday-packages-mobile-icon.png" alt="" className="img-fluid" />
+								<img src={`${baseStoreURL}/images/holiday-packages-mobile-icon.png`} alt="holiday-packages-mobile-icon.png" className="img-fluid" />
 								<span>Holiday Packages</span>
 							</div>
 						</div>
@@ -438,11 +439,7 @@ function HomeSearch(){
 										onChange={handleInputChange}
 										onInputChange={onTextChanged}
 										className="border-0 rounded w-full searchIcon hFormIcon"
-										//onHighlightChange={handleHighlightChange}
-										//isOptionEqualToValue={(option, value) => option.label === value.label}
-										//getOptionLabel={(option) => option.label}
 										loading={autocompleteLoading}
-										//filterOptions={handleFilterOptions}
 										endDecorator={
 											autocompleteLoading ? (
 											  <CircularProgress size="sm" sx={{ bgcolor: 'background.surface' }} />
