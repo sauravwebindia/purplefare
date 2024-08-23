@@ -26,6 +26,7 @@ import { baseStoreURL } from '@/repositories/Repository';
 
 export default function HomeMobileSearch(){
     const Router = useRouter();
+	const [cityName,setCityName] = useState(Router.query.cityName);
 	const [searchBtnDisable,setSearchBtnDisable] = useState("none");
 	const [searchBtnCursor, setSearchBtnCursor] = useState("default");
 	const [value, setValue] = useState(0);
@@ -37,8 +38,8 @@ export default function HomeMobileSearch(){
 	const [childCount,setChildCount] = useState(0);
 	const [roomCount,setRoomCount] = useState(1);
 	const [checkInOut,setCheckInOut] = useState([]);
-	const [checkInDate, setCheckInDate] =  useState("");
-	const [checkOutDate, setCheckOutDate] = useState("");
+	const [checkInDate, setCheckInDate] = useState(Router.query.checkInDate!=undefined?Router.query.checkInDate:"");
+	const [checkOutDate, setCheckOutDate] = useState(Router.query.checkOutDate!=undefined?Router.query.checkOutDate:"");
 	const [childAge,setChildAge] = useState("");
 	const [errorMessage, setErrorMessage] = useState(null);
 	const [successMessage, setSuccessMessage] = useState(null);
@@ -52,6 +53,47 @@ export default function HomeMobileSearch(){
 	const [isOpen, setIsOpen] = useState(false);
 	const [datepickerCount, setDatePickerCount] = useState(0);
 	const [autocompleteLoading, setAutoCompleteLoading] = useState(false);
+
+	useEffect(() => {  
+        let mounted = true;
+		if(Router.query.adults!=undefined){
+			setAdultsCount(parseInt(Router.query.adults));
+		}else{
+			setAdultsCount(2);
+		}
+		if(Router.query.child!=undefined){
+			setChildCount(parseInt(Router.query.child));
+		}else{
+			setChildCount(0);
+		}
+		if(Router.query.rooms!=undefined){
+			setRoomCount(parseInt(Router.query.rooms));
+		}else{
+			setRoomCount(1);
+		}
+		setCheckInDate(Router.query.checkInDate!=undefined?Router.query.checkInDate:"");		
+		setCheckOutDate(Router.query.checkOutDate!=undefined?Router.query.checkOutDate:"");
+		setChildAge(Router.query.childAge!=undefined?Router.query.childAge.split(","):"");
+		setSearchType(Router.query.searchType!=undefined?Router.query.searchType:null);
+		setSearchValue(Router.query.searchValue!=undefined?Router.query.searchValue:null);
+		setSearchSource(Router.query.searchSource!=undefined?Router.query.searchSource:null);
+		setRoomInputPlaceHolder(adultCount+" Adults, "+roomCount+" Room");
+		let city = Router.query.cityName;
+		setCityName(city);
+		setText(city);
+		let checkInOutArray  = new Array();
+		let checkInCompleteDate = new Date(checkOutDate);
+		let checkoutCompleteDate = new Date(checkInDate);
+		checkInOutArray.push(checkInCompleteDate);
+		checkInOutArray.push(checkoutCompleteDate);
+		setCheckInOut(checkInOutArray);
+		if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");
+		}
+		return () => mounted = false;
+	}, []);
+
 	const handleAdultDropdown = () => {
 		setAdultDropdownToogle(true);
 	}
@@ -105,12 +147,9 @@ export default function HomeMobileSearch(){
 	const disableAdultDropdown = () => {
 		if(adultDropDownToogle){
 			setAdultDropdownToogle(false);	
-            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
 			    setSearchBtnCursor("");
 			    setSearchBtnDisable("");		
-            }else{
-                setSearchBtnCursor("default");
-                setSearchBtnDisable("none");
             }
 		}
 	}
@@ -130,12 +169,9 @@ export default function HomeMobileSearch(){
 		childAgeOutput = childAgeOutput.filter(function () { return true });		
 		let childAgeString = childAgeOutput.join(",");
 		setChildAge(childAgeString);
-        if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+        if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
             setSearchBtnCursor("");
             setSearchBtnDisable("");		
-        }else{
-            setSearchBtnCursor("default");
-            setSearchBtnDisable("none");
         }
 	}
 
@@ -165,12 +201,9 @@ export default function HomeMobileSearch(){
 			roomInput += ", "+roomCount+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
-        if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+        if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
             setSearchBtnCursor("");
             setSearchBtnDisable("");		
-        }else{
-            setSearchBtnCursor("default");
-            setSearchBtnDisable("none");
         }
 	}
 
@@ -196,12 +229,9 @@ export default function HomeMobileSearch(){
 				roomInput += ", "+roomCount+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
-            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
                 setSearchBtnCursor("");
                 setSearchBtnDisable("");		
-            }else{
-                setSearchBtnCursor("default");
-                setSearchBtnDisable("none");
             }
 		}
 	}
@@ -227,12 +257,9 @@ export default function HomeMobileSearch(){
 			roomInput += ", "+roomCount+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
-        if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+        if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
             setSearchBtnCursor("");
             setSearchBtnDisable("");		
-        }else{
-            setSearchBtnCursor("default");
-            setSearchBtnDisable("none");
         }
 	}
 
@@ -269,12 +296,9 @@ export default function HomeMobileSearch(){
 				roomInput += ", "+roomCount+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
-            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
                 setSearchBtnCursor("");
                 setSearchBtnDisable("");		
-            }else{
-                setSearchBtnCursor("default");
-                setSearchBtnDisable("none");
             }
 		}
 	}
@@ -300,12 +324,9 @@ export default function HomeMobileSearch(){
 			roomInput += ", "+roomCounting+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
-        if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+        if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
             setSearchBtnCursor("");
             setSearchBtnDisable("");		
-        }else{
-            setSearchBtnCursor("default");
-            setSearchBtnDisable("none");
         }
 	}
 
@@ -331,12 +352,9 @@ export default function HomeMobileSearch(){
 				roomInput += ", "+roomCounting+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
-            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
                 setSearchBtnCursor("");
                 setSearchBtnDisable("");		
-            }else{
-                setSearchBtnCursor("default");
-                setSearchBtnDisable("none");
             }
 		}
 	}
@@ -387,12 +405,9 @@ export default function HomeMobileSearch(){
 			});
 			setCheckOutDate(checkOutDateString);
 			setIsOpen(!isOpen);
-            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
                 setSearchBtnCursor("");
                 setSearchBtnDisable("");		
-            }else{
-                setSearchBtnCursor("default");
-                setSearchBtnDisable("none");
             }
 		}
 	}
@@ -431,16 +446,12 @@ export default function HomeMobileSearch(){
 			localStorage.setItem('cityName',value.label);
 			setSearchValue(value.id);
 			setSearchSource(value.source);
-            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined && adultCount!='' && adultCount!=null && adultCount!=undefined && roomCount!='' && roomCount!=null && roomCount!=undefined){
+            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
                 setSearchBtnCursor("");
                 setSearchBtnDisable("");		
-            }else{
-                setSearchBtnCursor("default");
-                setSearchBtnDisable("none");
             }
 		}
 	};
-    
     return(
         <div className="searchPage">
             <section className="searchPageInn">
@@ -532,7 +543,7 @@ export default function HomeMobileSearch(){
 
                                 <div className="childAgeDropdowns">
                                 {Array.from(Array(childCount)).map((item, idx) => (
-                                    <div key={idx}><select name="childAge[]" id={`child-age-${idx}`} className="child-age-dropdown" onChange={handleChildAge} required={true}><option value="">Add Child {idx+1}</option><option value="0">Infant</option><option value="1">1 Year Old</option><option value="2">2 yrs</option><option value="3">3 yrs</option><option value="4">4 yrs</option><option value="5">5 yrs</option><option value="6">6 yrs</option><option value="7">7 yrs</option><option value="8">8 yrs</option><option value="9">9 yrs</option><option value="10">10 yrs</option><option value="11">11 yrs</option><option value="12">12 yrs</option><option value="13">13 yrs</option><option value="14">14 yrs</option><option value="15">15 yrs</option><option value="16">16 yrs</option><option value="17">17 yrs</option></select></div>
+                                    <div key={idx}><select name="childAge[]" id={`child-age-${idx}`} defaultValue={childAge[idx]} className="child-age-dropdown" onChange={handleChildAge} required={true}><option value="">Add Child {idx+1}</option><option value="0">Infant</option><option value="1">1 Year Old</option><option value="2">2 yrs</option><option value="3">3 yrs</option><option value="4">4 yrs</option><option value="5">5 yrs</option><option value="6">6 yrs</option><option value="7">7 yrs</option><option value="8">8 yrs</option><option value="9">9 yrs</option><option value="10">10 yrs</option><option value="11">11 yrs</option><option value="12">12 yrs</option><option value="13">13 yrs</option><option value="14">14 yrs</option><option value="15">15 yrs</option><option value="16">16 yrs</option><option value="17">17 yrs</option></select></div>
                                 ))}
                                 </div>
                                 <div className="addLine"><button type="button" className="rounded-md findBtn right" onClick={disableAdultDropdown}>Apply</button></div>

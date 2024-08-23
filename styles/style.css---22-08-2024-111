@@ -1363,14 +1363,13 @@ ul.hChkList {
 }
 
 .hListnDels h2 {
-  font-size: 18px;
+  font-size: 20px;
   color: #000;
   margin: 0;
 }
 
 .hStrRate img {
-  width: 13px;
-  margin-right: 2px;
+  width: 14px;
 }
 
 .hfacility {
@@ -2001,11 +2000,7 @@ margin-bottom: 6px; margin-right: 5px;
   border-radius: 10px;
   overflow: hidden;
 }
-.hdgallery .hdgthumbImg a{
-  display: flex;
-  object-fit: cover;
-  height: 87px;
-}
+
 .hdgallery .hdgThumb img {
   width: 100%;
 }
@@ -2342,7 +2337,6 @@ margin-bottom: 6px; margin-right: 5px;
 
 .dromhtThumb img {
   width: 49.4%;
-  height: 79px;
 }
 
 .arMorPhoto {
@@ -3066,7 +3060,7 @@ button.loginbtn:hover {
   font-weight: 400;
 }
 
-.main-popup input.subBtn {
+.main-popup input#submit {
   background: linear-gradient(81deg, #c8238b 0%, #ff8f00 24%, #bf31dd 100%)
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   ;
@@ -3086,7 +3080,7 @@ button.loginbtn:hover {
 
 .main-popup form.register {
   position: relative;
-  top: -248px;
+  top: -270px;
   left: 0;
   font-size: 1em;
   opacity: 0;

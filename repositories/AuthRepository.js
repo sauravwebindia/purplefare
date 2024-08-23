@@ -9,6 +9,16 @@ class AuthRepository {
         .catch((error) => ({ error: JSON.stringify(error) }));
         return reponse;        
     }
+
+
+    async Register(params) {
+        const reponse = await Repository.post(`${baseUrl}/auth/register`,params)
+         .then((response) => {
+             return response.data;
+         })
+         .catch((error) => ({ error: JSON.stringify(error) }));
+         return reponse;        
+     }
 	
 	async MyProfile(params) {
        const reponse = await Repository.post(`${baseUrl}/fetch-my-profile`,params)

@@ -747,17 +747,12 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
     .dtbleRow > div:nth-child(3) { width: 21%;}
     .dtbleRow > div:nth-child(4){ width: 12%;}
     .dtbleRow > div:last-child { width: 21%;}
-
-    .dtbleRow h4{ font-size: 13px;}
-    .hButton{ font-size: 11px;}
   }
   
   
-  @media (max-width:576px) {
-    .hdgallery .owl-nav .lSlideArrow { left: -5px !important;}
-    .hdgallery .owl-next{right: -8px!important;}
+  @media (max-width:650px) {
+    
   }
-  
   
   @media (max-width: 525px){
     .mobileOnly,
@@ -863,23 +858,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
     .rtTotal{width: 64px; height: 64px; line-height: 62px; font-size: 28px;}
     .rtiMain{ margin-bottom: 12px;}
   }
-
-  @media (max-width:480px) {
-    .allInfoBtns{position: sticky;}
-    .hdgallery .owl-prev{ width: 22px; height: 22px;}
-    .hdgallery .owl-next{ width: 22px; height: 22px;}
-
-    .hcancelPolicy{text-align: right;}
-    .dtbleRow > div:nth-child(3){padding-left: 0;}
-    .dtbleRow > div:nth-child(3) .dtInnSpace{padding-left: 0;}
-  }
-  @media (max-width:390px) {
-    .hdgallery .owl-prev{ width: 26px; height: 26px;}
-    .hdgallery .owl-next{ width: 26px; height: 26px;}
-    .hdgallery .ssArrow{ width: 30px; height: 40px;}
-    .allInfoBtns a{ line-height: 18px; padding: 6px 4px;}
-  }
-
   /*END DETAILS*/
 
   /*CART*/

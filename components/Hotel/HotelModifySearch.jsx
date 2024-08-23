@@ -404,11 +404,7 @@ export default function HotelModifySearch(){
 										onChange={handleInputChange}
 										onInputChange={onTextChanged}
 										className="border-0 rounded w-full searchIcon hFormIcon"
-										//onHighlightChange={handleHighlightChange}
-										//isOptionEqualToValue={(option, value) => option.label === value.label}
-										//getOptionLabel={(option) => option.label}
 										loading={autocompleteLoading}
-										//filterOptions={handleFilterOptions}
 										endDecorator={
 											autocompleteLoading ? (
 											  <CircularProgress size="sm" sx={{ bgcolor: 'background.surface' }} />

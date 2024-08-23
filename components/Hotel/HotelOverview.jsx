@@ -7,9 +7,27 @@ import { RWebShare } from "react-web-share";
 
 export default function HotelOverview(props){
     const Router = useRouter();
-    const[hotelName,setHotelName] = useState(null);
+    const [hotelName,setHotelName] = useState(null);
+    const [hotelSearchParams, setHotelSearchParams] = useState("");
     useEffect(() => {  
         let mounted = true;
+        let searchParams = "";
+        let checkInDate = Router.query.checkInDate;
+        let checkOutDate = Router.query.checkOutDate;
+        let adults = Router.query.adults;
+        let child = Router.query.child;
+        let childAge = Router.query.childAge;
+        let searchType = Router.query.searchType;
+        let searchValue = Router.query.searchValue; 
+        let searchSource = Router.query.searchSource;   
+        let rooms = Router.query.rooms; 
+        let traceId = Router.query.traceId;
+        let cityName = Router.query.cityName;
+        searchParams = {'traceId':traceId,'cityName':cityName,'searchSource':searchSource,'searchType':searchType,'searchValue':searchValue,'checkInDate':checkInDate,'checkOutDate':checkOutDate,'adults':adults,'rooms':rooms,'child':child,'childAge':childAge.split(",")};
+        var queryString = Object.keys(searchParams).map(function(key) {
+            return key + '=' + searchParams[key];
+        }).join('&');
+        setHotelSearchParams(queryString);
         if(props==null || props=='' || props==undefined){
             Router.push('/');
         }
@@ -40,7 +58,7 @@ export default function HotelOverview(props){
                             {props.hotel.rating!=null && props.hotel.rating!=undefined && props.hotel.rating>0?
                             <div className="hdStrRate">
                                 {generateTempArray(props.hotel.rating).map((item,i) => (
-                                <img src={`${baseStoreURL}/images/star-active.png`} alt="star-active.png" className="hstrActive"/>
+                                <img key={i} src={`${baseStoreURL}/images/star-active.png`} alt="star-active.png" className="hstrActive"/>
                                 ))}
                                 {5-parseInt(props.hotel.rating)>0?
                                 generateTempArray(5-parseInt(props.hotel.rating)).map((item,i) => (
@@ -58,7 +76,7 @@ export default function HotelOverview(props){
                     <RWebShare
                         data={{
                             text: props.hotel.name,
-                            url: baseStoreURL+props.hotel.hotel_url,
+                            url: baseStoreURL+props.hotel.hotel_url+'?'+hotelSearchParams,
                             title: props.hotel.name,
                         }}
                         onClick={() => console.log("shared successfully!")}

@@ -23,14 +23,21 @@ export default function HotelDetailImages(props){
     const [selectRoom,setSelectRoom] = useState(null);
     useEffect(() => {  
         let mounted = true;
+        let searchParams = "";
+        let checkInDate = Router.query.checkInDate;
+        let checkOutDate = Router.query.checkOutDate;
+        let adults = Router.query.adults;
+        let child = Router.query.child;
+        let childAge = Router.query.childAge;
+        let searchType = Router.query.searchType;
+        let searchValue = Router.query.searchValue; 
+        let searchSource = Router.query.searchSource;   
+        let rooms = Router.query.rooms; 
+        let traceId = Router.query.traceId;
+        let cityName = Router.query.cityName;
+        searchParams = {'traceId':traceId,'cityName':cityName,'searchSource':searchSource,'searchType':searchType,'searchValue':searchValue,'checkInDate':checkInDate,'checkOutDate':checkOutDate,'adults':adults,'rooms':rooms,'child':child,'childAge':childAge.split(",")};
         if(props==null || props=='' || props==undefined){
             Router.push('/');
-        }
-        let searchParams = "";
-        try{
-            searchParams = localStorage.getItem('searchParams');
-        }catch(e){
-
         }
         if(searchParams!='' && searchParams!=null && searchParams!=undefined){
             fetchHotelRooms(searchParams);
@@ -39,7 +46,7 @@ export default function HotelDetailImages(props){
     }, []);  
 
     async function fetchHotelRooms(searchParams){
-        let searchObject = JSON.parse(searchParams);
+        let searchObject = searchParams;
         if(searchObject.searchSource=='HotelBeds'){
             setTotalRooms(searchObject.rooms);
             setAdults(searchObject.adults);

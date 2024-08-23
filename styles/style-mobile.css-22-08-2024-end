@@ -868,10 +868,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
     .allInfoBtns{position: sticky;}
     .hdgallery .owl-prev{ width: 22px; height: 22px;}
     .hdgallery .owl-next{ width: 22px; height: 22px;}
-
-    .hcancelPolicy{text-align: right;}
-    .dtbleRow > div:nth-child(3){padding-left: 0;}
-    .dtbleRow > div:nth-child(3) .dtInnSpace{padding-left: 0;}
   }
   @media (max-width:390px) {
     .hdgallery .owl-prev{ width: 26px; height: 26px;}

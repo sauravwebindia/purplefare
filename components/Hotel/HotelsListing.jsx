@@ -30,6 +30,9 @@ export default function HotelsListing(props){
 	const [hasMore, setHasMore] = useState(false);
     const [cityName, setCityName] = useState(null);
 	const [nextPage, setNextPage] = useState(1);
+    const [isImageError,setImageError] = useState(false);
+    const [imageSrc,setImageSrc] = useState(null);
+    const [hotelSearchParams,setHotelSearchParams] = useState("");
 
     useEffect(() => {
         let mounted = true;
@@ -52,6 +55,10 @@ export default function HotelsListing(props){
             cityName = "";
         }
         let params = {'traceId':traceId,'cityName':cityName,'searchSource':searchSource,'searchType':searchType,'searchValue':searchValue,'checkInDate':checkInDate,'checkOutDate':checkOutDate,'adults':adults,'rooms':rooms,'child':child,'childAge':childAge.split(",")};
+        var queryString = Object.keys(params).map(function(key) {
+            return key + '=' + params[key];
+        }).join('&');
+        setHotelSearchParams(queryString);
         searchHotelsListing(params);
         return () => mounted = false;
     }, []);
@@ -129,6 +136,13 @@ export default function HotelsListing(props){
             setSkeltonLoading(false);
         }
     }
+
+    const handleImageError = () => {
+        if(!isImageError){
+            setImageSrc("https://b2b.tektravels.com/Images/HotelNA.jpg");
+            setImageError(!isImageError);
+        }
+    }
     
     let HotelsView = "";
     if(!skeltonLoading){
@@ -146,7 +160,7 @@ export default function HotelsListing(props){
         if(hotelsListing.length>0){
             HotelsView = hotelsListing.map((item,i) => (
                 <div className="hListn" key={i}>
-                    <Link target="_blank" href={`${baseStoreURL}${item.hotel_url}`} className="ldlink"></Link>
+                    <Link target="_blank" href={`${baseStoreURL}${item.hotel_url}?${hotelSearchParams}`} className="ldlink"></Link>
                     <div className="hListnDtls">
                         <div className="hListnImg">
                             <span className="flag" style={{display:"none"}}>Breakfast Included</span>
@@ -155,7 +169,7 @@ export default function HotelsListing(props){
                                 <div className="contain">
                                     <OwlCarousel className='owl-theme' margin={10} autoplay={true} responsive={responsiveObject} lazyLoad={true} slideBy={1} dots={true}>
                                         {item.images.map((image,i) => (
-                                            <div className="item"><img src={`${image}`} onerror="this.onerror=null;this.src='https://b2b.tektravels.com/Images/HotelNA.jpg'" width="266" height="204" alt={item.name} className="img-fluid" /></div>
+                                            <div className="item"><img src={`${image?image:imageSrc}`} onError={handleImageError} width="266" height="204" alt={item.name} className="img-fluid" /></div>
                                         ))}
                                     </OwlCarousel>
                                 </div>

@@ -138,16 +138,14 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 /*END FOOTER*/
 
 /*HOME*/
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1199px) {
 .hLogoCover img {
   width: 100%;
 }
 .hLogoCover .ssArrow, .hLogoCover .row .ssArrow{    width: 40px; height: 40px;}
-.tabBox label:nth-child(3) {padding: 4px 1.5em;}
-
-.expText h2 { font-size: 40px;}
-
-.owl-nav button img{width: 40px; }
+.tabBox label:nth-child(3) {
+  padding: 4px 1.5em;
+}
 
 }
 
@@ -157,8 +155,10 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 }
 
 @media screen and (max-width: 992px) {
-.expCover{ /*display: none;*/}
+.expCover{ display: none;}
 .wbwUs .borderRadiComman{ margin-bottom: 16px;}
+
+
   
 .hServIcons{
   display: flex;
@@ -208,8 +208,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .htabIcons{}
   .tabBox label:last-child{ min-width: 213px;}
   
-  .wbwUs .col-sm{ flex: inherit; width: 50%;}
-
 
   
 }
@@ -235,23 +233,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .qoutes{ width: 26px; height: 26px; right: -14px; top: -18px;}
 }
 
-@media screen and (max-width: 575px) {
-  .hSingleSlider .ssArrow{ left: 0px;}
-  .owl-next{right: 5px;}
-  .hMbhCover .lSlideArrow, .hMbhCover .row .lSlideArrow{ left: 0!important;}
-  .gdCover .lSlideArrow, .gdCover .row .lSlideArrow{ left: 0!important;}
-  .hLogoCover .ssArrow, .hLogoCover .row .ssArrow{ left: 0!important;}
-  .hLogoCover .rSlideArrow, .hLogoCover .row .rSlideArrow{right: 0!important; left: -12px !important;}
-}
-
 @media screen and (max-width: 480px) {
-  .exploreTop .expCover{ display: none;}
-
-  .videobox{ height: 300px;}
-
-  .wbwUs .borderRadiComman{padding: 16px 10px;}
-  .wbwUs img{ width: 60px;}
-  .wbwUs h3{ font-size: 17px;}
 
 	.tabBox{ border-top-left-radius: 14px; border-top-right-radius: 14px;}
 	.tabBox label:first-child{ border-top-left-radius: 14px;}
@@ -484,7 +466,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .hListnCalActin{display: flex; justify-content: space-between; position: relative; align-items: center;}
   .hListnCalActin .holdPrice{ margin-bottom: 6px;}
   .hListnCalActin .hsalePrice{line-height: 14px;}
-  .hListnCalActin .hInfo{font-size: 11px; display: block; padding-top: 5px;}
+  .hListnCalActin .hInfo{font-size: 11px;}
   .hRatings{left: 12px; line-height: 9px; right: inherit; margin-top: -40px; width: 33%;
     display: flex;
     justify-content: left;
@@ -517,8 +499,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .hAddr svg{height: 12px;}
 
   .hRatings{left: 8px;}
-
-  .hListn .item{ max-height: 180px; overflow: hidden;}
   
 }
 @media screen and (max-width: 460px) {
@@ -539,17 +519,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 }
 /*END HOTEL LISTING*/
 
-
-/*MOBILE SEARCH SCREEN*/
-@media (max-width: 992px){
-.searchPageInn .row{ display: block;}
-.searchPageInn .col-md-6{ flex: 0 0 auto; width: 100%; max-width: 480px; margin-left: auto; margin-right: auto;}
-.searchPageInn .col-md-3{width: 100%; max-width: 480px; margin-left: auto; margin-right: auto;}
-}
-.searchPageInn .rs-input-group.rs-input-group-inside{ background: none;}
-.searchPageInn .rs-input-group.rs-input-group-inside input{ background: none;}
-/*END MOBILE SEARCH SCREEN*/
-
 /*HOLIDAY PACKAGES LISTING*/
 .ltourFacl ul li img { max-width: 27px;}
 .ltourFacl ul li span { font-size: 12px;}
@@ -558,15 +527,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 
 /*DETAILS*/
 @media (max-width: 992px){
-  .innerPage{ padding: 0 0 55px 0;}
-  .dockLeft .hdoldPrice{
-    font-size: 13px;
-    line-height: 10px;
-    color: #b09bae;
-    text-decoration-line: line-through;
-    display: block;
-  }
-
   .dromtypeLeft{padding-top: 10px; padding-bottom: 10px;}
   .desktopOnly{ display: none;}
   .hdGalleryDetls{margin-bottom: 20px;}
@@ -607,7 +567,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .dtbleRow h4 {font-size: 18px;}
   .dtbleRow .smallTxt { font-size: 11px;}
   .dtbleRow li { font-size: 11px; background-size: 9px auto; background-position: 0px 4px; padding-left: 17px;}
-  .hButton{ font-size: 12px; padding: 6px 8px;}
+  .hButton{ font-size: 8px; padding: 6px 8px;}
   .droomLeft{ font-size: 10px; line-height: 9px;}
   .dtbleCover .dtblehdLine input[type=text] { font-size: 13px; width: 30px;}
   .dtbleCover .dtblehdLine.dtblehd{ min-height: 21px;}
@@ -693,7 +653,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
       left: 0;
       width: 100%;
       padding: 7px 2%;;
-      z-index: 9;
     }
     .dockableInn{ display: flex; justify-content: space-between; align-items: center;}
     .dockRight{}
@@ -747,17 +706,12 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
     .dtbleRow > div:nth-child(3) { width: 21%;}
     .dtbleRow > div:nth-child(4){ width: 12%;}
     .dtbleRow > div:last-child { width: 21%;}
-
-    .dtbleRow h4{ font-size: 13px;}
-    .hButton{ font-size: 11px;}
   }
   
   
-  @media (max-width:576px) {
-    .hdgallery .owl-nav .lSlideArrow { left: -5px !important;}
-    .hdgallery .owl-next{right: -8px!important;}
+  @media (max-width:650px) {
+    
   }
-  
   
   @media (max-width: 525px){
     .mobileOnly,
@@ -863,23 +817,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
     .rtTotal{width: 64px; height: 64px; line-height: 62px; font-size: 28px;}
     .rtiMain{ margin-bottom: 12px;}
   }
-
-  @media (max-width:480px) {
-    .allInfoBtns{position: sticky;}
-    .hdgallery .owl-prev{ width: 22px; height: 22px;}
-    .hdgallery .owl-next{ width: 22px; height: 22px;}
-
-    .hcancelPolicy{text-align: right;}
-    .dtbleRow > div:nth-child(3){padding-left: 0;}
-    .dtbleRow > div:nth-child(3) .dtInnSpace{padding-left: 0;}
-  }
-  @media (max-width:390px) {
-    .hdgallery .owl-prev{ width: 26px; height: 26px;}
-    .hdgallery .owl-next{ width: 26px; height: 26px;}
-    .hdgallery .ssArrow{ width: 30px; height: 40px;}
-    .allInfoBtns a{ line-height: 18px; padding: 6px 4px;}
-  }
-
   /*END DETAILS*/
 
   /*CART*/

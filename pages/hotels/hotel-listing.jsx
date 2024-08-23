@@ -18,7 +18,6 @@ const HotelListing = (props) => {
                 <NavHeader/>
                 <section className="innerPage">                    
                     <HotelStickSearch/>
-                    <HotelModifySearch/>
                     <section className="commanSpace">
                         <div className="container listing">
                             <Breadcrumb page="Hotel Listing" cityName={Router.query.cityName}/>

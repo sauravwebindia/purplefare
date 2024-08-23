@@ -1,18 +1,18 @@
 import React, {useEffect,useState} from 'react';
 import { baseStoreURL } from '@/repositories/Repository';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 
 export default function Breadcrumb(props){
+    const Router = useRouter();
     const [cityName,setCityName] = useState("");
     const [listingLink, setListingLink] = useState('/');
     useEffect(() => {  
         let mounted = true;
-       if(props.page=='Hotel Details'){
-            let searchParams = localStorage.getItem('searchParams');
-            let params = JSON.parse(searchParams);
-            setCityName(params.cityName);
-            setListingLink(`${baseStoreURL}/hotels/hotel-listing/?checkin=${params.checkInDate}&checkout=${params.checkOutDate}&cityName=${params.cityName}&searchSource=${params.searchSource}&searchType=${params.searchType}&searchValue=${params.searchValue}&rooms=${params.rooms}&adults=${params.adults}&child=${params.child}&childAge=${params.childAge}`);
+        if(props.page=='Hotel Details'){
+            setCityName(Router.query.cityName);
+            setListingLink(`${baseStoreURL}/hotels/hotel-listing/?checkin=${Router.query.checkInDate}&checkout=${Router.query.checkOutDate}&cityName=${Router.query.cityName}&searchSource=${Router.query.searchSource}&searchType=${Router.query.searchType}&searchValue=${Router.query.searchValue}&rooms=${Router.query.rooms}&adults=${Router.query.adults}&child=${Router.query.child}&childAge=${Router.query.childAge}`);
         }
         return () => mounted = false;
     }, []); 
@@ -24,7 +24,6 @@ export default function Breadcrumb(props){
                     <div>
                         <ol class="cd-breadcrumb">
                             <li><Link href={`${baseStoreURL}`}><i class="fa fa-home"></i></Link></li>
-                            <li><a href="javascript:;">Hotel</a></li>
                             <li class="current"><em>{props.cityName}</em></li>
                         </ol>
                     </div>

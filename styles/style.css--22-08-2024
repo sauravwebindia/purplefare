@@ -77,12 +77,7 @@ a {
   color: #000;
 }
 
-
-
-
 /*END COMMAN CSS*/
-
-
 
 /*SKELETON*/
 .react-loading-skeleton{ height: 97%;}
@@ -582,8 +577,7 @@ h2.title-2 {
 }
 
 .hSingleSlider .rSlideArrow {
-  /*right: -30px;*/
-  right: 0;
+  right: -30px;
 }
 
 .hMbhCover,
@@ -1199,8 +1193,6 @@ h2.title-2 {
   width: 100%;
   height: 100%;
   text-decoration: none;
-
-  z-index: 1;
 }
 
 .hListnDtls {
@@ -1363,22 +1355,21 @@ ul.hChkList {
 }
 
 .hListnDels h2 {
-  font-size: 18px;
+  font-size: 20px;
   color: #000;
   margin: 0;
 }
 
 .hStrRate img {
-  width: 13px;
-  margin-right: 2px;
+  width: 14px;
 }
 
 .hfacility {
   display: flex;
 }
 .hfacility ul{ list-style: none; padding: 0;}
-.hfacility li{display: inline-block; border: 1px solid #e7e7e7; line-height: 12px; padding: 6px 10px; border-radius: 4px; font-size: 14px;
-margin-bottom: 6px; margin-right: 5px;
+.hfacility li{display: inline-block; border: 1px solid #e7e7e7; padding: 3px 12px; border-radius: 4px; font-size: 14px;
+margin-bottom: 6px;
 }
 
 .hfacility img {
@@ -1492,8 +1483,6 @@ margin-bottom: 6px; margin-right: 5px;
   
 }
 /*End 12Aug2024*/
-
-.infinite-scroll-component p img{    width: 150px;}
 
 /*END HOTEL LISTING*/
 
@@ -1877,12 +1866,11 @@ margin-bottom: 6px; margin-right: 5px;
 
 .hdStrRate {
   display: inline-block;
-  margin-left: 10px;
 }
 
 .hdStrRate img {
   width: 14px;
-  margin: 0 4px 0 0;
+  margin: 0 -4px 0 0;
 }
 
 .dhName h2 {
@@ -1960,28 +1948,6 @@ margin-bottom: 6px; margin-right: 5px;
 }
 
 .hdgallery {}
-.hdgallery .ssArrow{
-  z-index: 9;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 40px;
-  height: 40px;
-}
-.hdgallery .owl-nav button:hover,
-.hdgallery .owl-nav button:focus{ background: none!important;}
-.hdgallery .owl-nav .owl-prev,
-.hdgallery .owl-nav .owl-next{
-  top: 20%;
-}
-.hdgallery .owl-nav .lSlideArrow {
-  left: -32px !important;
-}
-.hdgallery .owl-nav .rSlideArrow {
-  right: 4px !important;
-}
 
 .hdgallery .hdgBigImg {
   margin-bottom: 12px;
@@ -2001,11 +1967,7 @@ margin-bottom: 6px; margin-right: 5px;
   border-radius: 10px;
   overflow: hidden;
 }
-.hdgallery .hdgthumbImg a{
-  display: flex;
-  object-fit: cover;
-  height: 87px;
-}
+
 .hdgallery .hdgThumb img {
   width: 100%;
 }
@@ -2332,7 +2294,6 @@ margin-bottom: 6px; margin-right: 5px;
 }
 
 .dromHotlImgs {}
-.dromHotlImgs h4{font-size: 17px;}
 
 .dromhtThumb {
   display: flex;
@@ -2342,7 +2303,6 @@ margin-bottom: 6px; margin-right: 5px;
 
 .dromhtThumb img {
   width: 49.4%;
-  height: 79px;
 }
 
 .arMorPhoto {
@@ -2454,7 +2414,7 @@ ul.dromami li img {
 }
 
 .dtbleCover .dtblehdLine {
-  padding: 5px 8px 5px 8px;
+  padding: 5px 10px 5px 10px;
 }
 
 .dtbleCover .dtblehdLine .hsalePrice {
@@ -2490,12 +2450,6 @@ ul.dromami li img {
   word-break: break-word;
   display: block;
 }
-.hcancelPolicy{    display: block; text-align: center;
-  font-size: 12px;
-  padding-top: 5px;
-}
-.hcancelPolicy > strong{ display: block;}
-.hfromDateAmount{ font-weight: bold;}
 
 .droomLeft {
   display: block;
@@ -3066,7 +3020,7 @@ button.loginbtn:hover {
   font-weight: 400;
 }
 
-.main-popup input.subBtn {
+.main-popup input#submit {
   background: linear-gradient(81deg, #c8238b 0%, #ff8f00 24%, #bf31dd 100%)
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   ;
@@ -3086,7 +3040,7 @@ button.loginbtn:hover {
 
 .main-popup form.register {
   position: relative;
-  top: -248px;
+  top: -270px;
   left: 0;
   font-size: 1em;
   opacity: 0;
@@ -5469,7 +5423,7 @@ input.proUpdateBtn{
 
 
 /*BREADCRUMB*/
-.breadcrumbbx{ padding-bottom: 10px;}
+
 /* -------------------------------- 
 
 Basic Style

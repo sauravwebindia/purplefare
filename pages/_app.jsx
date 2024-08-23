@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from "@/store/store";
 import Header from '@/components/layouts/Header';
 import Router from 'next/router';
+import NProgress from 'nprogress';
 const jQuery = require('jquery');
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
@@ -14,6 +15,7 @@ import 'animate.css';
 import "@/styles/style.css";
 import "@/styles/style-mobile.css";
 import "@/styles/slider.css";
+import "@/styles/nprogress.css";
 
 
 class MyApp extends App {	
@@ -21,6 +23,18 @@ class MyApp extends App {
 		setTimeout(function () {
             document.getElementById('__next').classList.add('loaded');
         }, 100);
+		const handleRouteChange = (url) => {		
+		}
+
+		Router.events.on('routeChangeComplete', handleRouteChange);        
+		Router.events.on('routeChangeStart', (url) => {
+		  NProgress.start()
+		})
+		Router.events.on('routeChangeComplete', () => NProgress.done())
+		Router.events.on('routeChangeError', () => NProgress.done())
+		return () => {
+            Router.events.off('routeChangeComplete', handleRouteChange);
+        };
 	}
 	render() {
         const { Component, pageProps } = this.props;

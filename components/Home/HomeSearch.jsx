@@ -23,6 +23,7 @@ import match from 'autosuggest-highlight/match';
 import HotelRepository from '@/repositories/HotelRepository';
 import { useRouter } from 'next/router';
 import { baseStoreURL } from '@/repositories/Repository';
+import parseHTML from 'html-react-parser';
 
 function CustomTabPanel(props) {
   	const { children, value, index, ...other } = props;
@@ -125,8 +126,10 @@ function HomeSearch(){
 	const disableAdultDropdown = () => {
 		if(adultDropDownToogle){
 			setAdultDropdownToogle(false);	
-			setSearchBtnCursor("");
-			setSearchBtnDisable("");		
+			if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");		
+			}	
 		}
 	}
 
@@ -145,12 +148,15 @@ function HomeSearch(){
 		childAgeOutput = childAgeOutput.filter(function () { return true });		
 		let childAgeString = childAgeOutput.join(",");
 		setChildAge(childAgeString);
+		if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");		
+		}
 	}
 
 	const clearSearchFilter = () => {
 		setText('');
 		setDestinations([]);
-		//setAdultDropdownToogle(false);
 	}	
 
 	const handleAdultsIncreaseCount = () => {
@@ -174,6 +180,10 @@ function HomeSearch(){
 			roomInput += ", "+roomCount+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
+		if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");		
+		}
 	}
 
 	const handleAdultsDecreaseCount = () => {
@@ -198,6 +208,10 @@ function HomeSearch(){
 				roomInput += ", "+roomCount+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
+			if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");		
+			}
 		}
 	}
 
@@ -222,6 +236,10 @@ function HomeSearch(){
 			roomInput += ", "+roomCount+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
+		if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");		
+		}
 	}
 
 	const handleChildDecreaseCount = () => {
@@ -257,6 +275,10 @@ function HomeSearch(){
 				roomInput += ", "+roomCount+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
+			if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");		
+			}
 		}
 	}
 
@@ -281,6 +303,10 @@ function HomeSearch(){
 			roomInput += ", "+roomCounting+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
+		if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");		
+		}
 	}
 
 	const handleRoomDecreaseCount = () => {
@@ -305,6 +331,10 @@ function HomeSearch(){
 				roomInput += ", "+roomCounting+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
+			if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");		
+			}
 		}
 	}
 
@@ -312,6 +342,10 @@ function HomeSearch(){
 		setDatePickerCount(0);
 		setDatepickerArray([]);
 		setIsOpen(!isOpen);
+		if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");
+		}
 	}
 
 	const handleRangeDatePicker = (value) => {
@@ -354,6 +388,10 @@ function HomeSearch(){
 			});
 			setCheckOutDate(checkOutDateString);
 			setIsOpen(!isOpen);
+			if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");		
+			}
 		}
 	}
 
@@ -389,6 +427,10 @@ function HomeSearch(){
 			localStorage.setItem('cityName',value.label);
 			setSearchValue(value.id);
 			setSearchSource(value.source);
+			if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");		
+			}
 		}
 	};
 
@@ -422,10 +464,10 @@ function HomeSearch(){
 						</div>
 						<Tabs value={value} className="tab_container tabBox" onChange={handleChange} aria-label="basic tabs example">
 						  <Tab className="htabIcons htHotelIcon" label="Hotel" id="simple-tab-0" aria-controls="simple-tabpanel-0"/>
-						  <Tab disabled={true} className="htabIcons htFlightIcon" label="Flight" id="simple-tab-1" aria-controls="simple-tabpanel-1"/>
-						  <Tab disabled={true} className="htabIcons htfliHotelIcon" label="Hotel + Flight" id="simple-tab-2" aria-controls="simple-tabpanel-2"/>
-						  <Tab disabled={true} className="htabIcons htCruiseIcon" label="Cruise" id="simple-tab-3" aria-controls="simple-tabpanel-3"/>
-						  <Tab disabled={true} className="htabIcons htHotelPackIcon" label="Holiday Packages" id="simple-tab-4" aria-controls="simple-tabpanel-4"/>
+						  <Tab disabled={true} className="htabIcons htFlightIcon" label={`Flight (Comming Soon)`} id="simple-tab-1" aria-controls="simple-tabpanel-1"/>
+						  <Tab disabled={true} className="htabIcons htfliHotelIcon" label="Hotel + Flight (Comming Soon)" id="simple-tab-2" aria-controls="simple-tabpanel-2"/>
+						  <Tab disabled={true} className="htabIcons htCruiseIcon" label="Cruise (Comming Soon)" id="simple-tab-3" aria-controls="simple-tabpanel-3"/>
+						  <Tab disabled={true} className="htabIcons htHotelPackIcon" label="Holiday Packages (Comming Soon)" id="simple-tab-4" aria-controls="simple-tabpanel-4"/>
 						</Tabs>
 						<CustomTabPanel value={value} index={0} className="tab-content borderRadiComman tabinn">
 							<form>
