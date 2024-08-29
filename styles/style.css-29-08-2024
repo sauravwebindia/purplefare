@@ -253,34 +253,6 @@ ul.logedInUserdd li img{ width: 19px; margin-right: 8px;}
 /*END FOOTER*/
 
 /*HOME*/
-.hsearchCover .tabBox button:first-child{cursor: pointer;pointer-events:painted;}
-.hsearchCover .tabBox button{ cursor: default;pointer-events: none;}
-
-
-
-
-
-
-
-.hsearchCover .tabBox button:first-child:before{ display: none;}
-.hsearchCover .tabBox button:before{
-  line-height: 10px;
-  content: 'Coming Soon';
-  background: #faa9c1;
-  margin-left: auto;
-  margin-right: auto;
-  bottom: 4px;
-  padding: 2px 8px;
-  font-size: 11px;
-  border-radius: 8px;
-  width: 97px;
-  position: relative;
-  top: 31px;
-  z-index: 9;
-  margin-top: -11px;
-  margin-bottom: -4px;
-}
-.css-1aquho2-MuiTabs-indicator{ display: none;}
 .exptopDestinationsCover{ display: none!important;}
 
 .css-1aquho2-MuiTabs-indicator{ background: none;}
@@ -550,7 +522,6 @@ h2.title-2 {
   font-weight: 500;
 }
 
-.exploreTop .expCover{}
 .expCover {
   position: relative;
   margin-bottom: 20px;
@@ -605,7 +576,6 @@ h2.title-2 {
   width: 55px;
   height: 55px;
 }
-.homePage .owl-theme .owl-nav button:hover{ background: none!important;}
 
 .hSingleSlider .lSlideArrow {
   left: -30px;
@@ -3096,7 +3066,7 @@ button.loginbtn:hover {
   font-weight: 400;
 }
 
-.main-popup input#submit {
+.main-popup input.subBtn {
   background: linear-gradient(81deg, #c8238b 0%, #ff8f00 24%, #bf31dd 100%)
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   ;
@@ -3116,7 +3086,7 @@ button.loginbtn:hover {
 
 .main-popup form.register {
   position: relative;
-  top: -270px;
+  top: -248px;
   left: 0;
   font-size: 1em;
   opacity: 0;
@@ -4126,7 +4096,7 @@ ul.cartChkList li {
 }
 .linkBtn:hover{color:#000;}
 
-.guestHouseInfo a.btn{ border-color: #f37e2c; color:#636161; margin-right: 6px; margin-bottom: 6px;}
+.guestHouseInfo a.btn{ border-color: #f37e2c; color:#636161; margin-bottom: 6px;}
 .guestHouseInfo a.btn:hover{ background: #f37e2c; color: #fff;}
 /*END MY ACCOUNT MY TRIPS*/
 

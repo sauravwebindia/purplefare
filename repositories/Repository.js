@@ -1,6 +1,6 @@
 import axios from 'axios';
 //const baseDomain = 'http://127.0.0.1:8000/api/v1'; // API 
-const baseDomain = 'https://apitest.purplefare.com/api/v1'; // API 
+const baseDomain = 'https://www.topbusinesslisting.co.uk/api/v1'; // API 
 export const baseStoreURL = 'https://purplefare.vercel.app'; 
 export const mediaBaseURL = 'https://apitest.purplefare.com';
 export const assetBaseURL = 'https://apitest.purplefare.com/assets';

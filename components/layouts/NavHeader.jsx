@@ -1,4 +1,4 @@
-import React, {useState,Fragment} from 'react';
+import React, {useState, useEffect,Fragment} from 'react';
 import { baseStoreURL } from '@/repositories/Repository';
 import { connect, useDispatch } from 'react-redux';
 import Link from 'next/link';
@@ -13,6 +13,7 @@ function NavHeader (props) {
 	const Router = useRouter();
 	const dispatch = useDispatch();
     const { auth } = props;
+	const [isLoggedIn,setIsLoggedIn] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
 	const [accountDropdown, setAccountDropdown] = useState(false);
@@ -28,6 +29,13 @@ function NavHeader (props) {
 	const [registerPassword, setRegisterPassword] = useState("");
 	const [registerTermsConditions, setRegisterTermsConditions] = useState(0);
 	const [actionBtnLoading,setActionBtnLoading] = useState(false);
+
+
+	useEffect(() => {  
+        let mounted = true;
+		setIsLoggedIn(auth.isLoggedIn);
+		return () => mounted = false;
+	}, []);
 
 	const handleMobileMenu = () => {
 		setShowMenu(!showMenu);
@@ -191,15 +199,15 @@ function NavHeader (props) {
 	return (
 		<Fragment>
 		<div className="mb-2 justify-content-center mb-md-0 navboxmobile mobileMenu" style={{display: showMenu? "block" : "none"}}>
-			<a href="javascript:;" className="navboxclose" onClick={handleMobileMenu}>X</a>
+			<a href="javascript:void(0);" className="navboxclose" onClick={handleMobileMenu}>X</a>
 			<div className="navmheader">
-				{auth.isLoggedIn && Boolean(auth.isLoggedIn) === true?
+				{isLoggedIn && Boolean(isLoggedIn) === true?
 				<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {auth.user.user.email}</Link>
 				:
 				<Link href="javascript:;" className="loginBtnMob" onClick={handleMobileSignInUpPopup}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
 				}
 			</div>
-			{auth.isLoggedIn && Boolean(auth.isLoggedIn) === true?
+			{isLoggedIn && Boolean(isLoggedIn) === true?
 			<ul className="nav col-12 col-md-auto">
 				<li><Link href={`${baseStoreURL}/hotel-search`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/hotel.png`} alt="" />
 						Hotels</Link></li>
@@ -246,7 +254,7 @@ function NavHeader (props) {
 							<div className="mb-2 justify-content-center mb-md-0 desktopMenu">
 								<Link href="javascript:;" className="navboxclose">X</Link>
 								<div className="navmheader">
-									{auth.isLoggedIn && Boolean(auth.isLoggedIn) === true?
+									{isLoggedIn && Boolean(isLoggedIn) === true?
 										<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {auth.user.user.email}</Link>
 										:
 										<Link href="javascript:;" className="loginBtnMob" onClick={handleMobileSignInUpPopup}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
@@ -260,7 +268,7 @@ function NavHeader (props) {
 								</ul>
 							</div>							
 							<div className="col-md-3 text-end hdRight">
-								{auth.isLoggedIn && Boolean(auth.isLoggedIn) === true?
+								{isLoggedIn && Boolean(isLoggedIn) === true?
 									<div className="logedInUser">
 										<div className="lgdUserCover lgoddbtn" onClick={handleAccountDropdown}><span className="lgdUser">{auth.user.user.name.slice(0,1)}</span><span className="lgdUserText">{auth.user.user.name}</span> </div>
 										<ul className="logedInUserdd" style={{display: accountDropdown? "block" : "none"}}>

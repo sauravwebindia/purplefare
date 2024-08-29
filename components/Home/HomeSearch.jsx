@@ -462,12 +462,12 @@ function HomeSearch(){
 								<span>Holiday Packages</span>
 							</div>
 						</div>
-						<Tabs value={value} className="tab_container tabBox" onChange={handleChange} aria-label="basic tabs example">
+						<Tabs value={value} defaultValue={value} className="tab_container tabBox" onChange={handleChange} aria-label="basic tabs example">
 						  <Tab className="htabIcons htHotelIcon" label="Hotel" id="simple-tab-0" aria-controls="simple-tabpanel-0"/>
-						  <Tab disabled={true} className="htabIcons htFlightIcon" label={`Flight (Comming Soon)`} id="simple-tab-1" aria-controls="simple-tabpanel-1"/>
-						  <Tab disabled={true} className="htabIcons htfliHotelIcon" label="Hotel + Flight (Comming Soon)" id="simple-tab-2" aria-controls="simple-tabpanel-2"/>
-						  <Tab disabled={true} className="htabIcons htCruiseIcon" label="Cruise (Comming Soon)" id="simple-tab-3" aria-controls="simple-tabpanel-3"/>
-						  <Tab disabled={true} className="htabIcons htHotelPackIcon" label="Holiday Packages (Comming Soon)" id="simple-tab-4" aria-controls="simple-tabpanel-4"/>
+						  <Tab className="htabIcons htFlightIcon" label={`Flight`} id="simple-tab-1" aria-controls="simple-tabpanel-1"/>
+						  <Tab className="htabIcons htfliHotelIcon" label="Hotel + Flight" id="simple-tab-2" aria-controls="simple-tabpanel-2"/>
+						  <Tab className="htabIcons htCruiseIcon" label="Cruise" id="simple-tab-3" aria-controls="simple-tabpanel-3"/>
+						  <Tab className="htabIcons htHotelPackIcon" label="Holiday Packages" id="simple-tab-4" aria-controls="simple-tabpanel-4"/>
 						</Tabs>
 						<CustomTabPanel value={value} index={0} className="tab-content borderRadiComman tabinn">
 							<form>
