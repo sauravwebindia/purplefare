@@ -557,7 +557,7 @@ function HomeSearch(){
 									</div>
 								</div>
 								<div className="w-full mt-4 mb-0 flex justify-content-end">
-									<Link target="_blank" href={`/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Find Your Hotel</Link>
+									<Link target="_blank" href={`${baseStoreURL}/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Find Your Hotel</Link>
 								</div>
 							</form>	
 						</CustomTabPanel>

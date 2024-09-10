@@ -148,11 +148,17 @@ export default function HotelDetailImages(props){
         let rateItem = props.rateItem;
         let date;
         return (
-            <div className="dtblehdLine dtbleRowLine addRoomDtlsNew">
+            <div className="dtblehdLine dtbleRowLine">
+                <div className="dtblehdLine dtblehd">Price per night</div>
                 <div className="dtInnSpace">
-                    <span className="detlsAdltCount">{rateItem.adults} Adults & {rateItem.children} Child</span>
+                    <span className="dtCheapPrice desktopOnly">Cheapest Price You&apos;ve Seen!</span>
+                    <div className="dbkDetails">
+                        <span className="dmAdult"><img src={`${baseStoreURL}/images/user.png`} alt="user.png" /> {rateItem.adults}</span>
+                        <span className="dmAdult"><img src={`${baseStoreURL}/images/child.png`} alt="child.png" /> {rateItem.children}</span>
+                    </div>
                     <span className="holdPrice">{rateItem.currencySign} {formatCurrency(rateItem.new_sellingRate)}</span>
                     <span className="hsalePrice">{rateItem.currencySign} {formatCurrency(rateItem.totalNet)}</span>
+                    <span className="hInfo">Per night before taxes and fees</span>
                     {rateItem.cancellationPolicies!=undefined && rateItem.cancellationPolicies!=null && rateItem.cancellationPolicies!=''?
                         rateItem.cancellationPolicies.length>0?
                             rateItem.cancellationPolicies.map((cancelItem,k) => (
@@ -164,7 +170,6 @@ export default function HotelDetailImages(props){
                             ))
                         :''
                     :''}
-                    <a href="#" className="addRoomDtls">Add Room 1</a>
                 </div>
             </div>
         )
@@ -177,22 +182,21 @@ export default function HotelDetailImages(props){
         let hotelRooms = hotel.rooms;
         if(hotelRooms.length>0){
             for(let k=0;k<hotelRooms.length;k++){
-                if(hotelRooms[k]!=null && hotelRooms[k]!=undefined && hotelRooms[k]!=''){
-                    if(code==hotelRooms[k].roomCode){
-                        roomDetails['information'] = hotelRooms[k];
-                        break;
-                    }
-                }                
-            } 
+                if(code==hotelRooms[k].roomCode){
+                    roomDetails['information'] = hotelRooms[k];
+                    break;
+                }
+            }
         }
         return (
             roomDetails['information']!=undefined && roomDetails['information']!=null && roomDetails['information']!=''? 
                 roomDetails['information']['isParentRoom']==true? 
                     roomDetails['information']['roomFacilities']!=undefined?
                     <>
-                        <span className="smallTxt">Room Amenities:</span>      
+                        <span className="smallTxt">Your price includes:</span>      
                         <ul>
-                            {roomDetails['information']['roomFacilities'].slice(0, 5).map((facility,k) => (
+                            <li>Extra low price! (non-refundable)</li>
+                            {roomDetails['information']['roomFacilities'].map((facility,k) => (
                                 facility.description.content!='Room size (sqm)'?
                                 <li key={k}>{facility.description.content}</li>
                                 :''
@@ -250,141 +254,105 @@ export default function HotelDetailImages(props){
             }
         };
 
-        return (           
-            <div className="dromtypeLeft">
-                {roomDetails['images']!=null?
-                <div className="hdgalleryRoomMobile">
-                    <div className="hdgmroomInn">
-                        {roomDetails['images'].map((item,i) => (
-                            <div className="hdgroomSlide" key={i}>
-                                <img src={`${item.image_base_url}${item.path}`} alt={`${item.roomCode}`}/>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                :''}
-                <div className="dromHotlImgs">
+        return (
+            <div className="col-md-3">
+                <div className="dromtypeLeft">
                     {roomDetails['images']!=null?
-                    <div className="dromHotlDesktop">
-                        {roomDetails['roomMainImage']!=null?
-                            <img src={`${roomDetails['roomMainImage'].image_base_url}${roomDetails['roomMainImage'].path}`} alt={`${roomDetails['roomMainImage'].roomCode}`} className="img-fluid" />
-                        :''}
-                        <OwlCarousel className='owl-theme' responsive={responsiveObject} slideBy={1} loop={false} lazyLoad={true} autoplay={false} dots={false} margin={10} navText={['<a href="javascript:void(0);" className="ssArrow lSlideArrow"><img src="'+baseStoreURL+'/images/home/left-slider-arrow.png" alt="left-slider-arrow.png" className="img-fluid"/></a>','<a href="javascript:void(0);" className="ssArrow rSlideArrow"><img src="'+baseStoreURL+'/images/home/right-slider-arrow.png" alt="right-slider-arrow.png" className="img-fluid" /></a>']} nav>
-                            <div className="dromhtThumb">
-                                {roomDetails['images'].map((item,i) => (
-                                    <img key={i} src={`${item.image_base_url}${item.path}`} alt={`${item.roomCode}`}/>
-                                ))}
-                            </div>
-                        </OwlCarousel>
-                        <a href="javascript:;" className="arMorPhoto" style={{display:"none"}}>More Room Photos</a>
+                    <div className="hdgalleryRoomMobile">
+                        <div className="hdgmroomInn">
+                            {roomDetails['images'].map((item,i) => (
+                                <div className="hdgroomSlide" key={i}>
+                                    <img src={`${item.image_base_url}${item.path}`} alt={`${item.roomCode}`}/>
+                                </div>
+                            ))}
                         </div>
-                    :''}        
-                    {roomDetails['information']!=undefined && roomDetails['information']!=null && roomDetails['information']!=''?               
-                    <h4 className="mt-2 mb-0">{roomDetails['information']['description']}</h4>
+                    </div>
                     :''}
-                    <span className="dlastBok" style={{display:"none"}}>Last booked 2 hours ago</span>
-                    <ul className="dromami">
-                        <HotelRoomGeneralInformation roomInfoDetails={roomDetails}/>                       
-                    </ul>
+                    <div className="dromHotlImgs">
+                        {roomDetails['images']!=null?
+                        <div className="dromHotlDesktop">
+                            {roomDetails['roomMainImage']!=null?
+                                <img src={`${roomDetails['roomMainImage'].image_base_url}${roomDetails['roomMainImage'].path}`} alt={`${roomDetails['roomMainImage'].roomCode}`} className="img-fluid" />
+                            :''}
+                            <OwlCarousel className='owl-theme' responsive={responsiveObject} slideBy={1} loop={false} lazyLoad={true} autoplay={false} dots={false} margin={10} navText={['<a href="javascript:void(0);" class="ssArrow lSlideArrow"><img src="'+baseStoreURL+'/images/home/left-slider-arrow.png" alt="left-slider-arrow.png" class="img-fluid"/></a>','<a href="javascript:void(0);" class="ssArrow rSlideArrow"><img src="'+baseStoreURL+'/images/home/right-slider-arrow.png" alt="right-slider-arrow.png" class="img-fluid" /></a>']} nav>
+                                <div className="dromhtThumb">
+                                    {roomDetails['images'].map((item,i) => (
+                                        <img key={i} src={`${item.image_base_url}${item.path}`} alt={`${item.roomCode}`}/>
+                                    ))}
+                                </div>
+                            </OwlCarousel>
+                            <a href="javascript:;" className="arMorPhoto" style={{display:"none"}}>More Room Photos</a>
+                            </div>
+                        :''}        
+                        {roomDetails['information']!=undefined && roomDetails['information']!=null && roomDetails['information']!=''?               
+                        <h4 className="mt-2 mb-0">{roomDetails['information']['description']}</h4>
+                        :''}
+                        <span className="dlastBok" style={{display:"none"}}>Last booked 2 hours ago</span>
+                        <ul className="dromami">
+                            <HotelRoomGeneralInformation roomInfoDetails={roomDetails}/>                       
+                        </ul>
+                    </div>
                 </div>
             </div>
         );
     }
     if(!loading){    
         return (
-            <div className="roomsBox" id="roomsid">                
-                <div className="droomType">
-                    <div className="row">                            
-                        <div className="col-md-9">
-                        {rooms!=null && rooms!=undefined && rooms!='' && rooms.length>0?
-                            rooms.map((item,i) => (
-                            <Fragment key={i}>
+            <div className="roomsBox" id="roomsid">
+                {rooms!=null && rooms!=undefined && rooms!='' && rooms.length>0?
+                    rooms.map((item,i) => (
+                    <div className="droomType" key={i}>
+                        <div className="row">
+                            <div className="col-md-12">
                                 <div className="dromTypeHd desktopOnly">
                                     <h4>{item.name}</h4>
                                     <span className="dlastBok" style={{display:"none"}}>Last booked 2 hours ago</span>
-                                </div>                               
-                                <div className="dtbleCover dtbleCoverNew">                                                                 
-                                    <div className="dtbleRow">
-                                        <HotelRoomImagesWithDetails room={item}/>
-                                        <div className="dtlsFirstCol">
-                                        {item.rates!=null && item.rates!=undefined && item.rates!=''?         
-                                            item.rates.map((rateItem,k) => (   
-                                            <div className="dtbleRowInsitwo" key={k}>
-                                                <div className="dtblehdLine dtbleRowLine">
-                                                    <div className="dtInnSpace">
-                                                        <h4>{rateItem.boardName}</h4>
-                                                        <span className="dtCheapPrice mobileOnly">
-                                                            <span>Cheapest Price You&apos;ve Seen!</span>
-                                                        </span>                                                                                                       
-                                                        <HotelRoomFacilitiesInformation room={item}/>
-                                                    </div>
-                                                </div>
-                                                <HotelRoomPriceInformation rateItem={rateItem}/>                                                    
-                                            </div>
-                                            )) 
-                                        :''}  
-                                        </div>
-                                    </div>                                        
-                                </div> 
-                            </Fragment>     
-                            )):''}                                                                                   
+                                </div>
+                            </div>
                         </div>
-                        {/******* Side ******/}
-                        <div className="col-md-3">
-                            <div className="dtblehdLine dtbleRowLine dtlsLastFexed">
-                                <div className="dtlsLastFexedInn">
-                                    
-                                    <div className="dtlsBoxsScroll">
-                                        <div className="addhtls">
-                                            <a href="javascript:;" className="closeAddhtls"><img src={`${baseStoreURL}/images/close.png`} alt="close.png" /></a>
-                                            <h4>Deluxe Room</h4>
-                                            <span className="adultChild">2Adults & 1 child</span>
-                                            <div className="perNgtPrice">
-                                                <strong className="hsalePrice">₹ 15000</strong>
-                                                <span className="hInfo">Per night</span>
+                        <div className="row">
+                            <HotelRoomImagesWithDetails room={item}/>
+                            <div className="col-md-9">
+                                {item.rates!=null && item.rates!=undefined && item.rates!=''?
+                                    item.rates.map((rateItem,k) => (
+                                    <div className="dtbleCover" key={k}>
+                                        
+                                        <div className="dtbleRow">
+                                            <div className="dtblehdLine dtbleRowLine">
+                                                <div className="dtblehdLine dtblehd">Benefits</div>
+                                                <div className="dtInnSpace">
+                                                    <h4>{rateItem.boardName}</h4>
+                                                    <span className="dtCheapPrice mobileOnly">
+                                                        <span>Cheapest Price You&apos;ve Seen!</span>
+                                                    </span>                                                                                                       
+                                                    <HotelRoomFacilitiesInformation room={item}/>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="addhtls">
-                                            <a href="javascript:;" className="closeAddhtls"><img src={`${baseStoreURL}/images/close.png`} alt="close.png" /></a>
-                                            <h4>Deluxe Room</h4>
-                                            <span className="adultChild">2Adults & 1 child</span>
-                                            <div className="perNgtPrice">
-                                                <strong className="hsalePrice">₹ 15000</strong>
-                                                <span className="hInfo">Per night</span>
+                                            <div className="dtblehdLine dtbleRowLine">
+                                                <div className="dtblehdLine dtblehd">Sleeps</div>
+                                                <div className="dtInnSpace">
+                                                    <div className="dtImg"><img src={`${baseStoreURL}/images/details/user.png`} alt="user.png" /><img src={`${baseStoreURL}/images/details/user.png`} alt="child.png" /></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="addhtls">
-                                            <a href="javascript:;" className="closeAddhtls"><img src={`${baseStoreURL}/images/close.png`} alt="close.png" /></a>
-                                            <h4>Deluxe Room</h4>
-                                            <span className="adultChild">2Adults & 1 child</span>
-                                            <div className="perNgtPrice">
-                                                <strong className="hsalePrice">₹ 15000</strong>
-                                                <span className="hInfo">Per night</span>
-                                            </div>
-                                        </div>
-                                        <div className="addhtls">
-                                            <a href="javascript:;" className="closeAddhtls"><img src={`${baseStoreURL}/images/close.png`} alt="close.png" /></a>
-                                            <h4>Deluxe Room</h4>
-                                            <span className="adultChild">2Adults & 1 child</span>
-                                            <div className="perNgtPrice">
-                                                <strong className="hsalePrice">₹ 15000</strong>
-                                                <span className="hInfo">Per night</span>
-                                            </div>
+                                            <HotelRoomPriceInformation rateItem={rateItem}/>
+                                            <div className="dtblehdLine dtbleRowLine">
+                                                <div className="dtblehdLine dtblehd">Room</div>
+                                            
+                                                <input type="text" value="2" disabled /></div>
+                                                <div className="dtblehdLine dtbleRowLine">
+                                                    <div className="dtblehdLine dtblehd">Most booked</div>
+                                                    <a href="javascript:;" className="btn hButton">Book Now </a>
+                                                    <span className="droomLeft">Our last 2 rooms!</span>
+                                                </div>
                                         </div>
                                     </div>
-                                    <div className="dtblehdLine dtbleRowLine dtlsfpri">
-                                        <div className="dtblehdLine dtblehd">4 Adults & 2 Children</div>
-                                        <strong className="hsalePrice">₹ 60000</strong>
-                                        <span className="dtlsString">+₹ 1,501 taxes & fees</span>
-                                        <span className="dtlspnroom">Per night for 2 Rooms</span>
-                                        <a href="cart.html" className="btn hButton">Proceed </a>
-                                        <span className="droomLeft">Our last 2 rooms!</span>
-                                    </div>
-                                </div>                                
+                                    ))
+                                :''}                          
                             </div>
                         </div>
                     </div>
-                </div>           
+                    ))
+                :''}            
             </div>
         );
     }else{

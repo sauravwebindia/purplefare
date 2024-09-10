@@ -23,6 +23,8 @@ import Link from 'next/link';
 
 export default function HotelModifySearch(){
 	const Router = useRouter();
+	const [searchBtnDisable,setSearchBtnDisable] = useState("none");
+	const [searchBtnCursor, setSearchBtnCursor] = useState("default");
     const [cityName,setCityName] = useState(Router.query.cityName);
 	const [loading, setLoading] = useState(false);
 	const [checkInDate, setCheckInDate] = useState(Router.query.checkin);
@@ -58,13 +60,14 @@ export default function HotelModifySearch(){
 	}
 
 	async function searchHotel(params){
-		localStorage.removeItem('cityName');
+		console.log(params);
+		/*localStorage.removeItem('cityName');
 		localStorage.removeItem('traceId');
 		localStorage.removeItem('searchParams');
 		localStorage.setItem('cityName',params.cityName);
 		Router.push(`${baseStoreURL}/hotels/hotel-listing/?checkin=${params.checkin}&checkout=${params.checkout}&cityName=${params.cityName}&searchSource=${params.searchSource}&searchType=${params.searchType}&searchValue=${params.searchValue}&rooms=${params.rooms}&adults=${params.adults}&child=${params.child}&childAge=${params.childAge}`);
 		//Router.reload();
-		setTimeout(function(){location.reload()},500);
+		setTimeout(function(){location.reload()},500);*/
 	}
 
 	const onTextChanged = (e) => {
@@ -76,6 +79,8 @@ export default function HotelModifySearch(){
 					fetchDestinations(lowercasedValue);
 				}
 				setText(e.target.value);
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");
 			}
 		}
 	}
@@ -103,8 +108,16 @@ export default function HotelModifySearch(){
 		let child = childCount;
 		let childAgeOutput = [];
 		let temp = childAge;
-		if(temp!=''){
-			childAgeOutput = temp.split(",");
+		if(temp!='' && temp!=undefined && temp!=null){
+			if(temp.length>0){
+				if(temp.length==1){
+					childAgeOutput.push(temp);
+				}else{
+					childAgeOutput = temp;
+				}
+			}else{
+				childAgeOutput = temp.split(",");
+			}
 		}
 		if(child>0){
 			if(e.target.value!=''){
@@ -113,6 +126,8 @@ export default function HotelModifySearch(){
 		}	
 		let childAgeString = childAgeOutput.join(",");	
 		setChildAge(childAgeString);
+		setSearchBtnCursor("");
+		setSearchBtnDisable("");
 	}
 
 	const clearSearchFilter = () => {
@@ -142,6 +157,8 @@ export default function HotelModifySearch(){
 			roomInput += ", "+roomCount+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
+		setSearchBtnCursor("");
+		setSearchBtnDisable("");
 	}
 
 	const handleAdultsDecreaseCount = () => {
@@ -166,6 +183,8 @@ export default function HotelModifySearch(){
 				roomInput += ", "+roomCount+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");
 		}
 	}
 
@@ -190,6 +209,8 @@ export default function HotelModifySearch(){
 			roomInput += ", "+roomCount+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
+		setSearchBtnCursor("");
+		setSearchBtnDisable("");
 	}
 
 	const handleChildDecreaseCount = () => {
@@ -197,9 +218,23 @@ export default function HotelModifySearch(){
 		if(childCounting>=1){
 			if(childCounting>0){
 				let temp = childAge;
-				if(temp!=''){
-					let childAgeOutput = temp.split(",");
-					childAgeOutput.pop();
+				if(temp!='' && temp!=undefined && temp!=null){
+					let childAgeOutput = [];
+					if(temp.length>0){
+						if(temp.length==1){
+							childAgeOutput.push(temp);
+						}else{
+							childAgeOutput = temp;
+						}
+						if(childAgeOutput.length>0){
+							childAgeOutput.pop();
+						}
+					}else{
+						childAgeOutput = temp.split(",");
+						if(childAgeOutput.length>0){
+							childAgeOutput.pop();
+						}
+					}					
 					let childAgeString = childAgeOutput.join(",");	
 					setChildAge(childAgeString);
 				}
@@ -225,6 +260,8 @@ export default function HotelModifySearch(){
 				roomInput += ", "+roomCount+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");
 		}
 	}
 
@@ -249,6 +286,8 @@ export default function HotelModifySearch(){
 			roomInput += ", "+roomCounting+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
+		setSearchBtnCursor("");
+		setSearchBtnDisable("");
 	}
 
 	const handleRoomDecreaseCount = () => {
@@ -273,6 +312,8 @@ export default function HotelModifySearch(){
 				roomInput += ", "+roomCounting+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
+			setSearchBtnCursor("");
+			setSearchBtnDisable("");
 		}
 	}
 
@@ -281,6 +322,8 @@ export default function HotelModifySearch(){
 		setDatePickerCount(0);
 		setDatepickerArray([]);
 		setIsOpen(!isOpen);
+		setSearchBtnCursor("");
+		setSearchBtnDisable("");
 	}
 
 	const handleRangeDatePicker = (value) => {
@@ -485,7 +528,7 @@ export default function HotelModifySearch(){
 							</div>
 							
 							<div className="w-full mt-2 mb-0 flex justify-content-center">
-								<Link href="javascript:;" onClick={handleSearchHotel} className="rounded-md findBtn">Update Search</Link>
+								<a href={`${baseStoreURL}/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Update Search</a>
 							</div>
 						</section>
 					</div>
