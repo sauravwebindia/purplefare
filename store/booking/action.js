@@ -22,6 +22,13 @@ export const actionTypes = {
 
     UPDATE_HOTEL_BOOKING_SUCCESS: 'UPDATE_HOTEL_BOOKING_SUCCESS',
     UPDATE_HOTEL_BOOKING_ERROR: 'UPDATE_HOTEL_BOOKING_ERROR',
+
+
+    INCREASE_MAIN_ROOM_QTY: 'INCREASE_MAIN_ROOM_QTY',
+    INCREASE_MAIN_ROOM_QTY_SUCCESS: 'INCREASE_MAIN_ROOM_QTY_SUCCESS',
+    INCREASE_MAIN_ROOM_QTY_ERROR: 'INCREASE_MAIN_ROOM_QTY_ERROR',
+
+    DECREASE_MAIN_ROOM_QTY: 'DECREASE_MAIN_ROOM_QTY',
 };
 
 export function getHotelBooking() {
@@ -59,6 +66,14 @@ export function increaseRoomQty(room) {
 
 export function decreaseRoomQty(room) {
     return { type: actionTypes.DECREASE_ROOM_QTY, room };
+}
+
+export function increaseMainRoomQty(room) {
+    return { type: actionTypes.INCREASE_MAIN_ROOM_QTY, room };
+}
+
+export function decreaseMainRoomQty(room) {
+    return { type: actionTypes.DECREASE_MAIN_ROOM_QTY, room };
 }
 
 export function updateHotelBookingSuccess(payload) {

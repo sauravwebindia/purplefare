@@ -23,8 +23,17 @@ export default function HotelAboutOverview(props){
             let cateringFacilityArray = new Array();
             let businessFacilityArray = new Array();
             for(let p=0;p<amenities.length;p++){
-                if(amenities[p].key=='Room facilities (Standard room)'){
+                if(amenities[p].key.match(/Room facilities/)){
                     roomFacilityArray.push(amenities[p].value);
+                }
+                if(amenities[p].key=='Things to keep in mind'){
+                    basicFacilityArray.push(amenities[p].value);
+                }
+                if(amenities[p].key=='Sports'){
+                    basicFacilityArray.push(amenities[p].value);
+                }
+                if(amenities[p].key.match(/safety/)){
+                    basicFacilityArray.push(amenities[p].value);
                 }
                 if(amenities[p].key=='Meals'){
                     cateringFacilityArray.push(amenities[p].value);

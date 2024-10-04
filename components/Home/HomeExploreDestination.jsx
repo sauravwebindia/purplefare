@@ -16,24 +16,24 @@ export default function HomeExploreDestination(){
 							<div className="exptopDestinations">
 								<div className="expMob">
 									<div className="expTextMob">
-										<span>Holiday Packages</span>
+										<span><a href="#">Holiday Packages</a></span>
 										<h2>New York</h2>
 									</div>
-									<img src="images/home/hotel-mobile-1.jpg" alt="" className="img-fluid"/>
+									<div class="expImgCover"><img src="images/home/hotel-mobile-1.jpg" alt="" className="img-fluid"/></div>
 								</div>
 								<div className="expMob">
 									<div className="expTextMob">
-										<span>Holiday Packages</span>
+										<span><a href="#">Holiday Packages</a></span>
 										<h2>New York</h2>
 									</div>
-									<img src="images/home/newyork.jpg" alt="" className="img-fluid"/>
+									<div class="expImgCover"><img src="images/home/newyork.jpg" alt="" className="img-fluid"/></div>
 								</div>
 								<div className="expMob">
 									<div className="expTextMob">
-										<span>Holiday Packages</span>
+										<span><a href="#">Holiday Packages</a></span>
 										<h2>New York</h2>
 									</div>
-									<img src="images/home/newyork.jpg" alt="" className="img-fluid"/>
+									<div class="expImgCover"><img src="images/home/newyork.jpg" alt="" className="img-fluid"/></div>
 								</div>
 							</div>
 						</div>
@@ -41,70 +41,70 @@ export default function HomeExploreDestination(){
 				</div>
 				<div className="row">
 					<div className="col-sm-8 expCover">
-						<div className="expText"><span>Holiday Packages</span>
+						<div className="expText"><span><a href="#">Holiday Packages</a></span>
 							<h2>New York</h2>
 						</div>
-						<img src="images/home/newyork.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/newyork.jpg" alt="" className="img-fluid" /></div>
 					</div>
 					<div className="col-sm-4 expCover">
-						<div className="expText"><span>Holiday Packages</span>
+						<div className="expText"><span><a href="#">Holiday Packages</a></span>
 							<h2>Los Angeles</h2>
 						</div>
-						<img src="images/home/losangeles.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/losangeles.jpg" alt="" className="img-fluid" /></div>
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-sm-8 expCover">
-						<div className="expText"><span>Holiday Packages</span>
+						<div className="expText"><span><a href="#">Holiday Packages</a></span>
 							<h2>Miami</h2>
 						</div>
-						<img src="images/home/miami.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/miami.jpg" alt="" className="img-fluid" /></div>
 					</div>
 					<div className="col-sm-4 expCover">
-						<div className="expText"><span>Holiday Packages</span>
+						<div className="expText"><span><a href="#">Holiday Packages</a></span>
 							<h2>Houston</h2>
 						</div>
-						<img src="images/home/losangeles.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/losangeles.jpg" alt="" className="img-fluid" /></div>
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-sm expCover">
-						<div className="expText"><span>Hotel . Flight</span>
+						<div className="expText"><span><a href="#">Hotel</a><a href="#">Flight</a></span>
 							<h2>Orlando</h2>
 						</div>
-						<img src="images/home/losangeles.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/losangeles.jpg" alt="" className="img-fluid" /></div>
 					</div>
 					<div className="col-sm expCover">
-						<div className="expText"><span>Hotel . Flight</span>
+						<div className="expText"><span><a href="#">Hotel</a><a href="#">Flight</a></span>
 							<h2>Atlanta</h2>
 						</div>
-						<img src="images/home/losangeles.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/losangeles.jpg" alt="" className="img-fluid" /></div>
 					</div>
 					<div className="col-sm expCover">
-						<div className="expText"><span>Hotel . Flight</span>
+						<div className="expText"><span><a href="#">Hotel</a><a href="#">Flight</a></span>
 							<h2>Dallas</h2>
 						</div>
-						<img src="images/home/losangeles.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/losangeles.jpg" alt="" className="img-fluid" /></div>
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-sm expCover">
-						<div className="expText"><span>Hotel . Flight</span>
+						<div className="expText"><span><a href="#">Hotel</a><a href="#">Flight</a></span>
 							<h2>Orlando</h2>
 						</div>
-						<img src="images/home/losangeles.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/losangeles.jpg" alt="" className="img-fluid" /></div>
 					</div>
 					<div className="col-sm expCover">
-						<div className="expText"><span>Hotel . Flight</span>
+						<div className="expText"><span><a href="#">Hotel</a><a href="#">Flight</a></span>
 							<h2>Atlanta</h2>
 						</div>
-						<img src="images/home/losangeles.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/losangeles.jpg" alt="" className="img-fluid" /></div>
 					</div>
 					<div className="col-sm expCover">
-						<div className="expText"><span>Hotel . Flight</span>
+						<div className="expText"><span><a href="#">Hotel</a><a href="#">Flight</a></span>
 							<h2>Dallas</h2>
 						</div>
-						<img src="images/home/losangeles.jpg" alt="" className="img-fluid" />
+						<div class="expImgCover"><img src="images/home/losangeles.jpg" alt="" className="img-fluid" /></div>
 					</div>
 				</div>
 			</div>

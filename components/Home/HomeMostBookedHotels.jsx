@@ -12,7 +12,7 @@ export default function HomeMostBookedHotels(){
 	let BannerView;
 	const BannerItems = sliderItems.map((item,i) => (
 		<div className="col-sm expCover" key={i}>
-			<div className="expText"><span>Hotel</span>
+			<div className="expText"><span><a href="#">Hotel</a></span>
 				<h2>Bosten</h2>
 			</div>
 			<img src={`${baseStoreURL}/images/home/losangeles.jpg`} alt="losangeles.jpg" className="img-fluid" />

@@ -7,11 +7,10 @@ import HotelListingMobileHeader from "@/components/Hotel/HotelListingMobileHeade
 import HotelStickSearch from '@/components/Hotel/HotelStickSearch';
 import HotelModifySearch from '@/components/Hotel/HotelModifySearch';
 import {isMobile,isTablet,MobileView, BrowserView} from "react-device-detect";
-import HotelFilters from '@/components/Hotel/HotelFilters';
 import HotelsListing from '@/components/Hotel/HotelsListing';
 import Breadcrumb from '@/components/layouts/Breadcrumb';
 const HotelListing = (props) => {	
-    const Router = useRouter();
+    const Router = useRouter();   
     if (isMobile) {
         return(
             <Fragment>
@@ -22,12 +21,7 @@ const HotelListing = (props) => {
                         <div className="container listing">
                             <Breadcrumb page="Hotel Listing" cityName={Router.query.cityName}/>
                             <div className="row">
-                                <div className="col-md-3">
-                                    <HotelFilters/>
-                                </div>
-                                <div className="col-md-9">
-                                    <HotelsListing listing={props.props.data}/>
-                                </div>
+                                <HotelsListing listing={props.props.data}/>
                             </div>
                         </div>
                     </section>
@@ -45,12 +39,7 @@ const HotelListing = (props) => {
                         <div className="container listing">
                             <Breadcrumb page="Hotel Listing" cityName={Router.query.cityName}/>
                             <div className="row">
-                                <div className="col-md-3">
-                                    <HotelFilters/>
-                                </div>
-                                <div className="col-md-9">
-                                    <HotelsListing listing={props.props.data}/>
-                                </div>
+                                <HotelsListing listing={props.props.data}/>
                             </div>
                         </div>
                     </section>

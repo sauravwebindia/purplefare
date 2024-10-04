@@ -25,7 +25,7 @@ export const generateTempArray = (maxItems) => {
 
 export function formatCurrency(num) {
     if (num !== undefined) {
-        return parseFloat(num)
+        return parseFloat(num).toFixed(2)
             .toString()
             .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
     } else {

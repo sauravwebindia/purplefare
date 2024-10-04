@@ -19,12 +19,12 @@ export default function Breadcrumb(props){
 
 	if(props.page=='Hotel Listing'){
         return (
-            <div class="row">
-                <div class="col-md-12">
+            <div className="row">
+                <div className="col-md-12">
                     <div>
-                        <ol class="cd-breadcrumb">
-                            <li><Link href={`${baseStoreURL}`}><i class="fa fa-home"></i></Link></li>
-                            <li class="current"><em>{props.cityName}</em></li>
+                        <ol className="cd-breadcrumb">
+                            <li><Link href={`${baseStoreURL}`}><i className="fa fa-home"></i></Link></li>
+                            <li className="current"><em>{props.cityName}</em></li>
                         </ol>
                     </div>
                 </div>
@@ -36,11 +36,11 @@ export default function Breadcrumb(props){
             
             if(hotelDetails!=null && hotelDetails!='' && hotelDetails!=undefined){
                 return (
-                    <section class="breadcrumbbx">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <Link href={`${baseStoreURL}`}>Home</Link> <span class="brdIcon">/</span> <a href={`${listingLink}`}>{cityName}</a> <span class="brdIcon">/</span> <span class="brdNormal">{hotelDetails.name}</span>
+                    <section className="breadcrumbbx">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <Link href={`${baseStoreURL}`}>Home</Link> <span className="brdIcon">/</span> <a href={`${listingLink}`}>{cityName}</a> <span className="brdIcon">/</span> <span className="brdNormal">{hotelDetails.name}</span>
                                 </div>
                             </div>
                         </div>

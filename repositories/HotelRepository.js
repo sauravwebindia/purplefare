@@ -48,6 +48,33 @@ class HotelRepository {
         .catch((error) => ({ error: JSON.stringify(error) }));
         return reponse; 
     }
+
+    async applyFilters(params){
+        const reponse = await Repository.post(`${baseUrl}/search-hotels`,params)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => ({ error: JSON.stringify(error) }));
+        return reponse; 
+    }
+
+    async saveBooking(params){
+        const reponse = await Repository.post(`${baseUrl}/save-hotel-booking`,params)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => ({ error: JSON.stringify(error) }));
+        return reponse; 
+    }
+
+    async fetchBookingForReview(params){
+        const reponse = await Repository.post(`${baseUrl}/fetch-hotel-booking-for-review`,params)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => ({ error: JSON.stringify(error) }));
+        return reponse; 
+    }
 }
 
 export default new HotelRepository();

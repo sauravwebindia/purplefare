@@ -20,11 +20,15 @@ import parse from 'autosuggest-highlight/parse';
 import match from 'autosuggest-highlight/match';
 import HotelRepository from '@/repositories/HotelRepository';
 import Link from 'next/link';
+import { connect,useDispatch } from 'react-redux';
+import { clearHotelBooking,getHotelBooking } from '@/store/booking/action';
 
-export default function HotelModifySearch(){
+function HotelModifySearch(props){
 	const Router = useRouter();
-	const [searchBtnDisable,setSearchBtnDisable] = useState("none");
-	const [searchBtnCursor, setSearchBtnCursor] = useState("default");
+	const { auth,hotelBooking } = props;
+	const dispatch = useDispatch();
+	const [searchBtnDisable,setSearchBtnDisable] = useState("");
+	const [searchBtnCursor, setSearchBtnCursor] = useState("");
     const [cityName,setCityName] = useState(Router.query.cityName);
 	const [loading, setLoading] = useState(false);
 	const [checkInDate, setCheckInDate] = useState(Router.query.checkin);
@@ -72,15 +76,19 @@ export default function HotelModifySearch(){
 
 	const onTextChanged = (e) => {
 		if(e!=null && e!=undefined && e!=''){
-			if(e.target.value!=null && e.target.value!=undefined && e.target.value!=''){
-				const lowercasedValue = e.target.value.toLowerCase().trim();
-				if(e.target.value.length>2){
-					setAutoCompleteLoading(true);
-					fetchDestinations(lowercasedValue);
+			if(e.target!=null && e.target!=undefined && e.target!=''){
+				if(e.target.value!=null && e.target.value!=undefined && e.target.value!=''){
+					const lowercasedValue = e.target.value.toLowerCase().trim();
+					if(e.target.value.length>2){
+						setAutoCompleteLoading(true);
+						fetchDestinations(lowercasedValue);
+					}
+					setText(e.target.value);	
+					dispatch(clearHotelBooking());	
+					dispatch(getHotelBooking());		
+					setSearchBtnCursor("");
+					setSearchBtnDisable("");
 				}
-				setText(e.target.value);
-				setSearchBtnCursor("");
-				setSearchBtnDisable("");
 			}
 		}
 	}
@@ -126,6 +134,7 @@ export default function HotelModifySearch(){
 		}	
 		let childAgeString = childAgeOutput.join(",");	
 		setChildAge(childAgeString);
+		dispatch(clearHotelBooking());	
 		setSearchBtnCursor("");
 		setSearchBtnDisable("");
 	}
@@ -157,6 +166,7 @@ export default function HotelModifySearch(){
 			roomInput += ", "+roomCount+ " Rooms";
 		}
 		setRoomInputPlaceHolder(roomInput);
+		dispatch(clearHotelBooking());	
 		setSearchBtnCursor("");
 		setSearchBtnDisable("");
 	}
@@ -183,6 +193,7 @@ export default function HotelModifySearch(){
 				roomInput += ", "+roomCount+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
+			dispatch(clearHotelBooking());	
 			setSearchBtnCursor("");
 			setSearchBtnDisable("");
 		}
@@ -260,6 +271,7 @@ export default function HotelModifySearch(){
 				roomInput += ", "+roomCount+ " Rooms";
 			}
 			setRoomInputPlaceHolder(roomInput);
+			dispatch(clearHotelBooking());	
 			setSearchBtnCursor("");
 			setSearchBtnDisable("");
 		}
@@ -321,7 +333,8 @@ export default function HotelModifySearch(){
 	const handleDatePicker = (e) => {
 		setDatePickerCount(0);
 		setDatepickerArray([]);
-		setIsOpen(!isOpen);
+		setIsOpen(!isOpen);		
+		dispatch(clearHotelBooking());	
 		setSearchBtnCursor("");
 		setSearchBtnDisable("");
 	}
@@ -424,9 +437,9 @@ export default function HotelModifySearch(){
     }, []);
 
     return (
-        <div className="hsearchCover">
+        <div className="hsearchCover" id="search-fixed">
 			<div className="container">
-				<div className="row">
+				<div className="row searchHd">
 					<div className="col-md-12">
 						<h1><img src={`${baseStoreURL}/images/hotel-icon.png`} alt="hotel-icon.png" className="hsIcons" /> Hotel</h1>
 					</div>
@@ -537,3 +550,5 @@ export default function HotelModifySearch(){
 		</div>
     );
 }
+
+export default connect((state) => state)(HotelModifySearch);

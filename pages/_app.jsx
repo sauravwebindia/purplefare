@@ -16,13 +16,18 @@ import "@/styles/style.css";
 import "@/styles/style-mobile.css";
 import "@/styles/slider.css";
 import "@/styles/nprogress.css";
+import { v4 } from "uuid";
 
 
 class MyApp extends App {	
 	componentDidMount() {
 		setTimeout(function () {
             document.getElementById('__next').classList.add('loaded');
+			if(localStorage.getItem('uuid')==null || localStorage.getItem('uuid')==undefined || localStorage.getItem('uuid')==''){
+				localStorage.setItem('uuid',v4());
+			}
         }, 100);
+
 		const handleRouteChange = (url) => {		
 		}
 
