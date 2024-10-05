@@ -21,6 +21,7 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import HotelFilters from '@/components/Hotel/HotelFilters';
 import { clearHotelBooking } from '@/store/booking/action';
+import { isMobile } from 'react-device-detect';
 
 function HotelsListing(props){
     const router = useRouter();
@@ -48,6 +49,9 @@ function HotelsListing(props){
         let mounted = true;
         let checkInDate = router.query.checkin;
         let checkOutDate = router.query.checkout;
+        if(isMobile){
+            setShowMobileFilter(false);
+        }
         var date1 = new Date(checkInDate);
         var date2 = new Date(checkOutDate);
         var timeDiff = Math.abs(date2.getTime() - date1.getTime());
@@ -113,7 +117,9 @@ function HotelsListing(props){
             setLoadingProducts(false);
             setSkeltonLoading(false);
         }  
-        //setShowMobileFilter(false);      
+        if(isMobile){
+            setShowMobileFilter(false);
+        } 
     }
 
     async function fetchHotelFilters(params){
@@ -121,7 +127,9 @@ function HotelsListing(props){
         const responseData = await HotelRepository.searchHotelsFilters(params);
         if(responseData.success==1){            
             setListFilters(responseData.data.filters);   
-            //setShowMobileFilter(false);         
+            if(isMobile){
+                setShowMobileFilter(false);
+            }        
             //setSkeltonLoading(false);
         }
         setLoading(false);
@@ -148,7 +156,9 @@ function HotelsListing(props){
             const filterResponseData = await HotelRepository.searchHotelsFilters(searchJSONArray);
             if(filterResponseData.success==1){            
                 setListFilters(filterResponseData.data.filters);
-                //setShowMobileFilter(false);
+                if(isMobile){
+                    setShowMobileFilter(false);
+                }
             }			
             const responseData = await HotelRepository.applyFilters(searchJSONArray);
 			if (responseData.success==1) {
@@ -187,7 +197,9 @@ function HotelsListing(props){
             const filterResponseData = await HotelRepository.searchHotelsFilters(searchJSONArray);
             if(filterResponseData.success==1){            
                 setListFilters(filterResponseData.data.filters);
-                //setShowMobileFilter(false);
+                if(isMobile){
+                    setShowMobileFilter(false);
+                }
             }			
             const responseData = await HotelRepository.applyFilters(searchJSONArray);
 			if (responseData.success==1) {
@@ -318,6 +330,10 @@ function HotelsListing(props){
         setShowMobileFilter(!mobileFilterShow);
     }
 
+    const clearMobileFilter = () => {
+        localStorage.removeItem('persist:filters');
+    }
+
     const handleSortBy = (e) => {
         if(e!=null && e!=undefined && e!=''){
             if(e.target!=null && e.target!=undefined && e.target!=''){
@@ -373,7 +389,7 @@ function HotelsListing(props){
         ));
         FilterView = (
             <div className="filterbx" style={{display:mobileFilterShow?"block":"none"}}>
-                <h2>Filter <Link href="" className="float-end fltrremove">Clear Filter</Link> <Link href="" className="float-end fltrclose">X</Link></h2>
+                <h2>Filter <Link href="javascript:;" onClick={handleMobileFilter} className="float-end fltrremove">Clear Filter</Link> <Link href="javascript:;" onClick={handleMobileFilter} className="float-end fltrclose">X</Link></h2>
                 <div className="ltotalHotel">
                     Filter {totalResults} Total Hotels
                 </div>
@@ -384,8 +400,8 @@ function HotelsListing(props){
                 </div>
                 :''}
                 <div className="applyfilterMobile">
-                    <Link href="#" className="clearFilter">Clear Filter</Link>
-                    <Link href="#" className="applyFilter">Apply Filter</Link>
+                    <Link href="#" className="clearFilter" onClick={() => clearMobileFilter()}>Clear Filter</Link>
+                    <Link href="#" className="applyFilter" onClick={handleMobileFilter}>Apply Filter</Link>
                 </div>            
             </div>
         );
