@@ -83,6 +83,13 @@ export function updateHotelBookingSuccess(payload) {
     };
 }
 
+export function updateRoomIncrementHotelBookingSuccess(payload) {
+    return {
+        type: actionTypes.UPDATE_HOTEL_BOOKING_SUCCESS,
+        payload,
+    };
+}
+
 export function updateHotelBookingError(payload) {
     return {
         type: actionTypes.UPDATE_HOTEL_BOOKING_ERROR,

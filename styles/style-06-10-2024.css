@@ -1095,7 +1095,7 @@ h2.title-2 {
 }
 
 .innerPage .hsearchCover {
-  background-position: 0 -25px !important;
+  background-position: 0 -76px !important;
   transition: all 0.3s ease; /* Smooth transitions */
 }
 /*23sept2024*/
@@ -1173,8 +1173,7 @@ z-index: 9;
 .hotelSearch input[type="text"] {}
 
 .listing {
-  /*padding-top: 50px;*/
-  padding-top: 25px;
+  padding-top: 50px;
 }
 
 .listing .listInner {
@@ -1187,8 +1186,7 @@ z-index: 9;
 }
 
 .filtBx {
-  /*margin-bottom: 20px;*/
-  margin-bottom: 2px;
+  margin-bottom: 20px;
 }
 
 .filtBx h4 {
@@ -1196,11 +1194,6 @@ z-index: 9;
   color: #4a2069;
   padding-bottom: 4px;
   border-bottom: 1px solid #d4a1ba;
-}
-.filtBx .list-group{
-  max-height: 300px;
-  overflow-y: auto;
-  scrollbar-width: thin;
 }
 
 .fltrremove {
@@ -1259,7 +1252,6 @@ z-index: 9;
   vertical-align: middle;
   margin: 1px 0;
   cursor: pointer;
-  font-size: 14px;
 }
 
 .filterbx .checkbox-custom-label,
@@ -1394,7 +1386,7 @@ z-index: 9;
   position: absolute;
   top: 8px;
   left: -13px;
-  z-index: 2;
+  z-index: 9;
   display: inline-block;
   padding: .4em 0.5em .4em 0.7em;
   margin-right: 0.7em;
@@ -2035,14 +2027,6 @@ ul.hChkList {
   scrollbar-width: thin;
   padding-bottom: 30px;
 }
-
-/*7OCT2024*/
-.moreDtlsScroll .owl-item{ max-height: 325px; display: flex;}
-.moreDtlsScroll .owl-item img{object-fit: cover;}
-
-.allInfo .modal__content{ padding: 1.6rem 2rem 2rem;}
-/*End 7OCT2024*/
-
 .moreDtlsGallery{}
 .mdgallery{ position: relative;}
 .mdgallery img{ width:700px; max-width: 100%;}
@@ -2060,11 +2044,11 @@ ul.hChkList {
 .mdgBtns .mdgLeft, .mdgBtns .mdgRight{ position: relative;}
 .mdgBtns .mdgLeft img, .mdgBtns .mdgRight img{ width: 38px;}
 
-.mdRoomInfo{ display: flex; flex-wrap: wrap; justify-content: center; border-bottom: 1px solid #ccc; margin: 10px 0 0 0;}
-.mdRoomInfo span{ /*width: 48%;*/ width: 31%; margin: 0 1%; display: flex; margin-bottom: 6px;}
+.mdRoomInfo{ display: flex; flex-wrap: wrap; justify-content: center; border-bottom: 1px solid #ccc; margin: 10px 0 10px 0;}
+.mdRoomInfo span{ width: 48%; margin: 0 1%; display: flex; margin-bottom: 6px;}
 .mdRoomInfo span img{ height: 19px; margin-right: 10px;}
 
-.mAmenitiesPopup{ text-align: left; margin-top: 10px;}
+.mAmenitiesPopup{ text-align: left;}
 .mAmenitiesPopup h5{ font-size: 16px; font-weight: 600;}
 .mAmenitiesPopup h6{font-size: 14px;}
 .mAmenitiesPopup ul{ display: flex; flex-wrap: wrap; padding-left: 15px; margin-bottom: 10px!important;}
@@ -2621,16 +2605,11 @@ ul.dromami li {
   /*END 21SEPT2024*/
   font-size: 14px; 
 }
-/*7OCT2024*/
-ul.dromami li img{ display: none;}
+
 ul.dromami li span {
-  /*padding: 0 0 0 6px;*/
-  padding: 0;
+  padding: 0 0 0 6px;
   display: inline-block;
 }
-/*END 7OCT2024*/
-
-
 
 ul.dromami li img {
   width: 17px;
@@ -3523,7 +3502,7 @@ button.loginbtn:hover {
   font-weight: 400;
 }
 
-.main-popup input[type=submit].subBtn {
+.main-popup input#submit {
   background: linear-gradient(81deg, #c8238b 0%, #ff8f00 24%, #bf31dd 100%)
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   ;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { baseStoreURL } from '@/repositories/Repository';
 
 export default function Footer(){
 	
@@ -10,7 +11,7 @@ export default function Footer(){
 					<div className="row">
 						<div className="col-md-6 col-lg-3">
 							<div className="ftAbout">
-								<div className="btLogo"><img src="images/home/logo.png" alt=""/></div>
+								<div className="btLogo"><img src={`${baseStoreURL}/images/home/logo.png`} alt="logo.png"/></div>
 								<p>We aim to ensure that you never miss an opportunity to travel.</p>
 								<h3>Follow Us</h3>
 								<p className="sIcons">
@@ -26,11 +27,10 @@ export default function Footer(){
 							<div className="footer-tags">
 								<h2>Quick Links</h2>
 								<ul>
-									<li><a href="#">About us</a></li>
-									<li><a href="#">Careers</a></li>
-									<li><a href="#">Privacy</a></li>
-									<li><a href="#">Terms of use</a></li>
-									{/*<li><a href="#">Blog</a></li></div>*/}
+									<li><a href={`${baseStoreURL}/pages/about-us`}>About us</a></li>
+									<li><a href={`${baseStoreURL}/pages/careers`}>Careers</a></li>
+									<li><a href={`${baseStoreURL}/pages/privacy-policy`}>Privacy</a></li>
+									<li><a href={`${baseStoreURL}/pages/terms-conditions`}>Terms of use</a></li>
 								</ul>
 							</div>
 						</div>
@@ -48,7 +48,7 @@ export default function Footer(){
 							<div className="footer-tags">
 								<h2>Customer service</h2>
 								<ul>
-									<li><a href="#">Contact us</a></li>
+									<li><a href={`${baseStoreURL}/pages/contact-us`}>Contact us</a></li>
 									<li><a href="#">Help center</a></li>
 									<li><a href="#">Feedback</a></li>
 								</ul>

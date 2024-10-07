@@ -345,9 +345,15 @@ function HotelReview(props){
                                             <a href="javascript:;" className="inclusion-btn" onClick={() => handleRoomPopupDetail(room.roomCode)} id="inclution-btn">See Inclusions</a>
                                         </div>
                                         {room.roomAdults>1?
+                                            room.roomChild>0?
+                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adults & {room.roomChild} Child</p>
+                                            :
                                             <p className="smallTxt grayColor mb-2">{room.roomAdults} Adults</p>
                                         :
-                                        <p className="smallTxt grayColor mb-2">{room.roomAdults} Adult</p>
+                                            room.roomChild>0?
+                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adult & {room.roomChild} Child</p>
+                                            :
+                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adult</p>
                                         }
                                         <HotelRoomFacilitiesInformation room={room}/>
                                         <HotelRoomCancellationProgressBar room={room}/>                                     

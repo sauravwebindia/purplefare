@@ -34,6 +34,9 @@ function HotelDetailsRoomsSelection(props){
     const [commonPopupDisplay, setCommonPopupDisplay] = useState(false);
     const [commonPopupHeading, setCommonPopupHeading] = useState("");
     const [commonPopupText, setCommonPopupText] = useState("");
+    const [proceedBookingPopupDisplay, setProceedBookingPopupDisplay] = useState(false);
+    const [proceedBookingPopupHeading, setProceedBookingPopupHeading] = useState("");
+    const [proceedBookingPopupText, setProceedBookingPopupText] = useState("");
     const [roomImage,setRoomImage] = useState("");
     const [roomDetailPopupHTMl,setRoomDetailPopupHTML] = useState("");
     const [errorBookingText, setErrorBookingText] = useState("");
@@ -100,6 +103,10 @@ function HotelDetailsRoomsSelection(props){
         setCommonPopupDisplay(!commonPopupDisplay);
     }
 
+    const handleProceedBookingPopup = () => {
+        setProceedBookingPopupDisplay(!proceedBookingPopupDisplay);
+    }
+
     const handleBookingRoom = (room,rateItem) => {
         let hotelRooms = hotel.rooms;
         let hotelCurrentRoom;
@@ -122,20 +129,20 @@ function HotelDetailsRoomsSelection(props){
             }
         }
         let sameRoomCodeBookings = hotelBooking.hotelBookingRooms.filter(
-			item => item.code === room.code
+			item => item.id === rateItem.rateKey
 		);
         if(sameRoomCodeBookings!=undefined && sameRoomCodeBookings!='' && sameRoomCodeBookings!=null){
             let totalPax = 0;
             for(let k=0;k<sameRoomCodeBookings.length;k++){
-                totalPax = totalPax + (sameRoomCodeBookings[k].adults*sameRoomCodeBookings[k].quantity);
+                totalPax = totalPax + (sameRoomCodeBookings[k].quantity);
             }
             if(hotelCurrentRoom!=null && hotelCurrentRoom!=undefined && hotelCurrentRoom!=''){
                 if(hotelCurrentRoom.roomCode==room.code){
-                    if(totalPax>=hotelCurrentRoom.maxPax){
+                    if(totalPax>=rateItem.allotment){
                         //toast.error(`Max Pax ${hotelCurrentRoom.maxPax} is allowed for this room`);
                         setCommonPopupDisplay(true);
                         setCommonPopupHeading("Alert");
-                        setCommonPopupText(`Max Pax ${hotelCurrentRoom.maxPax} is allowed for this room`);
+                        setCommonPopupText(`Max Allotment ${rateItem.allotment} is allowed for ${currentRoom.name} ${rateItem.boardName}`);
                         return false;
                     }
                 }   
@@ -153,9 +160,7 @@ function HotelDetailsRoomsSelection(props){
                 }
             }
         }
-        let roomRate = {
-            'hotel':hotel,
-            'room':currentRoom,
+        let roomRate = {            
             'id':rateItem.rateKey,
             'quantity':1,
             'name':room.name,
@@ -168,6 +173,7 @@ function HotelDetailsRoomsSelection(props){
             'rooms':rateItem.rooms,
             'child':rateItem.children,
             'cancellation':rateItem.cancellationPolicies,
+            'room':currentRoom,
             'roomType':rateItem.boardName,
         }
         let existRoomRateIntoBooking = hotelBooking.hotelBookingRooms.find(
@@ -208,17 +214,24 @@ function HotelDetailsRoomsSelection(props){
             if(addedRooms==searchRooms && addedAdults>searchAdults){
                 alertText = `Current selection doesn't accommodate ${addedAdults} Guests.`;
             }
+            if(addedRooms<searchRooms || addedAdults<searchAdults){
+                alertText = `You searched for ${searchRooms} Rooms with ${searchAdults} Guests but you added ${addedRooms} Rooms with ${addedAdults} Guests.`;
+            }
             setErrorBookingText(alertText);
             setMobileRoomSelectionPopupStatus(true);
-            setCommonPopupDisplay(true);
-            setCommonPopupHeading("Alert");
-            setCommonPopupText(alertText);
+            setProceedBookingPopupDisplay(true);
+            setProceedBookingPopupHeading("Alert");
+            setProceedBookingPopupText(alertText);
             return false;
         }else{
             setErrorBooking(false);
             setErrorBookingText("");           
             saveBooking();             
         }
+    }
+
+    const handleForceProceedBooking = () => {
+        saveBooking();
     }
 
     async function saveBooking(){
@@ -436,6 +449,19 @@ function HotelDetailsRoomsSelection(props){
                 }
             }
         }
+
+        let responsiveObject = {
+            0:{
+                items:1
+            },
+            600:{
+                items:1
+            },
+            1000:{
+                items:1
+            }
+        };
+
         let hotelRoomsImages = hotel.images.room;
         let roomMainImage = new Array();
         if(hotelRoomsImages.length>0){
@@ -474,7 +500,9 @@ function HotelDetailsRoomsSelection(props){
                     
                     <div className="dromHotlDesktop">
                         {roomDetails['roomMainImage']!=null?
-                            <img src={`${roomDetails['roomMainImage'].image_base_url}${roomDetails['roomMainImage'].path}`} alt={`${roomDetails['roomMainImage'].roomCode}`} className="img-fluid" />
+                            <OwlCarousel className='owl-theme' responsive={responsiveObject} slideBy={1} loop={true} lazyLoad={true} autoplay={true} dots={true} margin={10} navText={['<a href="javascript:void(0);" class="ssArrow lSlideArrow"><img src="'+baseStoreURL+'/images/home/left-slider-arrow.png" alt="left-slider-arrow.png" class="img-fluid"/></a>','<a href="javascript:void(0);" class="ssArrow rSlideArrow"><img src="'+baseStoreURL+'/images/home/right-slider-arrow.png" alt="right-slider-arrow.png" class="img-fluid" /></a>']} nav>
+                                <img src={`${roomDetails['roomMainImage'].image_base_url}${roomDetails['roomMainImage'].path}`} alt={`${roomDetails['roomMainImage'].roomCode}`} className="img-fluid" />
+                            </OwlCarousel>
                         :
                         <img src={`${baseStoreURL}/images/no-hotel-image.jpg`} alt="no-hotel-image.jpg" className="img-fluid" />
                         }
@@ -608,16 +636,16 @@ function HotelDetailsRoomsSelection(props){
             }
         }
         let sameRoomCodeBookings = hotelBooking.hotelBookingRooms.filter(
-			item => item.code === room.code
+			item => item.id === rateItem.rateKey
 		);
         if(sameRoomCodeBookings!=undefined && sameRoomCodeBookings!='' && sameRoomCodeBookings!=null){
             let totalPax = 0;
             for(let k=0;k<sameRoomCodeBookings.length;k++){
-                totalPax = totalPax + (sameRoomCodeBookings[k].adults*sameRoomCodeBookings[k].quantity);
+                totalPax = totalPax + (sameRoomCodeBookings[k].quantity);
             }
             if(hotelCurrentRoom!=null && hotelCurrentRoom!=undefined && hotelCurrentRoom!=''){
                 if(hotelCurrentRoom.roomCode==room.code){
-                    if(totalPax>=hotelCurrentRoom.maxPax){
+                    if(totalPax>=rateItem.allotment){
                         disableAddBtn = true;
                     }
                 }   
@@ -945,7 +973,19 @@ function HotelDetailsRoomsSelection(props){
                     <p>{commonPopupText}</p>
                 </div>
             </div>
-            {/* END OF COMMON POPUP FOR TEXT*/}  
+            {/* END OF COMMON POPUP FOR TEXT*/} 
+            {/* PROCEED BOOKING POPUP FOR TEXT */}
+            <div className={`modal__container ${proceedBookingPopupDisplay==true?`show-modal`:``}`} id="text-popup-popup">
+                <div className="modal__content modal-sm">
+                    <div className="modal__close close-modal5" title="Close" onClick={() => handleProceedBookingPopup()}>
+                        <img src={`${baseStoreURL}/images/close.png`} alt="close.png" className="modal__img"/>
+                    </div>
+                    <h2 className="modal__title">{proceedBookingPopupHeading}</h2>
+                    <p>{proceedBookingPopupText}</p>
+                    <button onClick={() => handleForceProceedBooking()} className="btn hButton">Proceed</button>
+                </div>
+            </div>
+            {/* END OF PROCEED BOOKING POPUP FOR TEXT*/} 
             <div className={`modal__container ${roomDetailPopupDisplay==true?`show-modal`:``}`} id="more-details-popup">
                 <div className="modal__content modal-xl">
                     <div className="modal__close close-modal7" title="Close" onClick={() => handleCloseRoomPopupDetails()}>

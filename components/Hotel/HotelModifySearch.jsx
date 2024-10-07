@@ -347,7 +347,18 @@ function HotelModifySearch(props){
 				temp.push(previouseValue[i]);
 			}
 			temp.push(value);
-			setCheckInOut(temp);
+			let checkIn = temp[0];
+			let checkOut = temp[1];
+			console.log(temp);
+			if(new Date(checkIn)< new Date(checkOut)){			
+				setCheckInOut(temp);
+			}else{
+				let newTemp = new Array();
+				newTemp.push(temp[1]);
+				newTemp.push(temp[0]);
+				console.log(newTemp);
+				setCheckInOut(newTemp);
+			}
 			handleCheckInOut(temp);
 		}else if(previouseValue.length==0){
 			temp.push(value);

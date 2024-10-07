@@ -67,7 +67,6 @@ function* addRoomSaga(payload) {
             let hotel = room.hotel;
             delete room.hotel;
             currentHotelBooking.hotelBookingRooms.push(room);
-            currentHotelBooking.hotel = hotel;
 			currentHotelBooking.amount = calculateAmount(currentHotelBooking.hotelBookingRooms);
             currentHotelBooking.saleAmount = calculateSaleAmount(currentHotelBooking.hotelBookingRooms);
             currentHotelBooking.taxes = calculateTaxes(currentHotelBooking.hotelBookingRooms);
@@ -105,7 +104,6 @@ function* removeRoomSaga(payload) {
         localHotelBooking.totalRooms = calculateRooms(localHotelBooking.hotelBookingRooms);
         localHotelBooking.currency = room.currency;
 		if (localHotelBooking.hotelBookingRooms.length === 0) {
-            localHotelBooking.room = "";
 			localHotelBooking.hotelBookingRooms = [];
 			localHotelBooking.amount = 0;
             localHotelBooking.saleAmount = 0;
@@ -132,6 +130,7 @@ function* increaseRoomQtySaga(payload) {
         let selectedItem = localHotelBooking.hotelBookingRooms.find(
             (item) => item.id === room.id
         );
+        
         if (selectedItem) {
             selectedItem.quantity++;
             localHotelBooking.hotelBookingTotal++;
@@ -141,24 +140,6 @@ function* increaseRoomQtySaga(payload) {
             localHotelBooking.totalAdults = calculateAdults(localHotelBooking.hotelBookingRooms);
             localHotelBooking.totalChild = calculateChild(localHotelBooking.hotelBookingRooms);
             localHotelBooking.totalRooms = calculateRooms(localHotelBooking.hotelBookingRooms);
-        }
-        yield put(updateHotelBookingSuccess(localHotelBooking));
-    } catch (err) {
-        yield put(getHotelBookingError(err));
-    }
-}
-
-function* increaseMainRoomQtySaga(payload) {
-    try {
-        const { room } = payload;
-        let localHotelBooking = JSON.parse(
-            JSON.parse(localStorage.getItem('persist:purplefare')).hotelBooking
-        );
-        let selectedItem = localHotelBooking.hotelBookingRooms.find(
-            (item) => item.code === room.code
-        );
-        if (selectedItem) {
-            selectedItem.roomQty++;
         }
         yield put(updateHotelBookingSuccess(localHotelBooking));
     } catch (err) {
@@ -192,31 +173,9 @@ function* decreaseRoomQtySaga(payload) {
     }
 }
 
-
-
-function* decreaseMainRoomQtySaga(payload) {
-    try {
-        const { room } = payload;
-        const localHotelBooking = JSON.parse(
-            JSON.parse(localStorage.getItem('persist:purplefare')).hotelBooking
-        );
-        let selectedItem = localHotelBooking.hotelBookingRooms.find(
-            (item) => item.id === room.id
-        );
-
-        if (selectedItem) {
-            selectedItem.roomQty--;
-        }
-        yield put(updateHotelBookingSuccess(localHotelBooking));
-    } catch (err) {
-        yield put(getHotelBookingError(err));
-    }
-}
-
 function* clearHotelBookingSaga() {
     try {
         const emptyHotelBooking = {
-            hotel: "",
             hotelBookingRooms: [],
             amount: 0,
             saleAmount: 0,
@@ -240,6 +199,4 @@ export default function* rootSaga() {
     yield all([takeEvery(actionTypes.REMOVE_ROOM, removeRoomSaga)]);
     yield all([takeEvery(actionTypes.INCREASE_ROOM_QTY, increaseRoomQtySaga)]);
     yield all([takeEvery(actionTypes.DECREASE_ROOM_QTY, decreaseRoomQtySaga)]);
-    yield all([takeEvery(actionTypes.INCREASE_ROOM_QTY, increaseMainRoomQtySaga)]);
-    yield all([takeEvery(actionTypes.DECREASE_ROOM_QTY, decreaseMainRoomQtySaga)]);
 }

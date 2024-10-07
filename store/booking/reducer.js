@@ -1,7 +1,6 @@
 import { actionTypes } from './action';
 
 export const initHotelBooking = {
-    room: "",
     hotelBookingRooms: [],
     amount: 0,
     saleAmount: 0,
@@ -22,7 +21,6 @@ function reducer(state = initHotelBooking, action) {
         case actionTypes.UPDATE_HOTEL_BOOKING_SUCCESS:
             return {
                 ...state,
-                ...{ hotel: action.payload.hotel},
                 ...{ hotelBookingRooms: action.payload.hotelBookingRooms },
                 ...{ amount: action.payload.amount },
                 ...{ saleAmount: action.payload.saleAmount },
@@ -36,7 +34,6 @@ function reducer(state = initHotelBooking, action) {
         case actionTypes.CLEAR_HOTEL_BOOKING_SUCCESS:
             return {
                 ...state,
-                ...{ hotel: action.payload.hotel},
                 ...{ hotelBookingRooms: action.payload.hotelBookingRooms },
                 ...{ amount: action.payload.amount },
                 ...{ saleAmount: action.payload.saleAmount },

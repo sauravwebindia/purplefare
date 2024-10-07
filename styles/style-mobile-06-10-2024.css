@@ -606,7 +606,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   overflow: hidden;
   padding-left: 13px;
 }
-.cardMobile .cardMobTitle{justify-content: space-between; /*font-size: 21px;*/ font-size: 18px;}
+.cardMobile .cardMobTitle{justify-content: space-between; font-size: 21px;}
 .cardMobile ul{ padding:0; margin: 0 0 0 19px;}
 .cardMobile ul li{color: #6c6a6a;}
 .cardMobile .cardAdltPr{ display: flex; justify-content: space-between; font-size: 13px;}
@@ -682,7 +682,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .dtbleCover .dtblehdLine.dtblehd{font-size: 11px;}
   .dtbleRow h4 {font-size: 18px;}
   .dtbleRow .smallTxt { font-size: 11px;}
-  .dtbleRow li { font-size: 11px; background-size: 9px auto; background-position: 0px 4px; /*padding-left: 17px;*/ padding-left:0;}
+  .dtbleRow li { font-size: 11px; background-size: 9px auto; background-position: 0px 4px; padding-left: 17px;}
   .hButton{ font-size: 8px; padding: 6px 8px;}
   .droomLeft{ font-size: 10px; line-height: 9px;}
   .dtbleCover .dtblehdLine input[type=text] { font-size: 13px; width: 30px;}
@@ -810,18 +810,8 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
     .bnBtn:hover{ color:#fff;}
   
   }
-
-
-  
   
   @media (max-width: 768px){
-
-    /*7OCT2024*/
-    .mdRoomInfo span img{ display: block; margin: 0 0 5px 0;}
-    .mdRoomInfo span{font-size: 11px; line-height: 14px; text-align: left;}
-    /*End 7OCT2024*/
-
-
     /*21SEPT2024*/
     .mAmenitiesPopup ul li{width: 49%}
     /*END 21SEPT2024*/ 
@@ -853,10 +843,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   }
   
   @media (max-width: 525px){
-    /*7OCT2024*/
-    .cardMobContent{ padding-left: 0;}
-    /*END 7OCT2024*/
-
     .mobileOnly,
     .dtCheapPrice{display: block!important;}
 
