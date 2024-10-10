@@ -508,7 +508,7 @@ function HotelModifySearch(props){
 								</div>
 								<div className="col-md-3">
 									<div className="">
-										<DateRangePicker placeholder="Check-In & Check-Out" open={isOpen} onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} value={checkInOut}  name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
+										<DateRangePicker placeholder="Check-In & Check-Out" open={isOpen} onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} value={[new Date(checkInDate),new Date(checkOutDate)]}  name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
 									</div>
 								</div>
 								<div className="col-md-3">

@@ -5,6 +5,7 @@ import NavHeader from '@/components/layouts/NavHeader';
 import {isMobile} from "react-device-detect";
 import HotelReview from '@/components/Hotel/HotelReview';
 import Breadcrumb from '@/components/layouts/Breadcrumb';
+import Footer from '@/components/layouts/Footer';
 
 const HotelReviewPage = (props) => {	
     return (            
@@ -35,6 +36,7 @@ const HotelReviewPage = (props) => {
                     </div>
                 </section>
             </section>
+        <Footer/>
         </Fragment>
     );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { baseStoreURL } from '@/repositories/Repository';
 
 export default function HotelListingMobileHeader(){
 	return (
@@ -34,7 +35,7 @@ export default function HotelListingMobileHeader(){
 
                             <div className="col-md-3 text-end hdRight">
                                 <button type="button" className="btn btn-outline-primary me-2">
-                                    <img src="images/home/user-icon.png" alt="" /> Login
+                                    <img src={`${baseStoreURL}/images/home/user-icon.png`} alt="user-icon.png" /> Login
                                 </button>
                             </div>
                         </div>

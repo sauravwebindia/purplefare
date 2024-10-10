@@ -10,7 +10,6 @@ class AuthRepository {
         return reponse;        
     }
 
-
     async Register(params) {
         const reponse = await Repository.post(`${baseUrl}/auth/register`,params)
          .then((response) => {
@@ -18,10 +17,10 @@ class AuthRepository {
          })
          .catch((error) => ({ error: JSON.stringify(error) }));
          return reponse;        
-     }
+    }
 	
 	async MyProfile(params) {
-       const reponse = await Repository.post(`${baseUrl}/fetch-my-profile`,params)
+       const reponse = await Repository.post(`${baseUrl}/auth/fetch-myprofile`,params)
         .then((response) => {
             return response.data;
         })
@@ -31,7 +30,7 @@ class AuthRepository {
 	
 	
     async updateProfile(params) {
-        const reponse = await Repository.post(`${baseUrl}/update-profile`,params)
+        const reponse = await Repository.post(`${baseUrl}/auth/update-profile`,params)
          .then((response) => {
              return response.data;
          })
@@ -40,7 +39,34 @@ class AuthRepository {
     }
 
     async updatePassword(params) {
-        const reponse = await Repository.post(`${baseUrl}/update-password`,params)
+        const reponse = await Repository.post(`${baseUrl}/auth/update-password`,params)
+         .then((response) => {
+             return response.data;
+         })
+         .catch((error) => ({ error: JSON.stringify(error) }));
+         return reponse;        
+    }
+
+    async updateProfilePic(params) {
+        const reponse = await Repository.post(`${baseUrl}/auth/update-profilepic`,params)
+         .then((response) => {
+             return response.data;
+         })
+         .catch((error) => ({ error: JSON.stringify(error) }));
+         return reponse;        
+    }
+
+    async updateLoginDetails(params) {
+        const reponse = await Repository.post(`${baseUrl}/auth/update-login-info`,params)
+         .then((response) => {
+             return response.data;
+         })
+         .catch((error) => ({ error: JSON.stringify(error) }));
+         return reponse;        
+    }
+
+    async ForgotPassword(params) {
+        const reponse = await Repository.post(`${baseUrl}/forgot-password`,params)
          .then((response) => {
              return response.data;
          })

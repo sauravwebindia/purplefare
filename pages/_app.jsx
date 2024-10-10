@@ -28,7 +28,8 @@ class MyApp extends App {
 			}
         }, 100);
 
-		const handleRouteChange = (url) => {		
+		const handleRouteChange = (url) => {	
+			
 		}
 
 		Router.events.on('routeChangeComplete', handleRouteChange);        

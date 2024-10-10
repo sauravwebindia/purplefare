@@ -13,6 +13,8 @@ function NavHeader (props) {
 	const Router = useRouter();
 	const dispatch = useDispatch();
     const { auth } = props;
+	const [loginUserEmail,setLoginUserEmail] = auth.isLoggedIn?useState(auth.user.user.email):useState("");
+	const [loginUserName,setLoginUserName] = auth.isLoggedIn?useState(auth.user.user.name):useState("");
 	const [isLoggedIn,setIsLoggedIn] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
@@ -104,6 +106,8 @@ function NavHeader (props) {
 			dispatch(login(loggedInUser));
 			setLoginEmail("");
 			setLoginPassword("");
+			setLoginUserEmail(loggedInUser.user.email);
+			setLoginUserName(loggedInUser.user.name);
 			Router.push('/');
 			setVisibleValue("");
 		}else{
@@ -123,6 +127,8 @@ function NavHeader (props) {
 		const responseData = await AuthRepository.Register(params);
 		if (responseData.success==1) {
 			let loggedInUser = responseData.data;
+			setLoginUserEmail(loggedInUser.user.email);
+			setLoginUserName(loggedInUser.user.name);
 			toast.success(responseData.message);
 			setActionBtnLoading(false);			
 			dispatch(login(loggedInUser));	
@@ -220,49 +226,93 @@ function NavHeader (props) {
 		}
 	}
 
+	function AfterLogin(){
+		if(auth.isLoggedIn){
+			return (
+				<div className="logedInUser">
+					<div className="lgdUserCover lgoddbtn" onClick={handleAccountDropdown}><span className="lgdUser">{auth.user.user.name.slice(0,1)}</span><span className="lgdUserText">{loginUserName}</span> </div>
+					<ul className="logedInUserdd" style={{display: accountDropdown? "block" : "none"}}>
+						<li><img src={`${baseStoreURL}/images/user-icon.png`} alt="user-icon.png"/> <Link href={`${baseStoreURL}/account/profile`}>My Profile</Link></li>
+						<li><img src={`${baseStoreURL}/images/holiday-packages.png`} alt="holiday-packages.png"/> <Link href={`${baseStoreURL}/account/bookings`}>My Trips</Link></li>
+						<li><img src={`${baseStoreURL}/images/logout-icon.png`} alt="logout-icon.png"/> <Link href="javascript:;" onClick={(e) => handleLogout(e)}>Logout</Link></li>
+					</ul>
+				</div>
+			);
+		}else{
+			return (
+				<button type="button" className="btn me-2" onClick={handleSignInUpPopup}>
+					<img src={`${baseStoreURL}/images/home/user-icon.png`} alt="user-icon.png" /> Login
+				</button>
+			);
+		}
+	}
+
+	function MenuAfterLogin(){
+		if(auth.isLoggedIn){
+			return (
+				<Fragment>
+					<div className="navmheader">
+						<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {loginUserEmail}</Link>
+					</div>
+					<ul className="nav col-12 col-md-auto">
+						<li><Link href={`${baseStoreURL}/hotel-search`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/hotel.png`} alt="" />
+								Hotels</Link></li>
+						<li><Link href="javascript:;" className="nav-link px-2 link-secondary"><img src={`${baseStoreURL}/images/flight.png`}
+									alt="flight.png" /> Flights</Link></li>
+						<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/cruise.png`} alt="cruise.png" />
+								Cruise</Link></li>
+						<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
+									alt="holiday-packages.png" /> Holiday Packages</Link></li>
+
+						<li><Link href={`${baseStoreURL}/account/profile`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
+							alt="" /> My Profile</Link></li>
+
+						<li><Link href={`${baseStoreURL}/account/overview`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/login-details.png`}
+							alt="" />  Login Details</Link></li>
+
+						<li><Link href="javascript:;" onClick={(e) => handleLogout(e)} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/user-icon.png`} alt="" />
+							logout</Link></li>
+					</ul>
+				</Fragment>
+			);
+		}else{
+			return (
+				<Fragment>
+					<div className="navmheader">
+						<Link href="javascript:;" className="loginBtnMob" onClick={handleMobileSignInUpPopup}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
+					</div>
+					<ul className="nav col-12 col-md-auto">
+						<li><Link href={`${baseStoreURL}/hotel-search`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/hotel.png`} alt="" />
+								Hotels</Link></li>
+						<li><Link href="javascript:;" className="nav-link px-2 link-secondary"><img src={`${baseStoreURL}/images/flight.png`}
+									alt="flight.png" /> Flights</Link></li>
+						<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/cruise.png`} alt="cruise.png" />
+								Cruise</Link></li>
+						<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
+									alt="holiday-packages.png" /> Holiday Packages</Link></li>
+					</ul>
+				</Fragment>
+			)
+		}
+	}
+
+	function BtnAfterLogin(){
+		if(auth.isLoggedIn){
+			return (
+				<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {loginUserEmail}</Link>
+			);
+		}else{
+			return (
+				<Link href="javascript:;" className="loginBtnMob" onClick={handleMobileSignInUpPopup}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
+			);
+		}
+	}
+
 	return (
 		<Fragment>
 		<div className="mb-2 justify-content-center mb-md-0 navboxmobile mobileMenu" style={{display: showMenu? "block" : "none"}}>
 			<a href="javascript:void(0);" className="navboxclose" onClick={handleMobileMenu}>X</a>
-			<div className="navmheader">
-				{auth.isLoggedIn && Boolean(auth.isLoggedIn) === true?
-				<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {auth.user.user.email}</Link>
-				:
-				<Link href="javascript:;" className="loginBtnMob" onClick={handleMobileSignInUpPopup}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
-				}
-			</div>
-			{auth.isLoggedIn && Boolean(auth.isLoggedIn) === true?
-			<ul className="nav col-12 col-md-auto">
-				<li><Link href={`${baseStoreURL}/hotel-search`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/hotel.png`} alt="" />
-						Hotels</Link></li>
-				<li><Link href="javascript:;" className="nav-link px-2 link-secondary"><img src={`${baseStoreURL}/images/flight.png`}
-							alt="flight.png" /> Flights</Link></li>
-				<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/cruise.png`} alt="cruise.png" />
-						Cruise</Link></li>
-				<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
-							alt="holiday-packages.png" /> Holiday Packages</Link></li>
-
-				<li><Link href="my-profile.html" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
-					alt="" /> My Profile</Link></li>
-
-				<li><Link href="my-login-details.html" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/login-details.png`}
-					alt="" />  Login Details</Link></li>
-
-				<li><Link href="javascript:;" onClick={(e) => handleLogout(e)} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/user-icon.png`} alt="" />
-					logout</Link></li>
-			</ul>
-			:
-			<ul className="nav col-12 col-md-auto">
-				<li><Link href={`${baseStoreURL}/hotel-search`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/hotel.png`} alt="" />
-						Hotels</Link></li>
-				<li><Link href="javascript:;" className="nav-link px-2 link-secondary"><img src={`${baseStoreURL}/images/flight.png`}
-							alt="flight.png" /> Flights</Link></li>
-				<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/cruise.png`} alt="cruise.png" />
-						Cruise</Link></li>
-				<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
-							alt="holiday-packages.png" /> Holiday Packages</Link></li>
-			</ul>
-			}
+			<MenuAfterLogin/>
 		</div>
 		<header className="headerLine">
 			<div className="container">
@@ -278,11 +328,7 @@ function NavHeader (props) {
 							<div className="mb-2 justify-content-center mb-md-0 desktopMenu">
 								<Link href="javascript:;" className="navboxclose">X</Link>
 								<div className="navmheader">
-									{auth.isLoggedIn && Boolean(auth.isLoggedIn) === true?
-										<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {auth.user.user.email}</Link>
-										:
-										<Link href="javascript:;" className="loginBtnMob" onClick={handleMobileSignInUpPopup}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
-									}
+									<BtnAfterLogin/>
 								</div>
 								<ul className="nav col-12 col-md-auto">
 									<li><Link href={`${baseStoreURL}`} className="nav-link px-2 link-secondary">Hotels</Link></li>
@@ -292,20 +338,7 @@ function NavHeader (props) {
 								</ul>
 							</div>							
 							<div className="col-md-3 text-end hdRight">
-								{auth.isLoggedIn && Boolean(auth.isLoggedIn) === true?
-									<div className="logedInUser">
-										<div className="lgdUserCover lgoddbtn" onClick={handleAccountDropdown}><span className="lgdUser">{auth.user.user.name.slice(0,1)}</span><span className="lgdUserText">{auth.user.user.name}</span> </div>
-										<ul className="logedInUserdd" style={{display: accountDropdown? "block" : "none"}}>
-											<li><img src={`${baseStoreURL}/images/user-icon.png`} alt="user-icon.png"/> <Link href="my-profile.html">My Profile</Link></li>
-											<li><img src={`${baseStoreURL}/images/holiday-packages.png`} alt="holiday-packages.png"/> <Link href="my-account-listing.html">My Trips</Link></li>
-											<li><img src={`${baseStoreURL}/images/logout-icon.png`} alt="logout-icon.png"/> <Link href="javascript:;" onClick={(e) => handleLogout(e)}>Logout</Link></li>
-										</ul>
-									</div>
-								:
-									<button type="button" className="btn me-2" onClick={handleSignInUpPopup}>
-										<img src={`${baseStoreURL}/images/home/user-icon.png`} alt="user-icon.png" /> Login
-									</button>
-								}
+								<AfterLogin/>
 							</div>
 						</div>
 					</div>
@@ -329,7 +362,7 @@ function NavHeader (props) {
 					<input type="email" id="email" name="email" maxLength="150" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required={true}/>
 					<label for="password">Password:</label>
 					<input type="password" id="password" name="password" maxLength="20" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required={true}/>				
-					<div className="frgotPassword"><a href="">Lost your password?</a></div>
+					<div className="frgotPassword"><Link href={`${baseStoreURL}/forgot-password`}>Lost your password?</Link></div>
 					<input type="submit" className="subBtn" id="login-submit" value={`${actionBtnLoading==true?'Please wait':'Login'}`}/>
 				</form>			
 				<form className={`register ${moveLeftClassSignUp}`} onSubmit={handleRegisterSubmit} autoComplete="off">

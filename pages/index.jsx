@@ -23,15 +23,13 @@ function Home(props) {
 					<section className="homePage">
 						<HomeSearch/>
 						<HomeExploreDestination exploreDestination={page_props.data.list_home_destinations}/>
-						<HomeBannersSlider/>
-						<HomeMostBookedHotels/>
-						<HomeGreatDeals/>
-						<HomeAboutUs/>
+						<HomeBannersSlider experienceBanners={page_props.data.list_home_experience}/>
+						<HomeMostBookedHotels mostBookedHotels={page_props.data.list_most_booked_hotels}/>
+						<HomeAboutUs aboutContent={page_props.data.about_section}/>
 						<HomeLatestNews/>
 						<HomeReviews/>
 						<HomeVideo/>
 						<HomeWhyBookWithUs/>
-						<HomeTrustedPartners/>
 					</section>
 					<Footer/>
 				</Fragment>
@@ -45,13 +43,11 @@ function Home(props) {
 						<HomeExploreDestination/>
 						<HomeBannersSlider/>
 						<HomeMostBookedHotels/>
-						<HomeGreatDeals/>
 						<HomeAboutUs/>
 						<HomeLatestNews/>
 						<HomeReviews/>
 						<HomeVideo/>
 						<HomeWhyBookWithUs/>
-						<HomeTrustedPartners/>
 					</section>
 					<Footer/>
 				</Fragment>
@@ -66,13 +62,11 @@ function Home(props) {
 					<HomeExploreDestination/>
 					<HomeBannersSlider/>
 					<HomeMostBookedHotels/>
-					<HomeGreatDeals/>
 					<HomeAboutUs/>
 					<HomeLatestNews/>
 					<HomeReviews/>
 					<HomeVideo/>
 					<HomeWhyBookWithUs/>
-					<HomeTrustedPartners/>
 				</section>
 				<Footer/>
 			</Fragment>
