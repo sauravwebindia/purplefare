@@ -27,7 +27,7 @@ function Home(props) {
 						<HomeMostBookedHotels mostBookedHotels={page_props.data.list_most_booked_hotels}/>
 						<HomeAboutUs aboutContent={page_props.data.about_section}/>
 						<HomeLatestNews/>
-						<HomeReviews/>
+						<HomeReviews customerReviews={page_props.data.list_customer_reviews}/>
 						<HomeVideo/>
 						<HomeWhyBookWithUs/>
 					</section>

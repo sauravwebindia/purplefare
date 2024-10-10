@@ -13,6 +13,7 @@ function NavHeader (props) {
 	const Router = useRouter();
 	const dispatch = useDispatch();
     const { auth } = props;
+	const [isShrunk, setIsShrunk] = useState(false);
 	const [loginUserEmail,setLoginUserEmail] = auth.isLoggedIn?useState(auth.user.user.email):useState("");
 	const [loginUserName,setLoginUserName] = auth.isLoggedIn?useState(auth.user.user.name):useState("");
 	const [isLoggedIn,setIsLoggedIn] = useState(false);
@@ -36,7 +37,18 @@ function NavHeader (props) {
 	useEffect(() => {  
         let mounted = true;
 		setIsLoggedIn(auth.isLoggedIn);
-		return () => mounted = false;
+		const handleScroll = () => {
+			setIsShrunk(window.scrollY > 50);
+		};
+	
+		// Attach scroll event listener
+		window.addEventListener("scroll", handleScroll);
+		window.addEventListener("touchmove", handleScroll); // for touch devices
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+			window.removeEventListener("touchmove", handleScroll);
+			mounted = false;
+		};
 	}, []);
 
 	const handleMobileMenu = () => {
@@ -314,7 +326,7 @@ function NavHeader (props) {
 			<a href="javascript:void(0);" className="navboxclose" onClick={handleMobileMenu}>X</a>
 			<MenuAfterLogin/>
 		</div>
-		<header className="headerLine">
+		<header className={isShrunk ? "shrink" : "headerLine"}>
 			<div className="container">
 				<div className="row">
 					<div className="col-md-12">

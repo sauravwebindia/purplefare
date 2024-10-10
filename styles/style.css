@@ -578,7 +578,7 @@ h2.title-2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000000b3;
+  background: #00000021;
 }
 
 .expCover a{ 
@@ -619,9 +619,14 @@ h2.title-2 {
 }
 
 .expText h2 {
-  font-size: 52px;
+  font-size: 48px;
   color: #fff;
   margin-top: 1px;
+  text-shadow: 1px 1px 4px #606060; 
+  text-overflow: ellipsis;  
+  white-space: nowrap; 
+  overflow: hidden;  
+  padding: 0 10px;
 }
 .expImgCover{position: relative; border-radius: 1rem; overflow: hidden; height: 100%;}
 .expImgCover:after{
@@ -631,7 +636,7 @@ h2.title-2 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #000000b3;
+  background: #00000021;
 }
 .expCover img {
   width: 100%;

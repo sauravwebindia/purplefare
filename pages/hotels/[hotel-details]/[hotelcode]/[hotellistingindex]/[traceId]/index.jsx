@@ -17,6 +17,7 @@ import HotelReviewsRatings from '@/components/Hotel/HotelReviewsRatings';
 import { useDispatch } from 'react-redux';
 import { clearHotelBooking } from '@/store/booking/action';
 import HotelRepository from '@/repositories/HotelRepository';
+import HotelModifySearch from '@/components/Hotel/HotelModifySearch';
 import { addRoomItem, clearRoomItems } from '@/store/rooms/action';
 import { formatCurrency,generateTempArray } from '@/utilities/common-helpers';
 import Skeleton from 'react-loading-skeleton';
@@ -57,6 +58,7 @@ const HotelDetails = (props) => {
                         let cityName = Router.query.cityName;
                         let hotelCode = props.props.data.data.hotel.code; 
                         searchParams = {'traceId':traceId,'hotelCode':hotelCode,'cityName':cityName,'searchSource':searchSource,'searchType':searchType,'searchValue':searchValue,'checkInDate':checkInDate,'checkOutDate':checkOutDate,'adults':adults,'rooms':roomsCount,'child':child,'childAge':childAge.split(",")};
+                        console.log(searchParams);
                         if(props==null || props=='' || props==undefined){
                             Router.push('/');
                         }
@@ -148,6 +150,7 @@ const HotelDetails = (props) => {
                 <Fragment>
                     <NavHeader/>
                     <HotelStickSearch/>
+                    <HotelModifySearch/>
                     <section className="innerPage">
                         <Breadcrumb page="Hotel Details" hotel={hotelDetails}/>
                         <section className="commanSpace hdetailsPage">

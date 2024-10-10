@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { useRouter } from 'next/router';
 import {baseStoreURL} from '@/repositories/Repository';
 import { DateRangePicker } from 'rsuite';
@@ -21,12 +21,14 @@ import match from 'autosuggest-highlight/match';
 import HotelRepository from '@/repositories/HotelRepository';
 import Link from 'next/link';
 import { connect,useDispatch } from 'react-redux';
+import StickyObserver from '@/utilities/StickyObserver';
 import { clearHotelBooking,getHotelBooking } from '@/store/booking/action';
 
 function HotelModifySearch(props){
 	const Router = useRouter();
 	const { auth,hotelBooking } = props;
 	const dispatch = useDispatch();
+	const [isShrunk, setIsShrunk] = useState(false);
 	const [searchBtnDisable,setSearchBtnDisable] = useState("");
 	const [searchBtnCursor, setSearchBtnCursor] = useState("");
     const [cityName,setCityName] = useState(Router.query.cityName);
@@ -428,6 +430,12 @@ function HotelModifySearch(props){
 
     useEffect(() => {
         let mounted = true;
+		const handleScroll = () => {
+			setIsShrunk(window.scrollY > 50);
+		};
+		// Attach scroll event listener
+		window.addEventListener("scroll", handleScroll);
+		window.addEventListener("touchmove", handleScroll); // for touch devices
         let city = Router.query.cityName;
         try{
 			if(city==''){
@@ -444,121 +452,128 @@ function HotelModifySearch(props){
 		checkInOutArray.push(checkInCompleteDate);
 		checkInOutArray.push(checkoutCompleteDate);
 		setCheckInOut(checkInOutArray);
-        return () => mounted = false;
+        return () => {
+			window.removeEventListener("scroll", handleScroll);
+      		window.removeEventListener("touchmove", handleScroll);
+			mounted = false;
+		};
     }, []);
 
     return (
-        <div className="hsearchCover" id="search-fixed">
-			<div className="container">
-				<div className="row searchHd">
-					<div className="col-md-12">
-						<h1><img src={`${baseStoreURL}/images/hotel-icon.png`} alt="hotel-icon.png" className="hsIcons" /> Hotel</h1>
+		<Fragment>
+			<StickyObserver />
+			<div className="hsearchCover" id="search-fixed">
+				<div className="container">
+					<div className="row searchHd">
+						<div className="col-md-12">
+							<h1><img src={`${baseStoreURL}/images/hotel-icon.png`} alt="hotel-icon.png" className="hsIcons" /> Hotel</h1>
+						</div>
 					</div>
-				</div>
-				<div className="row hbanner">
-					<div className="col-md-12">
-						<section id="content1" className="tab-content borderRadiComman hotelSearch hsmobile">
-							<a href="javascript:;" className="hsclose">X</a>
-							<div className="row">
-								<div className="col-md-6">
-									<div className="w-full mb-3">
-									<Autocomplete
-										freeSolo
-										id="combo-box-demo"
-										placeholder="Where To?"
-										options={destinations}
-										value={text}
-										onChange={handleInputChange}
-										onInputChange={onTextChanged}
-										className="border-0 rounded w-full searchIcon hFormIcon"
-										loading={autocompleteLoading}
-										endDecorator={
-											autocompleteLoading ? (
-											  <CircularProgress size="sm" sx={{ bgcolor: 'background.surface' }} />
-											) : null
-										}
-										renderOption={(props, option, { inputValue }) => {
-											const matches = match(option.label, inputValue);
-											const parts = parse(option.label, matches);
-								  
-											return (
-											  <AutocompleteOption {...props}>
-												<Typography level="inherit">
-												  {option.label === inputValue
-													? option.label
-													: parts.map((part, index) => (
-														<Typography
-														  key={index}
-														  {...(part.highlight && {
-															variant: 'soft',
-															color: 'primary',
-															fontWeight: 'lg',
-															px: '2px',
-														  })}
-														>
-														  {part.text}
-														</Typography>
-													  ))}
-												</Typography>
-											  </AutocompleteOption>
-											);
-										}}
-									/>
+					<div className="row hbanner">
+						<div className="col-md-12">
+							<section id="content1" className="tab-content borderRadiComman hotelSearch hsmobile">
+								<a href="javascript:;" className="hsclose">X</a>
+								<div className="row">
+									<div className="col-md-6">
+										<div className="w-full mb-3">
+										<Autocomplete
+											freeSolo
+											id="combo-box-demo"
+											placeholder="Where To?"
+											options={destinations}
+											value={text}
+											onChange={handleInputChange}
+											onInputChange={onTextChanged}
+											className="border-0 rounded w-full searchIcon hFormIcon"
+											loading={autocompleteLoading}
+											endDecorator={
+												autocompleteLoading ? (
+												<CircularProgress size="sm" sx={{ bgcolor: 'background.surface' }} />
+												) : null
+											}
+											renderOption={(props, option, { inputValue }) => {
+												const matches = match(option.label, inputValue);
+												const parts = parse(option.label, matches);
+									
+												return (
+												<AutocompleteOption {...props}>
+													<Typography level="inherit">
+													{option.label === inputValue
+														? option.label
+														: parts.map((part, index) => (
+															<Typography
+															key={index}
+															{...(part.highlight && {
+																variant: 'soft',
+																color: 'primary',
+																fontWeight: 'lg',
+																px: '2px',
+															})}
+															>
+															{part.text}
+															</Typography>
+														))}
+													</Typography>
+												</AutocompleteOption>
+												);
+											}}
+										/>
+										</div>
 									</div>
-								</div>
-								<div className="col-md-3">
-									<div className="">
-										<DateRangePicker placeholder="Check-In & Check-Out" open={isOpen} onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} value={[new Date(checkInDate),new Date(checkOutDate)]}  name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
+									<div className="col-md-3">
+										<div className="">
+											<DateRangePicker placeholder="Check-In & Check-Out" open={isOpen} onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} value={[new Date(checkInDate),new Date(checkOutDate)]}  name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
+										</div>
 									</div>
-								</div>
-								<div className="col-md-3">
-									<div className="">
-										<input placeholder={roomInputPlaceHolder} readonly={true} onClick={handleAdultDropdown} className="border-0 rounded w-full adultsIcon hFormIcon"	type="text"/>
-										<div className="acdropdownCover" style={{display: adultDropDownToogle? "block" : "none"}}>
-											<div className="addLine">
-												<span className="addLineTitle">Rooms</span> 
-												<div className="addCount">
-													<a href="javascript:void(0);" onClick={handleRoomDecreaseCount}><FontAwesomeIcon icon={faMinus} /></a>
-													<input placeholder="1" value={roomCount} readonly={true} name="rooms" className="border-0 rounded" type="text"/>
-													<a href="javascript:void(0);" onClick={handleRoomIncreaseCount}><FontAwesomeIcon icon={faPlus} /></a>
+									<div className="col-md-3">
+										<div className="">
+											<input placeholder={roomInputPlaceHolder} readonly={true} onClick={handleAdultDropdown} className="border-0 rounded w-full adultsIcon hFormIcon"	type="text"/>
+											<div className="acdropdownCover" style={{display: adultDropDownToogle? "block" : "none"}}>
+												<div className="addLine">
+													<span className="addLineTitle">Rooms</span> 
+													<div className="addCount">
+														<a href="javascript:void(0);" onClick={handleRoomDecreaseCount}><FontAwesomeIcon icon={faMinus} /></a>
+														<input placeholder="1" value={roomCount} readonly={true} name="rooms" className="border-0 rounded" type="text"/>
+														<a href="javascript:void(0);" onClick={handleRoomIncreaseCount}><FontAwesomeIcon icon={faPlus} /></a>
+													</div>
 												</div>
-											</div>
-											<div className="addLine">
-												<span className="addLineTitle">Adults</span> 
-												<div className="addCount">
-													<a href="javascript:void(0);" onClick={handleAdultsDecreaseCount}><FontAwesomeIcon icon={faMinus} /></a>
-													<input placeholder="1" value={adultCount} readonly={true} name="adults" className="border-0 rounded"	type="text"/>
-													<a href="javascript:void(0);" onClick={handleAdultsIncreaseCount}><FontAwesomeIcon icon={faPlus} /></a>
+												<div className="addLine">
+													<span className="addLineTitle">Adults</span> 
+													<div className="addCount">
+														<a href="javascript:void(0);" onClick={handleAdultsDecreaseCount}><FontAwesomeIcon icon={faMinus} /></a>
+														<input placeholder="1" value={adultCount} readonly={true} name="adults" className="border-0 rounded"	type="text"/>
+														<a href="javascript:void(0);" onClick={handleAdultsIncreaseCount}><FontAwesomeIcon icon={faPlus} /></a>
+													</div>
 												</div>
-											</div>
-											<div className="addLine">
-												<span className="addLineTitle">Child</span> 
-												<div className="addCount">
-													<a href="javascript:void(0);" onClick={handleChildDecreaseCount}><FontAwesomeIcon icon={faMinus} /></a>
-													<input placeholder="1" value={childCount} readonly={true} name="child" className="border-0 rounded"	type="text"/>
-													<a href="javascript:void(0);" onClick={handleChildIncreaseCount}><FontAwesomeIcon icon={faPlus} /></a>
+												<div className="addLine">
+													<span className="addLineTitle">Child</span> 
+													<div className="addCount">
+														<a href="javascript:void(0);" onClick={handleChildDecreaseCount}><FontAwesomeIcon icon={faMinus} /></a>
+														<input placeholder="1" value={childCount} readonly={true} name="child" className="border-0 rounded"	type="text"/>
+														<a href="javascript:void(0);" onClick={handleChildIncreaseCount}><FontAwesomeIcon icon={faPlus} /></a>
+													</div>
 												</div>
-											</div>
 
-											<div className="childAgeDropdowns">
-											{Array.from(Array(childCount)).map((item, idx) => (
-												<div key={idx}><select name="childAge[]" defaultValue={childAge[idx]} id={`child-age-${idx}`} className="child-age-dropdown" onChange={handleChildAge} required={true}><option value="">Add Child {idx+1}</option><option value="0">Infant</option><option value="1">1 Year Old</option><option value="2">2 yrs</option><option value="3">3 yrs</option><option value="4">4 yrs</option><option value="5">5 yrs</option><option value="6">6 yrs</option><option value="7">7 yrs</option><option value="8">8 yrs</option><option value="9">9 yrs</option><option value="10">10 yrs</option><option value="11">11 yrs</option><option value="12">12 yrs</option><option value="13">13 yrs</option><option value="14">14 yrs</option><option value="15">15 yrs</option><option value="16">16 yrs</option><option value="17">17 yrs</option></select></div>
-											))}
+												<div className="childAgeDropdowns">
+												{Array.from(Array(childCount)).map((item, idx) => (
+													<div key={idx}><select name="childAge[]" defaultValue={childAge[idx]} id={`child-age-${idx}`} className="child-age-dropdown" onChange={handleChildAge} required={true}><option value="">Add Child {idx+1}</option><option value="0">Infant</option><option value="1">1 Year Old</option><option value="2">2 yrs</option><option value="3">3 yrs</option><option value="4">4 yrs</option><option value="5">5 yrs</option><option value="6">6 yrs</option><option value="7">7 yrs</option><option value="8">8 yrs</option><option value="9">9 yrs</option><option value="10">10 yrs</option><option value="11">11 yrs</option><option value="12">12 yrs</option><option value="13">13 yrs</option><option value="14">14 yrs</option><option value="15">15 yrs</option><option value="16">16 yrs</option><option value="17">17 yrs</option></select></div>
+												))}
+												</div>
+												<div className="addLine"><button type="button" className="rounded-md findBtn right" onClick={disableAdultDropdown}>Apply</button></div>
 											</div>
-											<div className="addLine"><button type="button" className="rounded-md findBtn right" onClick={disableAdultDropdown}>Apply</button></div>
 										</div>
 									</div>
 								</div>
-							</div>
-							
-							<div className="w-full mt-2 mb-0 flex justify-content-center">
-								<a href={`${baseStoreURL}/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Update Search</a>
-							</div>
-						</section>
+								
+								<div className="w-full mt-2 mb-0 flex justify-content-center updateSearch">
+									<a href={`${baseStoreURL}/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Update Search</a>
+								</div>
+							</section>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</Fragment>
     );
 }
 
