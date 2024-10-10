@@ -499,9 +499,11 @@ function HotelDetailsRoomsSelection(props){
                 <div className="dromHotlImgs">
                     
                     <div className="dromHotlDesktop">
-                        {roomDetails['roomMainImage']!=null?
+                        {roomDetails['images']!=null?
                             <OwlCarousel className='owl-theme' responsive={responsiveObject} slideBy={1} loop={true} lazyLoad={true} autoplay={true} dots={true} margin={10} navText={['<a href="javascript:void(0);" class="ssArrow lSlideArrow"><img src="'+baseStoreURL+'/images/home/left-slider-arrow.png" alt="left-slider-arrow.png" class="img-fluid"/></a>','<a href="javascript:void(0);" class="ssArrow rSlideArrow"><img src="'+baseStoreURL+'/images/home/right-slider-arrow.png" alt="right-slider-arrow.png" class="img-fluid" /></a>']} nav>
-                                <img src={`${roomDetails['roomMainImage'].image_base_url}${roomDetails['roomMainImage'].path}`} alt={`${roomDetails['roomMainImage'].roomCode}`} className="img-fluid" />
+                                {roomDetails['images'].map((item,i) => (
+                                    <img src={`${item.image_base_url}${item.path}`} alt={`${roomDetails['roomMainImage'].roomCode}`} className="img-fluid" />
+                                ))}
                             </OwlCarousel>
                         :
                         <img src={`${baseStoreURL}/images/no-hotel-image.jpg`} alt="no-hotel-image.jpg" className="img-fluid" />

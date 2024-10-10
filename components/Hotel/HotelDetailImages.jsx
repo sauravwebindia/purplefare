@@ -193,6 +193,7 @@ function HotelDetailImages(props){
 	};
 
     const handleImage = (image) => {
+        image = image.replace("https://photos.hotelbeds.com/giata/bigger/","https://photos.hotelbeds.com/giata/");
         let mainImage = image.replace("https://photos.hotelbeds.com/giata/","https://photos.hotelbeds.com/giata/bigger/");
         setMainImage(mainImage);
     }
