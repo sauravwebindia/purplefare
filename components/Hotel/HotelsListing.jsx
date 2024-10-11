@@ -286,8 +286,8 @@ function HotelsListing(props){
         }else{
             params = {'sort_by':sortBy,'cityName':cityName,'traceId':traceId,'page':nextPage,'searchSource':searchSource,'searchType':searchType,'searchValue':searchValue,'checkInDate':checkInDate,'checkOutDate':checkOutDate,'adults':adults,'rooms':rooms,'child':child,'childAge':childAge.split(",")};
         }
-        setLoadingProducts(true);
-        setSkeltonLoading(true);
+        //setLoadingProducts(true);
+        //setSkeltonLoading(true);
         localStorage.removeItem('persist:filters');
         const responseData = await HotelRepository.searchHotel(params);
         if(responseData.success==1){            
