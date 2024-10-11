@@ -10,7 +10,9 @@ export default function HomeAboutUs(props){
 			<div className="container mt-4 aboutUsh">
 				<div className="row">
 					<div className="col-md-6">
-						<div className="aboutImgCvr"><img src={`${baseStoreURL}/images/home/about.jpg`} alt="about.jpg" className="img-fluid borderRadiComman" /></div>
+						<div className="aboutImgCvr">
+							<img src={`${baseStoreURL}/images/home/logo.png`} alt="logo.png" className="img-fluid borderRadiComman" />
+						</div>
 					</div>
 					<div className="col-md-6">
 						<div className="hAbtText">

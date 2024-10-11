@@ -22,7 +22,9 @@ export default function HomeReviews(props){
 									<img src={item.image} alt={item.name} className="borderRadiComman hUserImg" />
 									<div>
 										<h4 className="mt-0.5 text-lg text-gray-900 testiTitle">{item.name}</h4>
-										<span className="text-gray-400">{item.location}</span>
+										{item.location!=null && item.location!='' && item.location!=undefined?
+											<span className="text-gray-400">{item.location}</span>
+										:''}
 									</div>
 								</div>
 								<p className="mt-4 text-gray-700">{item.review}</p>
@@ -43,7 +45,7 @@ export default function HomeReviews(props){
 					items:2
 				}
 			};
-			if(BannerView!=''){
+			if(reviewView!=''){
 				return(
 					<>
 						<div className="container mt-5 pt-2">

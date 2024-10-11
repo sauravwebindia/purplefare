@@ -157,12 +157,13 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 }
 
 @media screen and (max-width: 992px) {
+
 .expCover{ /*display: none;*/}
 
 .wbwUs .borderRadiComman{ margin-bottom: 16px;}
   
 .hServIcons{
-  display: flex;
+  display: flex!important;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -199,7 +200,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .expText h2{font-size: 30px;}
   .hsearchCover h1 { font-size: 1.5rem; padding-bottom: 20px;}
   .nhBox { font-size: 19px;}
-  .nhBox span { font-size: 19px;}
+  .nhBox span { font-size: 19px; display: block;}
 
   .dealText{ margin-top: 20px;}
   .gdCover .dealText h3{ font-size: 14px;}
@@ -216,6 +217,10 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 }
 
 @media screen and (max-width: 767px) {
+  .hsearchCover.sticky-element{position: inherit;}
+  .hMbhCover .expText h2{font-size: 17px;}
+  .aboutImgCvr{height: 195px;}
+
   .tabBox { width: 95%;}
   .tabBox label{font-size: 12px;}
   .tabBox label:last-child { min-width: 157px;}
@@ -569,6 +574,9 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 
 /*DETAILS*/
 @media (max-width: 992px){
+  .aminitiesBoxInn{}
+  .amiLine { width: 50%;}
+
   /*21SEPT2024*/
   .dtbleCover.dtbleCoverNew{ margin: 10px;} 
   .hdgalleryRoomMobile{ margin-left: 10px;}
@@ -682,7 +690,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .dtbleCover .dtblehdLine.dtblehd{font-size: 11px;}
   .dtbleRow h4 {font-size: 18px;}
   .dtbleRow .smallTxt { font-size: 11px;}
-  .dtbleRow li { font-size: 11px; background-size: 9px auto; background-position: 0px 4px; /*padding-left: 17px;*/ padding-left:0;}
+  .dtbleRow li { font-size: 12px; background-size: 9px auto; background-position: 0px 4px; /*padding-left: 17px;*/ padding-left:0;}
   .hButton{ font-size: 8px; padding: 6px 8px;}
   .droomLeft{ font-size: 10px; line-height: 9px;}
   .dtbleCover .dtblehdLine input[type=text] { font-size: 13px; width: 30px;}
@@ -776,6 +784,8 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
       /*END 21SEPT2024*/
     }
     .dockableInn{ display: flex; justify-content: space-between; align-items: center;}
+    
+
     .dockRight{min-width: 168px; text-align: right;}
     .dockLeft .oldPrice{ font-size: 13px; line-height: 10px; color: #b09bae; text-decoration-line: line-through;
       display: block;
@@ -853,6 +863,9 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   }
   
   @media (max-width: 525px){
+    .dockableInn .dockLeft{}
+    .dockableInn .dockRight{ min-width: 131px;}
+
     /*7OCT2024*/
     .cardMobContent{ padding-left: 0;}
     /*END 7OCT2024*/

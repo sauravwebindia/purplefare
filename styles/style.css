@@ -264,6 +264,32 @@ ul.logedInUserdd li img{ width: 19px; margin-right: 8px;}
 /*END FOOTER*/
 
 /*HOME*/
+.hsearchCover.sticky-element{ z-index: 99;}
+.hsearchCover.sticky-element .container > .row{ display: none;}
+.hsearchCover.sticky-element .container > .row.hbanner{ display: block;}
+.hsearchCover.sticky-element  .hServIcons{ display: none;}
+.hsearchCover.sticky-element  .tabBox{ display: none;}
+
+.hsearchCover.sticky-element .tabinn {
+  min-height: 69px;
+  padding: 12px 10px 8px 10px;
+}
+.hsearchCover.sticky-element form{ display: flex; justify-content: space-between;}
+.hsearchCover.sticky-element .css-19kzrtu{ padding: 0;}
+.hsearchCover.sticky-element .MuiAutocomplete-root {
+  
+}
+.hsearchCover.sticky-element .hSearchFild{margin-right: 16px; flex: 1; margin-bottom: 0!important;}
+.hsearchCover.sticky-element .fildTwoCover .fildTwo{ width: 50%;}
+.hsearchCover.sticky-element .hSearchBtn{ width: 22%; margin-top: 0!important;}
+.hsearchCover.sticky-element .hSearchBtn .findBtn{ text-align: center; 
+  height: 47px;
+  line-height: 46px;
+  font-size: 1.1rem;
+  padding: 0 1rem;
+}
+
+
 .hsearchCover .tabBox button:first-child{cursor: pointer;pointer-events:painted;}
 .hsearchCover .tabBox button{ cursor: default;pointer-events: none;}
 
@@ -507,7 +533,7 @@ background: linear-gradient(45deg,  #831d98 0%,#c8238b 100%); /* W3C, IE10+, FF1
 .calenderIcon{background: url(../public/images/home/calender.png) #fff;}
 .adultsIcon{background: url(../public/images/home/adults-icon.png) #fff;}
 .hFormIcon{ font-size: 17px; background-repeat: no-repeat; background-size: 22px auto; background-position: 16px 12px;
-  width: 100%; padding: 11px 0 11px 49px;
+  width: 100%; padding: 11px 0 11px 49px!important;
   height: 45px;
 }
 
@@ -539,7 +565,7 @@ background: linear-gradient(45deg,  #831d98 0%,#c8238b 100%); /* W3C, IE10+, FF1
 .purpleColor {
   color: #4a2069;
 }
-
+.hAbtText h2.title-2{ padding-top: 0; margin-bottom: 0; padding-bottom: 10px!important;}
 h2.title-2 {
   font-size: 45px;
   font-weight: bold;
@@ -567,8 +593,8 @@ h2.title-2 {
   position: relative;
   margin-bottom: 20px;
 
-    border-radius: 1rem;
-    overflow: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
  
 }
 .hMbhCover .expCover:after {
@@ -619,7 +645,7 @@ h2.title-2 {
 }
 
 .expText h2 {
-  font-size: 48px;
+  font-size: 40px;
   color: #fff;
   margin-top: 1px;
   text-shadow: 1px 1px 4px #606060; 
@@ -628,7 +654,10 @@ h2.title-2 {
   overflow: hidden;  
   padding: 0 10px;
 }
-.expImgCover{position: relative; border-radius: 1rem; overflow: hidden; height: 100%;}
+.expImgCover{position: relative; border-radius: 1rem; overflow: hidden; height: 100%;
+
+  max-height: 176px;
+}
 .expImgCover:after{
   content: '';
   position: absolute;
@@ -669,10 +698,20 @@ h2.title-2 {
   /*right: -30px;*/
   right: 0;
 }
-
 .hMbhCover,
 .hMbhCover .row {
   position: relative;
+}
+.hMbhCover .expCover a{max-height: 161px; display: flex;}
+.hMbhCover .expCover img{ height: 100%;}
+.hMbhCover .expText h2{
+  font-size: 22px;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .hMbhCover .owl-prev,
 .hMbhCover .owl-next{ top: 31%;}
@@ -771,12 +810,20 @@ h2.title-2 {
 }
 
 .aboutImgCvr {
-  background: url(../public/images/home/about-img-vector.png);
+  /*background: url(../public/images/home/about-img-vector.png);
   padding: 68px 0 0 0;
   background-position: right top;
   background-repeat: no-repeat;
-  background-size: 250px auto;
+  background-size: 250px auto;*/
+  background: #2f0d52;
+  border-radius: 20px;
+  text-align: center;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.aboutImgCvr img{}
 
 .hblogBx {
   /*19SEPT2024*/
@@ -1015,6 +1062,8 @@ h2.title-2 {
   box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
   padding: 20px 14px;
   text-align: center;
+
+  height: 100%;
 }
 
 .wbwUs img {
@@ -1072,6 +1121,16 @@ h2.title-2 {
 .hFormIcon{ position: relative;}
 .hFormIcon button.MuiAutocomplete-clearIndicator{ position: absolute; right: 10px;}
 .hSingleSlider .owl-carousel.owl-drag .owl-item{ margin-right: 0!important;}
+.hSingleSlider .owl-carousel.owl-drag .owl-item a{ 
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+  max-height: 240px;
+  align-items: center;
+  border-radius: 1rem;
+}
+.hSingleSlider .owl-carousel.owl-drag .owl-item a img{ width: 100%; height: 100%;}
+
 .hSingleSlider .owl-theme .owl-nav{ overflow: hidden;}
 .hSingleSlider .owl-theme .owl-nav button{ margin: 0!important;}
 
@@ -1105,7 +1164,7 @@ h2.title-2 {
 }
 /*23sept2024*/
 .myObserver {
-  height: 1px;
+  /*height: 1px;*/
   width: 1px;
   pointer-events: none;
   position: relative;
@@ -1131,7 +1190,7 @@ h2.title-2 {
 /* seems to be buggy when you change height of the header as there seems to be rounding error causing a jumping effect on the header*/
 .sticky-element {
 background: #fff;
-position: fixed; /* or sticky based on your layout */
+position: fixed;
 top: 0;
 width: 100%;
 padding-top: 0!important;
@@ -1153,7 +1212,10 @@ z-index: 9;
 .sticky-element .hotelSearch .col-md-3 .mb-3{  margin-bottom: 5px!important;}
 .sticky-element .hotelSearch .findBtn{height: 47px; line-height: 46px; font-size: 1.1rem; padding: 0 1rem;}
 
-.sticky-element .hotelSearch .hFormIcon{padding:0 0 0 10px;}
+.sticky-element .hotelSearch .hFormIcon{/*padding:0 0 0 10px;*/ padding:0 0 0 48px;}
+.calenderIcon .rs-input-group{ height: 100%;}
+.calenderIcon .rs-input-group .rs-date-range-input{ padding-left: 0;}
+
 
 /*end 23sept2024*/
 
@@ -2036,19 +2098,38 @@ ul.hChkList {
 /*21Sept2024*/
 .moreDtlsScroll{
   height: 70vh;
+  overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
   padding-bottom: 30px;
 }
 
 /*7OCT2024*/
-.moreDtlsScroll .owl-item{ max-height: 325px; display: flex;}
-.moreDtlsScroll .owl-item img{object-fit: cover;}
+.mdgallery{height: 325px; overflow: hidden; }
+
+.moreDtlsScroll .owl-item{ 
+  height: 255px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.moreDtlsScroll .owl-item img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  width: auto;
+  height: auto;
+}
 
 .allInfo .modal__content{ padding: 1.6rem 2rem 2rem;}
 /*End 7OCT2024*/
 
-.moreDtlsGallery{}
+.moreDtlsGallery{ padding: 0 17px;}
+.moreDtlsGallery button:hover{ background: none!important;}
+.moreDtlsGallery button.owl-next{ right: 0;}
+
+.moreDtlsGallery .owl-item{ /*margin-right: 0!important;*/}
 .mdgallery{ position: relative;}
 .mdgallery img{ width:700px; max-width: 100%;}
 
@@ -2207,12 +2288,20 @@ ul.hChkList {
 }
 
 .hdgallery .hdgBigImg {
+  border-radius: 16px;
+  background: #eeeeed;
+  height: 366px;
   margin-bottom: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hdgallery .hdgBigImg img {
   max-width: 100%;
-  border-radius: 16px;
+  max-height: 100%;
+  object-fit: cover;
 }
 
 .hdgallery .hdgThumb {
@@ -2231,6 +2320,7 @@ ul.hChkList {
 }
 .hdgallery .hdgThumb img {
   width: 100%;
+  object-fit: cover;
 }
 
 .hdPriceBox {
@@ -2373,10 +2463,11 @@ ul.hChkList {
 
 .aminitiesBoxInn {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.amiLine {}
+.amiLine { width: 25%;}
 
 .amiLine h4 {
   font-size: 18px;
@@ -3167,7 +3258,29 @@ h2.dpalTtitle {
 }
 .dtbleCover.dtbleCoverNew .dromtypeLeft{ padding-left: 0;}
 .dtbleCover.dtbleCoverNew .dromHotlImgs{ padding-top: 10px; padding-left: 10px;}
-
+.dromHotlDesktop .owl-item{
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 181px;
+}
+.dromHotlDesktop .owl-item img{
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+.dromHotlDesktop .owl-item{ /*margin-right: 0!important;*/}
+.dromHotlDesktop .owl-next{right:0;}
+.dromHotlDesktop .owl-nav button:hover{ background: none!important;}
+.dromHotlDesktop .owl-dots{ 
+  margin-top: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
 .detlsAdltCount{ display:block; text-align: center; margin-bottom: 18px;
   /*21SEPT2024*/

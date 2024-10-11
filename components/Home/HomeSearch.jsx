@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, Fragment} from 'react';
 import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import Tabs from '@mui/material/Tabs';
@@ -24,6 +24,7 @@ import HotelRepository from '@/repositories/HotelRepository';
 import { useRouter } from 'next/router';
 import { baseStoreURL } from '@/repositories/Repository';
 import parseHTML from 'html-react-parser';
+import StickyObserver from '@/utilities/StickyObserver';
 
 function CustomTabPanel(props) {
   	const { children, value, index, ...other } = props;
@@ -73,6 +74,24 @@ function HomeSearch(){
 	const [isOpen, setIsOpen] = useState(false);
 	const [datepickerCount, setDatePickerCount] = useState(0);
 	const [autocompleteLoading, setAutoCompleteLoading] = useState(false);
+	const [isShrunk, setIsShrunk] = useState(false);
+
+	useEffect(() => {  
+        let mounted = true;
+		const handleScroll = () => {
+			setIsShrunk(window.scrollY > 50);
+		};
+	
+		// Attach scroll event listener
+		window.addEventListener("scroll", handleScroll);
+		window.addEventListener("touchmove", handleScroll); // for touch devices
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+			window.removeEventListener("touchmove", handleScroll);
+			mounted = false;
+		};
+	}, []);
+
 	const handleAdultDropdown = () => {
 		setAdultDropdownToogle(true);
 	}
@@ -436,16 +455,18 @@ function HomeSearch(){
 	};
 
 	return (
-		<div className="hsearchCover">			
+		<Fragment>
+		<StickyObserver />
+		<div id="search-fixed" className={isShrunk ? "hsearchCover sticky-element" : "hsearchCover"}>			
 			<div className="container">
 				<div className="row">
 					<div className="col-md-12">
-						<h1>Compare and Book Cheap Flights on Over 500 Airlines</h1>
+						<h1>Explore Thousands Of Hotels and Book the Best Deal</h1>
 					</div>
 				</div>
 				<div className="row hbanner">
 					<div className="col-md-12">
-					<div class="hServIcons">
+					<div className="hServIcons">
 							<div className="hServIconsBox">
 								<a href={`${baseStoreURL}/hotel-search`}><img src={`${baseStoreURL}/images/hotel-mobile-icon.png`} alt="hotel-mobile-icon.png" className="img-fluid" />
 								<span>Hotel</span></a>
@@ -472,7 +493,7 @@ function HomeSearch(){
 						</Tabs>
 						<CustomTabPanel value={value} index={0} className="tab-content borderRadiComman tabinn">
 							<form>
-								<div className="w-full mb-3">
+								<div className="w-full mb-3 hSearchFild">
 									<Autocomplete
 										freeSolo
 										id="combo-box-demo"
@@ -557,7 +578,7 @@ function HomeSearch(){
 										</div>
 									</div>
 								</div>
-								<div className="w-full mt-4 mb-0 flex justify-content-end">
+								<div className="w-full mt-4 mb-0 flex justify-content-end hSearchBtn">
 									<Link target="_blank" href={`${baseStoreURL}/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Find Your Hotel</Link>
 								</div>
 							</form>	
@@ -582,6 +603,7 @@ function HomeSearch(){
 				</div>
 			</div>
 		</div>
+		</Fragment>
 	);
 }
 

@@ -64,7 +64,7 @@ export default function HomeExploreDestination(props){
 					<div className="row">
 						<div className="col-md-12">
 							<div className="nhBox purpleColor pt-4 pb-3">Need help booking? Our agents are ready! 
-							<span>Call us 24/7 at 0000000000</span></div>
+							<span> Call us 24/7 at +1 (786) 286-2631</span></div>
 							<h2 className="title-2 text-center pb-3">Explore Top Destinations</h2>
 						</div>
 					</div>
