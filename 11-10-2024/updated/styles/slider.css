@@ -1,0 +1,19 @@
+.bannerHomeDsk .homeSlider .img_wrap{ text-align:center;}
+
+.bannerHomeDsk .homeSliderin { position: relative; z-index: 2; transition: all 0.3s;}
+.homeSlider a{ display:block;}
+.bannerHomeDsk .homeSliderin:after{
+	/*background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), transparent);*/
+/*position: absolute;
+content: "";
+height: 60%;
+width: 100%;
+
+
+background: linear-gradient(180deg, rgba(40, 44, 63, 0) 0%, #282C3F 100%);
+
+left: 0;
+bottom: 0;
+*/
+}
+.bannerHomeDsk .homeSliderCover{position: relative; z-index: 2;}

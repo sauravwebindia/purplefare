@@ -1,0 +1,108 @@
+/*HEADER*/
+@media screen and (max-width: 1199px) {
+  .headerLine .col-md-3{ width: 20%;}
+  .tabBox label{ padding: 4px 1.5em; font-size: 15px;}
+}
+/*END HEADER*/
+
+
+/*FOOTER*/
+
+/*END FOOTER*/
+
+/*HOME*/
+@media screen and (max-width: 1199px) {
+.hLogoCover img {
+  width: 100%;
+}
+.hLogoCover .ssArrow, .hLogoCover .row .ssArrow{    width: 40px; height: 40px;}
+.tabBox label:nth-child(3) {
+  padding: 4px 1.5em;
+}
+
+}
+
+@media screen and (max-width: 1050px) {
+  .hsearchCover h1 { font-size: 2rem;}
+  .tabBox label:last-child{padding-left: 1.5rem;}
+}
+
+@media screen and (max-width: 991px) {
+  /*HEADER*/
+  .hder .hdLogo { width: 122px;}
+  .headerLine .col-md-3{ width: 17%;}
+  /*END HEADER*/
+
+  h2.title-2 { font-size: 32px;}
+
+  .expText span {font-size: 15px;}
+  .expText h2{font-size: 30px;}
+  .hsearchCover h1 { font-size: 1.5rem; padding-bottom: 20px;}
+  .nhBox { font-size: 19px;}
+  .nhBox span { font-size: 19px;}
+
+  .dealText{ margin-top: 20px;}
+  .gdCover .dealText h3{ font-size: 14px;}
+  .gdCover .dealText span{ font-size: 14px;}
+
+  .tabBox{width: 91%;}
+  .htabIcons{ display: none;}
+  .tabBox label:last-child{ min-width: 213px;}
+  .hder .nav li { padding: 0 5px;}
+  .hder .nav a{font-size: 15px;}
+}
+
+@media screen and (max-width: 767px) {
+  .tabBox { width: 95%;}
+  .tabBox label{font-size: 12px;}
+  .tabBox label:last-child { min-width: 157px;}
+
+  .expText span { font-size: 12px;}
+  .expText h2 { font-size: 20px;}
+
+  .hMbhCover .ssArrow, .hMbhCover .row .ssArrow{ width: 38px; height: 38px;}
+  .hMbhCover .expCover{margin-bottom: 0;}
+
+  .hSingleSlider .ssArrow{ width: 38px; height: 38px;}
+  .gdCover .ssArrow, .gdCover .row .ssArrow{ width: 38px; height: 38px;}
+
+  .blogHomeSection .col-sm{width: 100%; flex: auto; margin-bottom: 20px;}
+
+  .testihbox .testi{padding: 25px 20px;}
+  .testihbox .testiTitle{font-size: 18px; line-height: 22px; padding-bottom: 0;}
+  .qoutes{ width: 26px; height: 26px; right: -14px; top: -18px;}
+}
+@media screen and (max-width: 480px) {
+
+  .tabBox{ border-top-left-radius: 14px; border-top-right-radius: 14px;}
+  .tabBox label:first-child{ border-top-left-radius: 14px;}
+  .tabBox label:last-child{  padding-left: 0.8rem; border-top-right-radius: 14px;}
+
+  .tabBox label:first-child { padding: 4px 1.2em;}
+  .tabBox label{font-size: 12px; line-height: 12px;}
+  .tabBox label:last-child{min-width: 56px;}
+
+  h2.title-2 { font-size: 25px; padding-bottom: 5px !important;}
+
+  .hSingleSlider .lSlideArrow { left: -6px;}
+  .hSingleSlider .rSlideArrow { right: -6px;}
+
+  .hMbhCover .expCover{ margin-bottom: 20px;}
+
+  .hMbhCover .lSlideArrow, .hMbhCover .row .lSlideArrow { left: 0px;}
+  .hMbhCover .rSlideArrow, .hMbhCover .row .rSlideArrow { right: 0;}
+
+  .gdCover .lSlideArrow, .gdCover .row .lSlideArrow { left: 0;}
+  .gdCover .rSlideArrow, .gdCover .row .rSlideArrow{ right: 0;}
+
+  .hLogoCover .lSlideArrow, .hLogoCover .row .lSlideArrow { left: 0;}
+  .hLogoCover .rSlideArrow, .hLogoCover .row .rSlideArrow { right: 0;}
+
+}
+/*END HOME*/
+
+
+
+
+
+

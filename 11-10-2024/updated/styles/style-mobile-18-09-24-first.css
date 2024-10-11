@@ -1,0 +1,1280 @@
+/*HEADER*/
+.navbar-toggler-icon {
+  background-image: 
+  url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(225, 225, 225)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+}
+@media screen and (max-width: 1199px) {
+  .headerLine .col-md-3{ width: 20%;}
+  .tabBox label{ padding: 4px 1.5em; font-size: 15px;}
+}
+
+@media screen and (max-width: 992px) {
+  .desktopMenu{ display: none;}
+  .mobileMenu{ display:block;}
+  .mobileMenu .nav a img {
+      width: 23px;
+      margin-right: 10px;
+  }
+  .mobileMenu .loginBtnMob img{ border-radius: 100px;}
+  .mobileMenu .nav a {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 12px 10px 12px 20px !important;
+    color: #1c1c1c !important;
+    display: flex;
+    align-items: center;
+  }
+  .mobileMenu .nav a:hover {
+      border-left: 2px solid #bd94ef;
+      background: #f7f1ff;
+  }
+
+
+
+  .applyfilterMobile{ display: block;}
+  .navboxclose{ display: block;}
+  .navmheader{ display: block;}
+  .hder .nav a img{ display: block;}
+
+
+.headerLine{padding: 11px 0 12px 0;   background: linear-gradient(96deg, rgba(131, 29, 152, 1) 0%, #3d0969 100%);}
+.innerPage .hsearchCover{ /*display: none;*/}
+
+.navmobile{ 
+  display: block !important;
+  position: absolute;
+  right: 9px;
+  padding: 0;
+  top: 17px;
+} 
+.headerLine .col-md-3{ margin-bottom: 0!important;}
+.headerLine .col-md-3.hdRight{ display: none;}
+.navmobile .navbar-toggler-icon{ width: 1.8em; height: 1.8em;}
+.navboxclose{
+  position: absolute;
+  right: 20px;
+  font-size: 21px;
+  color: #c095e9;
+  text-decoration: none;
+  display: block;
+  margin-top: 0;
+  font-weight: 300;
+  margin-right: 0;
+  width: 34px;
+  height: 34px;
+  text-align: center;
+  background: #fff;
+  border-radius: 50px;
+  line-height: 34px;
+  top: 6px;
+  right: 6px;
+}
+.loginBtnMob img{ width: 55px; margin-right: 12px;  border-radius: 100%;}
+a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
+.navboxmobile{ 
+  position: relative;
+  display: none;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+  background: #fff;
+  left: 0;
+  height: 100vh;
+  padding: 0;
+}
+.navmheader{
+  padding: 40px 40px;
+  background: linear-gradient(56deg, rgba(243, 177, 100, 1) 0%, rgba(184, 145, 254, 1) 100%);
+  -webkit-border-bottom-right-radius: 24px;
+  -webkit-border-bottom-left-radius: 24px;
+  -moz-border-radius-bottomright: 24px;
+  -moz-border-radius-bottomleft: 24px;
+  border-bottom-right-radius: 24px;
+  border-bottom-left-radius: 24px;
+
+  box-shadow: 0 2px 5px 1px rgba(64, 60, 67, .16);
+  }
+
+  .navboxmobile ul{display: block; padding: 20px 0 0 0;}
+  .navboxmobile ul li{ display: block; margin-bottom: 2px;}
+
+  .hder .nav li { padding: 0 0;}
+  .hder .nav a{font-size: 15px; font-weight: 400; line-height: 20px; padding: 12px 10px 12px 20px!important; color: #1c1c1c!important; 
+    display: flex;
+    align-items: center;
+  }
+  .hder .nav a:hover{border-left: 2px solid #bd94ef; background: #f7f1ff;}
+  .hder .nav a img{width: 23px; margin-right: 10px;}
+
+  .hder .hdLogo { width: 89px;}
+  .headerLine .col-md-3{ width: 17%;}
+
+
+}
+@media screen and (max-width: 480px) {
+.main-popup p.check-mark{ margin: 0 0 0 -187px; width: 90%; padding-left: 22px; position: relative;}
+.main-popup p.check-mark label{ margin-left: 0; width: 99%;         text-align: left;}
+.main-popup p.check-mark input[type=checkbox]{ position: absolute; left: 0;}
+}
+@media screen and (max-width: 390px) {
+  .main-popup p.check-mark { margin: 0 0 0 -173px;}
+}
+@media screen and (max-width: 375px) {
+  .main-popup p.check-mark { margin: 0 0 0 -167px;}
+}
+@media screen and (max-width: 360px) {
+  .main-popup p.check-mark { margin: 0 0 0 -160px;}
+}
+@media screen and (max-width: 360px) {
+  .main-popup p.check-mark { margin: 0 0 0 -152px;}
+}
+/*END HEADER*/
+
+
+/*FOOTER*/
+
+/*END FOOTER*/
+
+/*HOME*/
+@media screen and (max-width: 1200px) {
+.hLogoCover img {
+  width: 100%;
+}
+.hLogoCover .ssArrow, .hLogoCover .row .ssArrow{    width: 40px; height: 40px;}
+.tabBox label:nth-child(3) {padding: 4px 1.5em;}
+
+.expText h2 { font-size: 40px;}
+
+.owl-nav button img{width: 40px; }
+
+}
+
+@media screen and (max-width: 1050px) {
+  .hsearchCover h1 { font-size: 2rem;}
+  .tabBox label:last-child{padding-left: 1.5rem;}
+}
+
+@media screen and (max-width: 992px) {
+.expCover{ /*display: none;*/}
+.wbwUs .borderRadiComman{ margin-bottom: 16px;}
+  
+.hServIcons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  
+}
+
+.hServIconsBox {
+  width: 23%;
+  height: 80px;
+  background: #fff;
+  border-radius: 10px;
+  perspective: 1000px;
+  text-align: center;
+  padding: 2%;
+  margin-bottom: 6px;
+}
+.hServIconsBox a{ color:#424242; text-decoration: none;}
+.hServIconsBox img{
+  height: 33px;
+  width: auto;
+}
+.hServIconsBox span{ display: block; font-size: 13px; line-height: 13px; margin-top: 5px;}
+
+
+.tabBox{display: none;}  
+.hsearchCover .tabinn{ display: none;}
+
+
+  h2.title-2 { font-size: 32px;}
+
+  .filtMore{ display: none;}
+  .expText span {font-size: 15px;}
+  .expText h2{font-size: 30px;}
+  .hsearchCover h1 { font-size: 1.5rem; padding-bottom: 20px;}
+  .nhBox { font-size: 19px;}
+  .nhBox span { font-size: 19px;}
+
+  .dealText{ margin-top: 20px;}
+  .gdCover .dealText h3{ font-size: 14px;}
+  .gdCover .dealText span{ font-size: 14px;}
+
+  .tabBox{width: 91%;}
+  .htabIcons{}
+  .tabBox label:last-child{ min-width: 213px;}
+  
+  .wbwUs .col-sm{ flex: inherit; width: 50%;}
+
+
+  
+}
+
+@media screen and (max-width: 767px) {
+  .tabBox { width: 95%;}
+  .tabBox label{font-size: 12px;}
+  .tabBox label:last-child { min-width: 157px;}
+
+  .expText span { font-size: 12px;}
+  .expText h2 { font-size: 20px;}
+
+  .hMbhCover .ssArrow, .hMbhCover .row .ssArrow{ width: 38px; height: 38px;}
+  .hMbhCover .expCover{margin-bottom: 0;}
+
+  .hSingleSlider .ssArrow{ width: 38px; height: 38px;}
+  .gdCover .ssArrow, .gdCover .row .ssArrow{ width: 38px; height: 38px;}
+
+  .blogHomeSection .col-sm{width: 100%; flex: auto; margin-bottom: 20px;}
+
+  .testihbox .testi{padding: 25px 20px;}
+  .testihbox .testiTitle{font-size: 18px; line-height: 22px; padding-bottom: 0;}
+  .qoutes{ width: 26px; height: 26px; right: -14px; top: -18px;}
+}
+
+@media screen and (max-width: 575px) {
+  .hSingleSlider .ssArrow{ left: 0px;}
+  .owl-next{right: 5px;}
+  .hMbhCover .lSlideArrow, .hMbhCover .row .lSlideArrow{ left: 0!important;}
+  .gdCover .lSlideArrow, .gdCover .row .lSlideArrow{ left: 0!important;}
+  .hLogoCover .ssArrow, .hLogoCover .row .ssArrow{ left: 0!important;}
+  .hLogoCover .rSlideArrow, .hLogoCover .row .rSlideArrow{right: 0!important; left: -12px !important;}
+}
+
+@media screen and (max-width: 480px) {
+  .exploreTop .expCover{ display: none;}
+
+  .videobox{ height: 300px;}
+
+  .wbwUs .borderRadiComman{padding: 16px 10px;}
+  .wbwUs img{ width: 60px;}
+  .wbwUs h3{ font-size: 17px;}
+
+	.tabBox{ border-top-left-radius: 14px; border-top-right-radius: 14px;}
+	.tabBox label:first-child{ border-top-left-radius: 14px;}
+	.tabBox label:last-child{  padding-left: 0.8rem; border-top-right-radius: 14px;}
+
+	.tabBox label:first-child { padding: 4px 1.2em;}
+	.tabBox label{font-size: 12px; line-height: 12px;}
+	.tabBox label:last-child{min-width: 56px;}
+
+	h2.title-2 { font-size: 25px; padding-bottom: 5px !important;}
+
+	.hSingleSlider .lSlideArrow { left: -6px;}
+	.hSingleSlider .rSlideArrow { right: -6px;}
+
+	.hMbhCover .expCover{ margin-bottom: 20px;}
+
+	.hMbhCover .lSlideArrow, .hMbhCover .row .lSlideArrow { left: 0px;}
+	.hMbhCover .rSlideArrow, .hMbhCover .row .rSlideArrow { right: 0;}
+
+	.gdCover .lSlideArrow, .gdCover .row .lSlideArrow { left: 0;}
+	.gdCover .rSlideArrow, .gdCover .row .rSlideArrow{ right: 0;}
+
+	.hLogoCover .lSlideArrow, .hLogoCover .row .lSlideArrow { left: 0;}
+	.hLogoCover .rSlideArrow, .hLogoCover .row .rSlideArrow { right: 0;}
+
+
+	.exptopDest .col-md-12{ margin-bottom: 10px;}
+
+	.exptopDestinationsCover{
+	  display: block!important;
+	  overflow: auto hidden;
+	  height: 100%;
+	  scroll-behavior: smooth;
+	}
+	.exptopDestinations{
+	  display: inline-flex;
+	  -webkit-box-pack: center;
+	  justify-content: center;
+	  height: 100%;
+	  min-width: 100%;
+	  box-sizing: content-box;
+	  gap: 8px;
+	}
+	.expMob{ 
+	  position: relative;
+	  width: 187px;
+	}
+	.expMob img{
+	  height: 100%;
+	  border-radius: 1rem;
+	}
+	.expMob .expTextMob{
+	  position: absolute;
+	  bottom: 10px;
+	  left: 0;
+	  right: 0;
+	  margin: 0 auto;
+	  text-align: center;
+	  padding: 0 8px;
+	}
+	.expMob .expTextMob h2{ 
+	  font-size: 17px;
+	  color:#fff;
+	  text-overflow: ellipsis;
+	  white-space: nowrap;
+	  overflow: hidden;
+	  margin: 4px 0 0 0;
+	}
+	.expMob .expTextMob span{ 
+	  font-size: 12px;
+	  letter-spacing: .7px;
+	  background: #f48129;
+	  padding: 1px 12px;
+	  border-radius: 50px;
+	  color: #fff;
+	  width: 88%;
+
+	  display: inline-block;
+	  text-overflow: ellipsis;
+	  white-space: nowrap;
+	  overflow: hidden;
+	}
+
+}
+/*END HOME*/
+
+
+/*HOTEL LISTING*/
+@media screen and (max-width: 991px) {
+.headerLine .container{ max-width:100%;}
+.headerLine .container .justify-content-center{justify-content: left !important;}
+.hsearchCover .hbanner .col-md-4,
+.hsearchCover .hbanner .col-md-6,
+.hsearchCover .hbanner .col-md-12{flex: 0 0 100%; width: 100%; margin-bottom: 10px;}
+.hsearchCover .hbanner .col-md-6 .w-full{ margin-bottom: 0!important;}
+.hsearchCover .hbanner .col-md-3{flex: 0 0 100%; width: 100%; margin-bottom: 10px;}
+.findBtn{font-size: 1.3rem; padding: 0 2rem;}
+
+
+.hlWish{top: inherit; bottom: 6px; right: 6px;}
+
+.llineText { font-size: 12px;}
+.hListn .hListnImg{width: 35%;}
+
+  .mFixBtns{ display: none;}
+.hListn{
+ box-shadow:0 .125rem .25rem rgb(210 188 206) !important; 
+ border: 1px solid #f3e0ef; 
+}
+  .filterbx h2{font-size: 20px;}
+  .float-end.fltrremove{ display: none;}
+  .applyfilterMobile{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .applyfilterMobile .clearFilter{
+    font-size: 15px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+    border-radius: 28px;
+    color: #c1238d;
+    font-weight: normal;
+  }
+  .applyfilterMobile .applyFilter{
+    font-size: 15px;
+    text-decoration: none;
+    border: 1px solid #831d98;
+    padding: 4px 10px;
+    border-radius: 28px;
+    color: #fff;
+    font-weight: normal;
+    background: linear-gradient(239deg, rgba(200, 35, 139, 1) 0%, rgba(131, 29, 152, 1) 100%);
+  }
+
+
+
+.ltotalHotel{ display: block;  font-size: 14px; margin-bottom: 10px;}
+
+.sbbDesktop{ display: none;}
+.mFixBtns{ display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  z-index: 9999;
+  width: 100%;
+  padding: 7px 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+.mFixBtns a{
+  line-height: 7px;
+  padding: 1px 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  border: 1px solid #666161;
+  border-radius: 4px;
+  margin-right: 5px;
+  color:#911e95;
+  text-decoration: none;
+}
+.mFixBtns i{color:#911e95; margin-right: 4px;}
+.shortBybx select{ border-radius: 4px; width: 170px;}
+.shortBybx{text-align: right;}
+.fltrclose{ font-size: 21px; color:#000; text-decoration: none; display: block;
+  margin-top: 2px;
+  font-weight: normal;
+  margin-right: 3px;
+}
+.listing .col-md-3{ width: 0; padding: 0;}
+.listing .col-md-9 { flex: 0 0 auto; width: 100%;}
+.hRatings a{ padding: 1px 3px; font-size: 12px; margin-right: 2px;}
+.hListnCalActin .hButton{ font-size: 11px;}
+.listing{}
+.listing{}
+.filterbx{ display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99999;
+  background: #fff;
+  padding: 4% 2% 3% 2%;
+  overflow-y: auto;
+  height: 100vh;
+}
+.filterbx h2{ position: relative; margin: 0 0 8px 0;}
+
+.filtBx h4{font-size: 16px;}
+.filterbx .checkbox-custom-label, .filterbx .radio-custom-label{ font-size: 13px;}
+
+
+}
+
+@media screen and (max-width: 767px) {
+  .hListnDtls{ position: relative;}
+  .flag{ top: 15px; left: 0;}
+  .hListn .hListnImg{ position: initial;}
+  .hListn .hListnImg .hlWish{ background: #f6f6f6; top:5px; right: 5px;}
+
+  .hListnDtls{padding: 10px 10px 10px 10px;}
+  .w-full.mb-3{ margin-bottom: 0!important;}
+  .hotelSearch input[type="text"]{ /*margin-bottom: 15px;*/}
+  .hListn { display: block;}
+  .hListnDtls{ display: flex; }
+  .hListn .hListnImg{ width: 100%; max-width: 160px; margin: 0 0 20px 0;}
+  .hListnCalActin{ width: 100%;}
+  .hRatings{ left: inherit; right: 12px;}
+  .listing .listInner{ padding-left: 0;}
+
+  .hListn .hListnImg{ width: 34%; margin: 0 0 33px 0;}
+  .hListn .hListnImg img{width: 100%; z-index: 0; object-fit: cover; height: 100%;
+    max-height: 100%;
+    min-width: auto;
+    min-height: 100px;
+    vertical-align: middle;
+  }
+  .hListnDels{width: 66%; padding: 8px 2px 8px 8px;}
+  .hListnDels h2 { padding-right: 19px; font-size: 14px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; line-height: inherit;}
+  .hAddr{font-size: 11px;}
+  .hChkList li {font-size: 12px;}
+  .hOffPrice{ font-size: 11px;}
+  .hfacility img{height: 16px;}
+
+  .hListnCalActin{display: flex; justify-content: space-between; position: relative; align-items: center;}
+  .hListnCalActin .holdPrice{ margin-bottom: 6px;}
+  .hListnCalActin .hsalePrice{line-height: 14px;}
+  .hListnCalActin .hInfo{font-size: 11px; display: block; padding-top: 5px;}
+  .hRatings{left: 12px; line-height: 9px; right: inherit; margin-top: -40px; width: 33%;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+    align-items: center;
+    font-size: 10px;
+  }
+  
+  .hListnCalActin{padding: 10px 12px 10px 12px;}
+  .hListnCalActin .hButton{ display: none;}
+  .hListnCalActin .hOffLto{margin-bottom: 0;}
+  .hListnCalActin h5.hOfferPerct{ margin-bottom: 5px;}
+
+}
+
+@media screen and (max-width: 480px) {
+  .hListnDels h2 { padding-right: 26px; }
+  .headerLine .col-md-3{ width: 100%;}
+  .findBtn{ font-size: 1rem; padding: 0 1.5rem;}
+  .sbyBox { display: block;}
+  .shortBybx{ font-size: 13px;}
+  .mFixBtns a{ line-height: 28px;  padding: 1px 34px;}
+
+  .listing{padding-top: 26px;}
+  
+  .hListnDtls{padding: 5px 5px 5px 5px;}
+  .flag{ font-size: 10px; left: -5px;}
+  .hStrRate img{ width: 10px;}
+  .hAddr{padding-left: 14px;}
+  .hAddr svg{height: 12px;}
+
+  .hRatings{left: 8px;}
+
+  .hListn .item{ max-height: 180px; overflow: hidden;}
+  
+}
+@media screen and (max-width: 460px) {
+  .hRatings{width: 28%;}
+  .hRatings{left: 6px;}
+}
+@media screen and (max-width: 375px) {
+  .hotelSearch { padding: 20px 25px;}
+  .hRatings{width: 27%;}
+}
+@media screen and (max-width: 360px) {
+  .findBtn{ font-size: .9rem; padding: 0 1.2rem;}
+  .hListnDels{ padding-left: 5px; padding-right: 5px;}
+  .hOffPrice{font-size: 12px; line-height: 11px; padding: 5px 10px;}
+}
+@media screen and (max-width: 359px) {
+  .hRatings{width: 26%;}
+}
+/*END HOTEL LISTING*/
+
+
+/*MOBILE SEARCH SCREEN*/
+@media (max-width: 992px){
+.searchPageInn .row{ display: block;}
+.searchPageInn .col-md-6{ flex: 0 0 auto; width: 100%; max-width: 480px; margin-left: auto; margin-right: auto;}
+.searchPageInn .col-md-3{width: 100%; max-width: 480px; margin-left: auto; margin-right: auto;}
+}
+.searchPageInn .rs-input-group.rs-input-group-inside{ background: none;}
+.searchPageInn .rs-input-group.rs-input-group-inside input{ background: none;}
+/*END MOBILE SEARCH SCREEN*/
+
+/*HOLIDAY PACKAGES LISTING*/
+.ltourFacl ul li img { max-width: 27px;}
+.ltourFacl ul li span { font-size: 12px;}
+/*END HOLIDAY PACKAGES LISTING*/
+
+
+/*DETAILS*/
+@media (max-width: 992px){
+
+  .seltroomoverly{ display: none; background-color: rgba(0, 0, 0, .8); height: 100%; position: fixed; top:0; width: 100%; z-index:999;}
+  .seltroombox{ display: none; position: fixed;  bottom: 0; left: 0; right: 0; z-index: 999;
+    height: 90vh; background: #fff;
+  }
+  .seltroomboxxes{
+    display: -ms-flexbox; display: -webkit-box;  display: flex; flex-flow: column;
+    -webkit-box-align: center; -ms-flex-align: center; -webkit-box-pack: flex-end; -ms-flex-pack: flex-end; align-items: center;
+  }
+  .seltroomboxInn{ background-color: #fff; margin-bottom: 64px; max-height: 80%; overflow-y: scroll; width: 94%;  margin:0 auto;
+    height: 90vh;
+    padding: 0 0 0 0;
+  }
+
+.seltroomTitle{width: 94%;  margin:0 auto;}
+.titleMob-2{ font-size: 17px; line-height: 16px; font-weight: bold;  margin-bottom: 3px;}
+.cardMobile{
+    border-radius: 5px;
+    box-shadow: 0 2px 8px 0 rgb(0 0 0 / 17%);
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
+    border: 1px solid #eeeeee;
+}
+.cardMobImg{width:100px; height: 100px; border-radius: 8px; overflow: hidden;}
+.cardMobImg img{ object-fit: cover; width: 100%; height: 100%;}
+.cardMobContent{
+  flex: 1;
+  overflow: hidden;
+  padding-left: 13px;
+}
+.cardMobile .cardMobTitle{justify-content: space-between; font-size: 21px;}
+.cardMobile ul{ padding:0; margin: 0 0 0 19px;}
+.cardMobile ul li{color: #6c6a6a;}
+.cardMobile .cardAdltPr{ display: flex; justify-content: space-between; font-size: 13px;}
+.cardMobile .cardAdltPrLft{flex: 1;}
+.cardMobile .cardAdltPrRgt{display: flex; flex-direction: column; line-height: 16px;}
+.cardMobile .cardPriceStrick{text-decoration: line-through;}
+.cardMobile .cardBoldPrice{font-size: 16px;}
+.cardMobile .cardAddi{ font-size: 15px;}
+.cardMobile .cardDelete{ font-size: 15px; border: 1px solid #ccc; border-radius: 100px; width: 22px; height: 22px; text-align: center; line-height: 22px;}
+
+
+  
+
+
+
+  .dromtypeLeft{padding-top: 10px; padding-bottom: 10px;}
+  .desktopOnly{ display: none;}
+  .hdGalleryDetls{margin-bottom: 20px;}
+  .hdGalleryDetls .col-md-6{width: 100%; flex: auto;}
+  .hdGalleryDetls .col-md-3{width: 100%; flex: auto;}
+  .hdPriceBox{margin-left: 0; margin-top: 20px;}
+  .amiBox{ margin-top: 22px;}
+  .hdRatings{ margin-bottom: 8px;}
+
+  .dfixcotent {display: none;}
+  .allInfoBtns{ min-height: auto!important; display:flex; min-height: auto; padding: 5px 3px 2px 3px;
+    justify-content: center;
+    position: relative;
+    flex-wrap: wrap;
+    z-index: 0;
+  }
+  .allInfoBtns a{ padding: 3px 4px; line-height: 22px; margin-left: 2px; margin-right: 2px; margin-bottom: 5px;}
+
+  .dtalsTab{padding-top: 26px;}
+  .roomsBox{margin-top: 20px;}
+
+  .droomType .row .col-md-3{ width: 100%; flex: auto;}
+  .droomType .row .col-md-9{ width: 100%; flex: auto;}
+  .hdgalleryMobile{ display: none!important;}
+   
+  .hdgalleryRoomMobile{ display: block!important;}
+  .dprodrLine { width: 22.5%;}
+  .sIcons a span{width: 27px; height: 27px; line-height: 27px;}
+
+  .hsclose{display: block!important;}
+  .dmobilehd{ display: block!important;}
+  .dockable{ display: block!important;}
+  .allInfoBtns{position: inherit; min-height: 96px;}
+  .allInfoBtns a { font-size: 14px; padding: 8px 4px;}
+  .dfixcontinner a.hdButton{ padding: 5px 15px;}
+  
+  .dtbleCover .dtblehdLine.dtblehd{font-size: 11px;}
+  .dtbleRow h4 {font-size: 18px;}
+  .dtbleRow .smallTxt { font-size: 11px;}
+  .dtbleRow li { font-size: 11px; background-size: 9px auto; background-position: 0px 4px; padding-left: 17px;}
+  .hButton{ font-size: 8px; padding: 6px 8px;}
+  .droomLeft{ font-size: 10px; line-height: 9px;}
+  .dtbleCover .dtblehdLine input[type=text] { font-size: 13px; width: 30px;}
+  .dtbleCover .dtblehdLine.dtblehd{ min-height: 21px;}
+  .dtImg img { max-width: 16px;}
+  .dtbleCover .dtblehdLine .hInfo{font-size: 10px; line-height: 11px;}
+  ul.dromami li span{ font-size: 11px;}
+
+
+  .dromHotlDesktop{display: none!important; } 
+    .hdgalleryMobile{ display: block!important; overflow: auto hidden; height: 100%; scroll-behavior: smooth;}
+    .hdgalleryRoomMobile{ display: block!important;
+      overflow: auto hidden;
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+    .hdgmroomInn{
+      display: inline-flex;
+      -webkit-box-pack: center;
+      justify-content: center;
+      height: 100%;
+      min-width: 100%;
+      box-sizing: content-box;
+      gap: 8px;
+    }
+    .hdgroomSlide{ width: 187px;}
+    .hdgroomSlide img{width: 100%; display: block; border-radius: 10px;}
+  
+  
+    .hdgmInn{
+      display: inline-flex;
+      -webkit-box-pack: center;
+      justify-content: center;
+      height: 100%;
+      min-width: 100%;
+      box-sizing: content-box;
+      gap: 8px;
+    }
+    .hdgSlide{ width: 187px;}
+    .hdgSlide img{width: 100%; display: block; border-radius: 10px;}
+  
+    .hdgDesktop{ display: none!important;}
+  
+    .hsmobile{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 99;
+      height: 100vh;
+      border-radius: 0;
+      padding-top: 77px;
+      display: none;
+    }
+  
+    a.hsclose{ font-size: 19px; position:absolute; top:10px; right: 10px; text-decoration: none; background: #fff; color:#000;padding: 4px;
+      border-radius: 50px; width: 38px; height: 38px; line-height: 30px; text-align: center;
+    } 
+    .dmobilehd{     background: linear-gradient(56deg, rgba(243, 177, 100, 1) 0%, rgba(184, 145, 254, 1) 100%);
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 7px 2%;
+      z-index: 9;
+    }
+    
+    .dmobilehdInn{ display: flex; align-items: center;}
+    img.dmBack{   
+      filter: drop-shadow(0px 1000px 0 #fff);
+      transform: translateY(-1000px);
+  
+      }
+    .innerPage .hsearchCover h1{ display: none;}
+    .dsearch{ background: #fff; border-radius: 7px; padding: 3px 7px; width: 89%; margin-left: 2%; overflow: hidden;}
+    .dshotelName{ font-size: 13px; display: block; font-weight: 600; text-overflow: ellipsis;
+      white-space: nowrap; overflow: hidden;}
+    .dsotherInfo{ font-size: 12px; display: block;  text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
+  
+    .dockable{ 
+      background: #fff;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 7px 2%;;
+      z-index: 9999;
+    }
+    .dockableInn{ display: flex; justify-content: space-between; align-items: center;}
+    .dockRight{min-width: 168px; text-align: right;}
+    .dockLeft .oldPrice{ font-size: 13px; line-height: 10px; color: #b09bae; text-decoration-line: line-through;
+      display: block;
+    }
+    .dockLeft .tlsPrice {
+      font-size: 20px;
+      color: #4a2069;
+      display: block;
+      text-align: center;
+    }
+    .dockLeft .taxFee {
+      font-size: 10px;
+      line-height: 11px;
+      color: #907793;
+      word-break: break-word;
+      display: block;
+    }
+    .bnBtn{
+      font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 50px;
+        background: rgb(200, 35, 139);
+        background: linear-gradient(239deg, rgba(200, 35, 139, 1) 0%, rgba(131, 29, 152, 1) 100%);
+        padding: 6px 16px;
+        text-transform: uppercase;
+        margin-top: 0;
+        display: inline-block;
+    }
+    .bnBtn:hover{ color:#fff;}
+  
+  }
+  
+  @media (max-width: 768px){
+    .dtbleCover{ margin-left: 5px; margin-right: 5px;}
+  
+    .allInfoBtns a { font-size: 13px;}
+  
+    .dromHotlImgs img{width: 100%;}
+    .dromhtThumb img { width: 49.6%;}
+    ul.dromami{ padding: 10px 0 10px 0;}
+    .dtbleCover .dtblehdLine .holdPrice { font-size: 11px;}
+    .dtbleCover .dtblehdLine .hsalePrice{ font-size: 16px;}
+  
+    .dtbleRow > div:first-child { width: 34%;}
+    .dtbleRow > div:nth-child(2) { width: 12%;}
+    .dtbleRow > div:nth-child(3) { width: 21%;}
+    .dtbleRow > div:nth-child(4){ width: 12%;}
+    .dtbleRow > div:last-child { width: 21%;}
+  }
+  
+  
+  @media (max-width:650px) {
+    
+  }
+  
+  @media (max-width: 525px){
+    .mobileOnly,
+    .dtCheapPrice{display: block!important;}
+
+    .dhName h2{font-size: 18px; display: block;}
+    .hdStrRate img {width: 11px; line-height: 7px;}
+    .dhName p { font-size: 13px;}
+    .hdRatingbox a{font-size: 14px; padding: 6px 6px;}
+    .hdRatingbox strong{ font-size: 14px; line-height: 15px;}
+    .hdRatingbox span{font-size: 10px;}
+    .hdPriceBox h3{    font-size: 20px;}
+    .hdPriceBox .hdgustDetls{font-size: 12px; padding-bottom: 5px!important;}
+    .hdPriceBox .hdoldPrice{ display: none;}
+    .hdtlsPrice{ display: none!important;}
+    .hdTaxFee{ display: none!important;}
+    .hdPriceBox .hdButton{ display: none!important;}
+    
+    .dtalsTab{ padding-top: 0; margin-top: 0px!important;}
+    .roomsBox{    margin-top: 20px;}
+
+    
+
+    .hdRatings{ margin-bottom: 10px;}
+    .hdPriceBox{margin-left: 0; margin-top: 22px;}
+    .amiBox{ margin: 15px 0;}
+    .hdGalleryDetls { margin-bottom: 20px;}
+    .dtalsTab{ margin-top: 30px; margin-bottom: 30px;}
+    .dtalsTab h2{font-size: 20px;}
+    .amiLine h4{font-size: 14px;}
+    .amiLine ul li{ font-size: 13px; padding: 0 0 0 20px; background-size: 13px auto;}
+  
+    h2.dpalTtitle{ font-size: 20px;}
+    .dtour-slide .dh-title{ margin-top: 10px;}
+    
+    
+    .droomType{ padding-bottom: 5px; border-radius: 10px;}
+    .dtbleCover{ border-radius: 8px;}
+   
+    
+    .dtbleRow{ display: flex;  flex-wrap: wrap; gap: 0;}
+    .dtbleRow > div:first-child { width: 62%;padding-bottom: 0;}
+    .dtbleRow > div:nth-child(2) { width: 100%; background:none; display: none;}
+    .dtbleRow > div:nth-child(3) { width: 36%;}
+    .dtbleRow > div:nth-child(4){ width: 100%; background:none; display: none;}
+    .dtbleRow > div:last-child { width: 100%; position: relative; display: flex; flex-direction: row-reverse;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0;
+    }
+
+    .hdgalleryRoomMobile{ margin-bottom: 14px;}
+    .dtbleCover .dtblehdLine .hInfo{text-align: right;}
+    .dlastBok{ font-size: 13px;}
+    .dromtypeLeft h4{font-size: 17px; line-height: 12px;}
+ 
+    .dbkDetails{ display: flex; align-items: center; margin-bottom: 5px;}
+    .dbkDetails span{font-size: 13px; padding-left: 7px; display: flex; align-items: center;}
+    .dbkDetails img{ max-width: 13px; margin-right: 2px;}
+
+    .dtInnSpace { padding: 8px 0 0px 0;}
+    .droomLeft{ text-align: left;}
+  
+    .dtbleCover .dtblehdLine{padding-left: 10px; padding-right: 10px;}
+    .dtbleRow > div:first-child .dtInnSpace{
+      flex-direction: column;
+      display: flex;
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .dtCheapPrice span{
+      padding: 4px 10px;
+      background: #c1228c;
+      color: #fff;
+      text-align: center;
+      border-radius: 50px;
+    }
+    .dtbleRow > div:first-child .dtInnSpace .dtCheapPrice.mobileOnly{ padding: 0; margin-bottom: 5px; display: inline-flex!important; background: none;}
+    .dtbleRow ul{ margin-bottom: 0;}
+    .dtbleRow > div:nth-child(3) .dtInnSpace{ 
+      padding-left: 8px;
+      flex-direction: column;
+      align-items: flex-end;
+      display: flex;
+    }
+    .dtbleCover .dtblehdLine .dtCheapPrice{ display: inline-block;}
+    .dtbleRow li{ padding-left: 13px;}
+  
+    .dtImg{ justify-content: center;}
+    .dtbleCover .dtblehdLine.dtblehd { display: none; padding: 5px 10px 5px 10px; min-height: 0px; background: #f8f8f8; text-align: center;}
+    .dtbleRow ul{text-align: left;}
+    .hButton{ margin-top: 12px;}
+  
+    .aminitiesBoxInn{flex-wrap: wrap;}
+    .amiLine { width: 48%; padding: 10px 1%;}
+  
+    .dprodRating .dprodrLine{    width: 49%;}
+    .dFiterBtns .btn{ font-size: 13px; margin-bottom: 10px;}
+  
+    .dAllReviewCard .card{ padding: 12px 5px;}
+    .dAllReviewCard h4.card-title{    font-size: 19px;}
+
+    .rtTotal{width: 64px; height: 64px; line-height: 62px; font-size: 28px;}
+    .rtiMain{ margin-bottom: 12px;}
+  }
+
+  /*END DETAILS*/
+
+  /*CART*/
+  @media (max-width: 1200px){
+   .offCoupon .plan-type{ font-size: 14px;}
+   .plan-cost{font-size: 14px;}
+  }
+  @media (max-width: 992px){
+    .bkInfoBox .bkInfoBoxText{ margin-left: 10px;}
+    .progressbarInn li{width: 175px;}
+    .cart .col-md-8{ width: 100%; margin-bottom: 15px;}
+    .cart .col-md-4{ width: 100%;}
+    .bkInfoBoxText{margin-left: 0;}
+    .continuePay{
+      position: fixed;
+      bottom: 0;
+      border-radius: 0;
+      max-width: 100%;
+      left: 0;
+      z-index: 99;
+    }
+    
+  }
+  @media (max-width: 768px){
+    .progressbarInn li{width: 150px;}
+    .bkInfoBox{ display: block;}
+    .bkInfoBoxImg{ width: 100%; max-width: 500px; margin: 0 auto 20px auto;}
+  
+    .cartBinfo{ background: #f6f6f6; border-radius: .7rem; padding: 10px;}
+    .cartBinfo div{width: 50%; margin-bottom: 10px; border-bottom: 1px solid #ccc; padding: 10px 5px;}
+    .cartBinfo div:last-child{ border-bottom: 0;}
+    .cartBinfo div:nth-child(3){ border-bottom: 0;}
+  
+    .cartFacility ul li{    width: 49%;}
+  }
+  @media (max-width: 550px){
+    .progressbarInn li { width: 110px;font-size: 12px;}
+    .bkInfoBoxImg{ height: auto; max-height:inherit; min-height: auto;}
+    .hdRatingbox a{line-height: 11px;}
+  }
+  @media (max-width: 390px){
+    .progressbarInn li { width: 102px;font-size: 12px;}
+    .plan-type{margin-right: 13px;}
+  }
+  @media (max-width: 360px){
+    .cartFacility ul li{    width: 98%;}
+  }
+  @media (max-width: 359px){
+    .progressbarInn li { width: 77px;font-size: 11px;}
+  }
+  /*END CART*/
+  /*THANKS*/
+  @media (max-width: 992px){
+  .bookingSucessPage .col-md-8 {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .bookingSucessPage .col-md-4 {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .gtmtBtn {
+    position: fixed;
+    bottom: 0;
+    border-radius: 0;
+    max-width: 100%;
+    left: 0;
+    z-index: 99;
+    margin-bottom: 0!important;
+}
+.bookingSucessPage .bkInfoBoxText{ margin-left: 16px;}
+.btn.gtmtBtn{ padding-top: 10px; padding-bottom: 11px;}
+
+.cartBinfo div span{font-size: 13px; color: #5d5b5bcc;}
+}
+@media (max-width: 768px){
+  .bookingSucessPage .bkInfoBoxText{ margin-left: 0;}
+  .bookingSucessPage .bkInfoBoxImg{
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 20px auto;
+    max-height: inherit;
+    min-height: auto;
+  }
+  .bookingSucessPage .bkInfoBoxImg img{}
+}
+@media (max-width: 414px){
+  .cartBinfo{padding: 0;}
+  .thfulDetls i{font-size: 15px;}
+  .cartBinfo div strong{    font-size: 11px; line-height: 17px; display: block;}
+}
+  /*END THANKS*/
+
+  /*MY ACCOUNT MY TRIPS*/
+  @media (max-width: 992px){
+  .macHdrLeft{ padding-right: 10px;}
+  .macHdrRight .gtmtBtn{ position: inherit; border-radius: 40px;
+    padding-top: 5px;
+    padding-bottom: 6px;
+  }
+  }
+  @media (max-width: 768px){
+  .macHdrRight .gtmtBtn{font-size: 14px; line-height: 17px;}
+
+  .tripNavinn a{font-size: .8rem;}
+  .macTrip h2{font-size: 18px;}
+  .macHdrLeft p{font-size: 13px;}
+  .macContent .macCol strong{font-size: 14px;}
+  .macContent .macCol span{font-size: 13px;}
+  .macImp li{font-size: 13px; background-size: 10px auto;}
+  }
+  @media (max-width: 550px){
+  .macHdr{ display: block;}
+  .macHdrRight{padding-bottom: 10px;}
+  .macHdrRight .gtmtBtn{ max-width: 205px; padding-top: 9px; padding-bottom: 10px;}
+  .macImp li{font-size: 14px;}
+
+  .macTrip h2 {font-size: 16px;}
+  .macHdrLeft p {font-size: 14px;}
+  .tripNavinn a{text-align: center;}
+  .macContent{ display: block;}
+  .macContent .blankSpace{ display: none!important;}
+  }
+  @media (max-width: 480px){
+  .tripNavinn{ padding: 8px 10px;}
+  .tripNavinn a{padding: 7px 8px;}
+  }
+  @media (max-width: 375px){
+    .tripNavinn{ padding: 8px 7px;}
+    .tripNavinn a{padding: 7px 10px; margin: 0 3px;}
+    .macHdrLeft p strong{ display: block;}
+  }
+  @media (max-width: 359px){
+  .macHdrLeft .hdStrRate{ margin-bottom: 8px;}
+  }
+  /*END MY ACCOUNT MY TRIPS*/
+
+/*MY ACCOUNT MY TRIPS CANCELLED*/
+@media (max-width: 992px){
+.order-tracking p{font-size: 12px;}
+.order-tracking p span{font-size: 12px;}
+.order-tracking{ padding-left: 5px; padding-right: 5px;}
+.order-tracking .is-complete{width: 25px; height: 25px;}
+.order-tracking .is-complete:after{ height: 13px;}
+.order-tracking.completed .is-complete:after{left: 9px;}
+
+.order-tracking .not-complete:before{height: 13px; left: 6px;}
+.order-tracking .is-complete:after{ left: 8px; width: 6px;}
+
+.order-tracking p strong{display: block; line-height: 14px;}
+.order-tracking p br{ display: none;}
+.macTrip h2{ margin-bottom: 3px;}
+}
+/*END MY ACCOUNT MY TRIPS CANCELLED*/
+
+/*MY PROFILE*/
+@media (max-width: 992px){
+.myproPage>.row>.col-md-4{display: none;}
+.myproPage>.row>.col-md-8{ width: 100%;}
+}
+/*END MY PROFILE*/
+
+/*LOGIN DETAILS AND CHANGE PASSWORD POPUP*/
+@media (max-width: 992px){
+.modal__container{align-items: flex-start; margin-top: 60px;}
+}
+/*END LOGIN DETAILS AND CHANGE PASSWORD POPUP*/
+
+
+/*MY ACCOUNT MY TRIPS DETAILS*/
+@media (max-width: 1200px){
+.macGustPhoto .mgPhoto{width: 23.6%;}
+}
+@media (max-width: 992px){
+.macGustPhoto .mgPhoto{width: 23.2%;}
+.macAmi ul li { width: 48.3%;}
+
+.cartRightBox h3{font-size: 17px; margin-bottom: 10px;}
+.thmanageTrip li .fas{margin-right: 5px;}
+
+.matdPages .bkInfoBoxText{ padding-left: 10px;}
+
+.col-md-8.col-md-8-half{ width: 100%; margin-bottom: 20px;}
+.col-md-4.col-md-4-half{ width: 100%;}
+
+}
+@media (max-width: 768px){
+.macGustPhoto .mgPhoto{width: 22.4%;}
+.macGustPhoto .mgPhoto{width: 48.3%;}
+
+.bkInfoBoxImgCover{width: 100%;}
+.bkInfoBoxImgCover .bkInfoBoxImgMap{ margin: 0 auto; margin-bottom: 20px;}
+.bkInfoBoxImgCover .bkInfoBoxImgMap img{ max-height: 80px;}
+.matdPages .bkInfoBoxText{ padding-left: 0; margin-left: 0;}
+.cartBinfo div{border-bottom:0;}
+
+.ttRow .ttRowInn{font-size: 14px; line-height: 15px;}
+.maccBkDetails{ font-size: 14px; gap: 15px; flex-wrap: wrap; padding-right: 0;}
+.maccBkDetails .maccBkDetls:first-child{ width: 100%;}
+.maccBkDetls{ width: 48%;}
+.maccBkDetls .htlRom img{width: 160px;}
+}
+@media (max-width: 550px){
+.matdPages .boxWithShadow{ padding: 12px 10px;}
+.macGustPhoto{gap: 5px;}
+.macGustPhoto .mgPhoto{width: 22.2%;}
+
+.matdHdrs h1{ font-size: 22px;}
+
+.maccBkDetails .maccBkDetls:last-child{ width: 100%;}
+
+.maccSteps .container{ padding-left: 0; padding-right: 0;}
+.maccSteps .container .col-md-12{ padding-left: 5px; padding-right: 5px;}
+.tracking-item{ padding: 2rem .5rem 0.5rem 1.1rem;}
+.tracking-item .tracking-content{ display: block;}
+.tracking-item .tracking-content span{ margin-bottom: 10px;}
+.maccdbox .mcctBtn{ width: 100px!important;}
+}
+
+@media (max-width: 480px){
+.matdHdrs{ padding: 12px 15px;}
+.bkdid strong{font-size: 14px;}
+.matdHdrs .bkdinfo{ margin-bottom: 0;}
+.maccBkDetails{gap: 10px;}
+
+.thfulDetls h6.mb-3{ margin-bottom: 5px!important;}
+.ttRow .ttRowInn{ font-size: 13px; margin-right: 8px;}
+.ttRow .ttRowInn i{width: 35px;}
+.boxWithShadow.bgColored .maccdbox h2{font-size: 17px;}
+.macGustPhoto .mgPhoto { width: 22.9%;}
+.linkFormat{ display: inline-block;}
+}
+@media (max-width: 414px){
+.maccBkDetls{ width: 100%; padding: 5px 5px;} 
+.maccBkDetails{ gap: 0;}
+.ttRow{display: block;}
+.ttRow .ttRowInn{ margin-bottom: 8px; justify-content: left;} 
+.guestHouseInfo a.btn{ width: 100%; font-size: 13px;}
+.macAmi ul li{ width: 100%;}
+}
+/*END MY ACCOUNT MY TRIPS DETAILS*/
+
+/*ADD GUEST*/
+@media (max-width: 992px){
+.maccHotelCard .gtmtBtn{ display: none;}
+.fgtAvailBtn{width: 100%;}
+.fgtAvailBtn a.gtmtBtn{width: 100%;}
+}
+@media (max-width: 768px){
+.editViewCover{display: block;}
+.egtviewLeft{ width: 100%; margin-bottom: 20px;}
+.egtviewRight{ width: 100%; border-left: 0; padding-top: 20px; border-top: 1px solid #f3e0ef;}
+.egtviewRight .egtSpace{ padding-left: 0!important;}
+.stepsag .nav-tabs.wizard li a{font-size:12px; padding: 6px 7px;}
+.stepsag .nav-tabs.wizard a .nmbr, .stepsag .nav-tabs.wizard a .nmbr{    display: block; margin: 0 auto 10px auto;}
+.stepsag .nav-tabs.wizard a .nmbr, .stepsag .nav-tabs.wizard a .nmbr{line-height: 26px; margin-bottom: 5px;}
+}
+@media (max-width: 550px){
+.matdIcon{ margin-right: 10px; margin-bottom: 22px; float: left;}
+.matdInn{ display: block;}
+.matdBox .bkInfoBoxText h1{ font-size: 18px;}
+.matdBox .bkInfoBoxText h2{font-size: 13px;}
+.matdrg{ font-size: 13px; margin-top: 8px;}
+
+.maccHotelCard .card{ max-width: 100%;}
+.egtviewRight{ padding-top: 35px;}
+.egtDelete{ top: -24px; right: -1px;}
+}
+@media (max-width: 375px){
+  .egtHalf label{ line-height: 16px;}
+  .egtHalf label strong{ display: block;}
+  .stepsag .nav-tabs.wizard li a{padding: 6px 4px; line-height: 13px;}
+  
+  
+}
+@media (max-width: 359px){
+  .egtHalf{ width: 100%;}
+  .egtHalf label strong{ display: inline-block;}
+}
+/*END ADD GUEST*/
+
+/*GUEST - CHANGE DATED*/
+.editViewCover .egtviewLeft.w-50{ width: 100%!important;}
+.editViewCover .egtviewRight.w-50{ width: 100%!important;}
+
+@media (max-width: 480px){
+  .nav-tabs.wizard li a{min-height: 80px;}
+  .nav-tabs.wizard a.active, .nav-tabs.wizard a:hover{min-height: 80px;}
+  .nciDate .calendar{font-size: 14px;}
+  .caldarrow{ font-size: 14px; top: 12px;}
+  .nciDate span{font-size: 14px;}
+}
+@media (max-width: 480px){
+.egtviewRight .egtHalf{ margin-bottom: 10px;}
+.nciDate{ margin-right: 0;}
+}
+/*END GUEST - CHANGE DATED*/
+
+/*CANCEL HOTEL*/
+@media (max-width: 1200px){
+.cancelType label{ font-size: 15px;}
+.cancelType input[type="radio"]:checked + label:after{margin-top: 1.15em; margin-left: -1.48em;}
+}
+@media (max-width: 768px){
+  .cancelType ul li{ width: 100%;}
+  .cancelType input[type="radio"]:checked + label:after{    margin-left: -1.50em;}
+}
+/*END CANCEL HOTEL*/
+
+/*CONTACT US*/
+@media (max-width: 992px){
+.helpCenterInn .card { width: 46.5%;}
+}
+@media (max-width: 768px){
+.helpCenterInn .card { width: 98%;}
+}
+/*END CONTACT US*/
+
+/*SEARCH PAGE*/
+.searchPage{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  height: 100vh;
+  background: #fff;
+}
+.searchPage h1{
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 26px;
+  margin-bottom: 0px;
+}
+.sm-text{ font-size: 14px; color:#a07db9; margin-bottom: 8px;}
+.searchPage .searchPageInn{ padding: 77px 15px 15px 15px;}
+.searchPage .searchIcon { background: url(../public/images/home/search-icon.png) #f1e7ee;}
+.searchPage .calenderIcon { background: url(../public/images/home/calender.png) #f1e7ee;}
+.searchPage .adultsIcon { background: url(../public/images/home/adults-icon.png) #f1e7ee; }
+
+.searchPage .col-md-6, .searchPage .col-md-3{ margin-bottom: 10px!important;}
+.searchPage .searchclose{
+  font-size: 19px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-decoration: none;
+  background: #c2268e;
+  color: #fff;
+  padding: 4px;
+  border-radius: 50px;
+  width: 38px;
+  height: 38px;
+  line-height: 30px;
+  text-align: center;
+}
+.searchPage .hFormIcon {
+  font-size: 14px;
+  background-repeat: no-repeat;
+  background-size: 22px auto;
+  background-position: 16px 12px;
+  width: 100%;
+  padding: 11px 0 11px 49px;
+}
+
+.searchBtn{
+  text-align: center;
+  font-weight: 600;
+  color: #fff;
+  display: inline-block;
+  font-size: 1rem;
+  padding: 0 1.5rem;
+  height: 42px;
+  line-height: 42px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  text-decoration: none;
+  background: linear-gradient(45deg, #831d98 0%, #c8238b 100%);
+}
+/*END EARCH PAGE*/
