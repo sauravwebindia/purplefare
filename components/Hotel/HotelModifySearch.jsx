@@ -32,9 +32,7 @@ function HotelModifySearch(props){
 	const [searchBtnDisable,setSearchBtnDisable] = useState("");
 	const [searchBtnCursor, setSearchBtnCursor] = useState("");
     const [cityName,setCityName] = useState(Router.query.cityName);
-	const [loading, setLoading] = useState(false);
-	const [checkInDate, setCheckInDate] = useState(Router.query.checkin);
-	const [checkOutDate, setCheckOutDate] = useState(Router.query.checkout);
+	const [loading, setLoading] = useState(false);	
 	const [text,setText] = useState('');
 	const [destinations, setDestinations] = useState([]);
 	const [adultDropDownToogle,setAdultDropdownToogle] = useState(false);
@@ -44,6 +42,8 @@ function HotelModifySearch(props){
 	const [checkInOut,setCheckInOut] = useState([]);
 	const [childAge, setChildAge] = useState(Router.query.childAge.split(","));
 	const [searchType, setSearchType] = useState(Router.query.searchType);
+	const [checkInDate, setCheckInDate] = Router.query.searchType=="Hotel"?useState(Router.query.checkInDate):useState(Router.query.checkin);
+	const [checkOutDate, setCheckOutDate] = Router.query.searchType=="Hotel"?useState(Router.query.checkOutDate):useState(Router.query.checkout);
 	const [searchValue, setSearchValue] = useState(Router.query.searchValue);
 	const [searchSource, setSearchSource] = useState(Router.query.searchSource);
 	const [roomInputPlaceHolder,setRoomInputPlaceHolder] = useState(adultCount+" Adults, "+roomCount+" Room");
@@ -566,7 +566,11 @@ function HotelModifySearch(props){
 								</div>
 								
 								<div className="w-full mt-2 mb-0 flex justify-content-center updateSearch">
+									{searchType=='City'?
 									<a href={`${baseStoreURL}/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Update Search</a>
+									:
+									<a href={`${baseStoreURL}/hotels/hotel-details/${searchValue}/${Math.floor(Math.random() * 10)}/dbbc6a8d58d3c592c419a77caefc0147-${searchSource}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Update Search</a>
+									}
 								</div>
 							</section>
 						</div>
