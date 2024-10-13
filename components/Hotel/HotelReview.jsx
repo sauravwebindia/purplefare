@@ -522,7 +522,7 @@ function HotelReview(props){
                                 </li>
                                 <li className="flex-between">
                                     <span className="cttitle">Total Amount to be paid</span>
-                                    <span className="ctdtals">{hotelBooking.currency} {formatCurrency(hotelBooking.saleAmount+hotelBooking.taxes)}</span> 
+                                    <span className="ctdtals">{hotelBooking.currency} {formatCurrency(parseFloat(hotelBooking.saleAmount)+parseFloat(hotelBooking.taxes))}</span> 
                                 </li>
                                 </ul>
                         </div>
