@@ -16,6 +16,7 @@ function HotelReview(props){
     const [inclusionPopupDisplay, setInclusionPopupDisplay] = useState(false);
     const [inclusionPopupText, setInclusionPopupText] = useState("");
     const [roomDetailPopupCode,setRoomDetailPopupCode] = useState(null);
+    const [checkInAge,setCheckInAge] = useState("");
 	const dispatch = useDispatch();
     useEffect(() => {  
         let mounted = true;
@@ -47,6 +48,21 @@ function HotelReview(props){
         const responseData = await HotelRepository.fetchBookingForReview(params);
         if(responseData.success==1){
             setHotelBooking(responseData.data.booking);
+            let hotel = JSON.parse(responseData.data.booking.hotelDetail);
+            if(hotel.amenities.length>0){
+                let hotelAmenities = hotel.amenities;
+                for(let k=0;k<hotelAmenities.length;k++){                    
+                    let checkInAgeString = hotelAmenities[k]['value'].match(/check-in age/);
+                    if(checkInAgeString!=null){
+                        let numb = checkInAgeString.input.match(/\d/g);
+                        if(numb.length>0){
+                            numb = numb.join("");
+                            setCheckInAge(numb);
+                            break;
+                        }
+                    }
+                }
+            }
             setLoading(false);
         }else{
             //router.back() ?? router.push('/');
@@ -178,9 +194,17 @@ function HotelReview(props){
     }
 
     const handleRoomPopupDetail = (code) => {
-        setRoomDetailPopupCode(code);
-        setInclusionPopupDisplay(true);
-        setInclusionPopupText(generateRoomInclusionDetailsPopup(code));
+        setRoomDetailPopupCode(code);        
+        let roomInclusionText = "";
+        roomInclusionText = generateRoomInclusionDetailsPopup(code);
+        if(roomInclusionText!=null && roomInclusionText!='' && roomInclusionText!=undefined){
+            setInclusionPopupText(roomInclusionText);
+            setInclusionPopupDisplay(true);
+        }
+    }
+
+    const handleBookingAddCustomerForm = (e) => {
+        e.preventDefault();
     }
 
     const generateRoomInclusionDetailsPopup = (code) => {
@@ -209,27 +233,30 @@ function HotelReview(props){
                         }
                     }
                 }
-                console.log(roomNewDetails);
-                return (
-                    <>
-                    <h2 className="modal__title">{room.roomRatePlanName}</h2>
-                    {roomNewDetails['information']!=undefined && roomNewDetails['information']!=null && roomNewDetails['information']!=''?
-                        roomNewDetails['information']['roomFacilities']!=undefined && roomNewDetails['information']['roomFacilities']!=null && roomNewDetails['information']['roomFacilities']!='' && roomNewDetails['information']['roomFacilities'].length>0?
+                if(roomNewDetails['information']!=undefined && roomNewDetails['information']!=null && roomNewDetails['information']!=''){
+                    return (
                         <>
-                            <p className="smallTxt">Room Inclusions</p>
-                            <ul>                                    
-                                {roomNewDetails['information']['roomFacilities'].map((roomFacility,i) => ( 
-                                    roomFacility.description.content!="Room size (sqm)"?
-                                    <li>{roomFacility.description.content}</li>
-                                    :''
-                                ))}                                      
-                            </ul>
-                        </>
+                        <h2 className="modal__title">{room.roomRatePlanName}</h2>
+                        {roomNewDetails['information']!=undefined && roomNewDetails['information']!=null && roomNewDetails['information']!=''?
+                            roomNewDetails['information']['roomFacilities']!=undefined && roomNewDetails['information']['roomFacilities']!=null && roomNewDetails['information']['roomFacilities']!='' && roomNewDetails['information']['roomFacilities'].length>0?
+                            <>
+                                <p className="smallTxt">Room Inclusions</p>
+                                <ul>                                    
+                                    {roomNewDetails['information']['roomFacilities'].map((roomFacility,i) => ( 
+                                        roomFacility.description.content!="Room size (sqm)"?
+                                        <li>{roomFacility.description.content}</li>
+                                        :''
+                                    ))}                                      
+                                </ul>
+                            </>
+                            :''
                         :''
-                    :''
-                    }
-                    </>
-                );
+                        }
+                        </>
+                    );
+                }else{
+                    return "";
+                }
             }
         }
     }
@@ -247,31 +274,38 @@ function HotelReview(props){
             if(cancelPolicy!='' && cancelPolicy!=undefined && cancelPolicy!=null){
                 let cancelDateObject = new Date(cancelPolicy.from);
                 let nextDay = new Date(cancelPolicy.from);
-                nextDay.setDate(cancelDateObject.getDate() + 1);
+                nextDay.setDate(cancelDateObject.getDate() - 1);
                 let nextDayCancellation = nextDay.toDateString(); 
                 let date = new Date(cancelPolicy.from).toDateString();
                 let checkInDateStart = new Date(reviewBooking.checkInDate).toDateString();
-                if(cancelPolicy.from<reviewBooking.checkInDate){
-                    return (
-                        <div className="container d-flex align-items-center">
-                            <div className="progresCover">
-                                <div className="progresbar">
-                                    <span className="progRefund">Refundable</span>
-                                    <div className="steps">
-                                        <span className="progCircle"></span>
-                                        <strong>Now</strong>
-                                    </div>
-                                    <span className="line"></span>
-                                    <span className="line"></span>
-                                    <div className="steps">                                    
-                                        <span className="progCircle"></span>
-                                        <strong>{checkInDateStart} | {reviewBooking.checkInTime} <span>Check-in</span></strong>
-                                    </div>
-                                        
-                                </div> 
-                            </div>  
-                        </div>
-                    );
+                let checkInDateObject = new Date(reviewBooking.checkInDate);
+                if(cancelPolicy.from!=undefined && cancelPolicy.from!=null && cancelPolicy.from!=''){
+                    console.log(cancelDateObject);
+                    console.log(checkInDateObject);
+                    if(cancelDateObject==nextDay){
+                        return (
+                            <div className="container d-flex align-items-center">
+                                <div className="progresCover">
+                                    <div className="progresbar">
+                                        <span className="progRefund">Refundable</span>
+                                        <div className="steps">
+                                            <span className="progCircle"></span>
+                                            <strong>Now</strong>
+                                        </div>
+                                        <span className="line"></span>
+                                        <span className="line"></span>
+                                        <div className="steps">                                    
+                                            <span className="progCircle"></span>
+                                            <strong>{checkInDateStart} | {reviewBooking.checkInTime} <span>Check-in</span></strong>
+                                        </div>
+                                            
+                                    </div> 
+                                </div>  
+                            </div>
+                        );
+                    }else{
+                        return "";
+                    }
                 }else{
                     return "";
                 }
@@ -383,28 +417,29 @@ function HotelReview(props){
                                 </div>
 
                                 <h2 className="modal__title">Add Guests</h2>
-                                <p className="smallTxt">Name should be as per official govt. ID & travelers below 18 years of age cannot travel alone</p>
+                                <p className="smallTxt">Name should be as per official govt. ID & travelers below {18} years of age cannot travel alone</p>
                                 <div className="modelInContent">
+                                    <form onSubmit={handleBookingAddCustomerForm}>
                                     <div className="row">
                                         <div className="col-md-12">
                                             <label>First Name</label>
-                                            <input type="text" value="1234567890" id="mobile"/>
+                                            <input type="text" placeholder="First Name" id="first_name_popup" name="first_name_popup" />
                                         </div>
                                         <div className="col-md-12">
                                             <label>Last Name</label>
-                                            <input type="text" value="1234567890" id="mobile"/>
+                                            <input type="text" placeholder="Last Name" id="last_name_popup" name="last_name_popup" />
                                         </div>
                                         <div className="col-md-12">
                                             <p className="check-mark mt-2 termLink">
-                                                <input type="checkbox" id="gst-terms"/>
-                                                <label for="gst-terms">Below 12 years of age</label>
+                                                <input type="checkbox" id="is_child" name="is_child"/>
+                                                <label for="is_child">Below 12 years of age</label>
                                             </p>
                                         </div>
-
                                         <div className="col-md-12">
-                                            <a href="javascript:;" className="dummyLink"><input type="submit" id="submit" value="ADD TO SAVED GUESTS" className="proUpdateBtn"/></a>
+                                            <input type="submit" id="submit" value="ADD TO SAVED GUESTS" className="proUpdateBtn"/>
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
 
                                 
@@ -412,9 +447,8 @@ function HotelReview(props){
                         </div>
                         <div className="boxWithShadow mb-3">
                             <div className="guestBox">
-                                <p className="smallTxt tgcbox">The guest checking into each hotel room must be 21 or older, present a valid Photo ID and credit card.</p>
+                                <p className="smallTxt tgcbox">The guest checking into each hotel room must be {checkInAge} or older, present a valid Photo ID and credit card.</p>
                                 <h2>Guest Name</h2>
-
                                 
                                 <div className="row formbx">
                                     <div className="col-md-6">
@@ -444,9 +478,7 @@ function HotelReview(props){
 
                                     <div className="col-md-12 mb-1">
                                         <a href="javascript:;" className="adguest-btm" id="ad-guest">+ Add Guest</a>
-                                    </div>
-                                    
-                                    
+                                    </div>                                 
 
                                 </div>
                             </div>
@@ -457,7 +489,7 @@ function HotelReview(props){
                         <div className="hr mb-2"></div>
                         <p className="smallTxt">By proceeding, I agree to purplefare’s User Agreement, Terms of Service, Supplier Terms & Conditions and Cancellation & Property Booking Policies</p>
                         
-                        <a href="thanks.html" className="continuePay grediant-multi-btn">Pay Now</a>
+                        <Link href="javascript:;" onClick={() => generateBooking()} className="continuePay grediant-multi-btn">Pay Now</Link>
 
                     </div>
                 </div>
@@ -469,30 +501,34 @@ function HotelReview(props){
                             <h3>Reservation Summary</h3>
                             <ul className="purchase-props">
                                 <li className="flex-between">
-                                    <span className="cttitle">1 Room x 1 Nights <span>Base Price</span></span>
-                                    <span className="ctdtals"><strong className="hsalePrice">$ 15000</strong></span> 
+                                    <span className="cttitle">{hotelBooking.totalRooms} Room x {hotelBooking.totalNight} Nights <span>Base Price</span></span>
+                                    <span className="ctdtals"><strong className="hsalePrice">{hotelBooking.currency} {formatCurrency(hotelBooking.amount)}</strong></span> 
                                 </li>
-                                <li className="flex-between cartDiscount">
-                                    <span className="cttitle">Total Discount</span>
-                                    <span className="ctdtals">$ 12,508</span> 
-                                </li>
-                                <li className="flex-between">
-                                    <span className="cttitle">Price after Discount</span>
-                                    <span className="ctdtals">$ 10,590</span> 
-                                </li>
+                                {hotelBooking.amount>hotelBooking.saleAmount?
+                                    <>
+                                        <li className="flex-between cartDiscount">
+                                            <span className="cttitle">Total Discount</span>
+                                            <span className="ctdtals">{hotelBooking.currency} {formatCurrency(hotelBooking.amount-hotelBooking.saleAmount)}</span> 
+                                        </li>                                
+                                        <li className="flex-between">
+                                            <span className="cttitle">Price after Discount</span>
+                                            <span className="ctdtals">{hotelBooking.currency} {formatCurrency(hotelBooking.saleAmount)}</span> 
+                                        </li>
+                                    </>
+                                :''}
                                 <li className="flex-between">
                                     <span className="cttitle">Taxes and fees</span>
-                                    <span className="ctdtals">$ 2,816</span> 
+                                    <span className="ctdtals">{hotelBooking.currency} {formatCurrency(hotelBooking.taxes)}</span> 
                                 </li>
                                 <li className="flex-between">
                                     <span className="cttitle">Total Amount to be paid</span>
-                                    <span className="ctdtals">$ 13,406</span> 
+                                    <span className="ctdtals">{hotelBooking.currency} {formatCurrency(hotelBooking.saleAmount+hotelBooking.taxes)}</span> 
                                 </li>
                                 </ul>
                         </div>
                         </div>
 
-                        <div className="cartRightBox mb-3">
+                        <div className="cartRightBox mb-3" style={{display:"none"}}>
                             <div className="cartRightBoxInn">
                                 <h3>Coupon Codes</h3>
                                 <div className="cartdiscount">

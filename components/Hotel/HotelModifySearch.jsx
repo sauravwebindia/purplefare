@@ -42,8 +42,8 @@ function HotelModifySearch(props){
 	const [checkInOut,setCheckInOut] = useState([]);
 	const [childAge, setChildAge] = useState(Router.query.childAge.split(","));
 	const [searchType, setSearchType] = useState(Router.query.searchType);
-	const [checkInDate, setCheckInDate] = Router.query.searchType=="Hotel"?useState(Router.query.checkInDate):useState(Router.query.checkin);
-	const [checkOutDate, setCheckOutDate] = Router.query.searchType=="Hotel"?useState(Router.query.checkOutDate):useState(Router.query.checkout);
+	const [checkInDate, setCheckInDate] = Router.query.checkin!=null?useState(Router.query.checkin):useState(Router.query.checkInDate);
+	const [checkOutDate, setCheckOutDate] = Router.query.checkout!=null?useState(Router.query.checkout):useState(Router.query.checkOutDate);
 	const [searchValue, setSearchValue] = useState(Router.query.searchValue);
 	const [searchSource, setSearchSource] = useState(Router.query.searchSource);
 	const [roomInputPlaceHolder,setRoomInputPlaceHolder] = useState(adultCount+" Adults, "+roomCount+" Room");

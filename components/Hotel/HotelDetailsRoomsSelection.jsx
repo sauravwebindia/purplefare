@@ -927,7 +927,7 @@ function HotelDetailsRoomsSelection(props){
                             }
                         </div>
                         <div className="dockRight">
-                            <a href="#" className="btn bnBtn" onClick={() => handleMobileRoomSelectionPopup()}>Continue</a>
+                            <a href="javascript:;" className="btn bnBtn" onClick={() => handleForBooking()}>Continue</a>
                         </div>
                     </div>
                 </div>
