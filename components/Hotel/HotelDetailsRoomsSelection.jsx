@@ -43,6 +43,7 @@ function HotelDetailsRoomsSelection(props){
     const [searchString,setSearchString] = useState("");
     const [saveSearchParams,setSearchParams] = useState("");
     const [userUniqueId,setUserUniqueId]  = useState("");
+    const [actionLoader, setActionLoader] = useState(false);
     useEffect(() => {  
         let mounted = true;
         if(localStorage.getItem('uuid')!=null && localStorage.getItem('uuid')!=undefined && localStorage.getItem('uuid')!=''){
@@ -224,6 +225,7 @@ function HotelDetailsRoomsSelection(props){
             setProceedBookingPopupText(alertText);
             return false;
         }else{
+            setActionLoader(true);
             setErrorBooking(false);
             setErrorBookingText("");           
             saveBooking();             
@@ -231,6 +233,7 @@ function HotelDetailsRoomsSelection(props){
     }
 
     const handleForceProceedBooking = () => {
+        setActionLoader(true);
         saveBooking();
     }
 
@@ -239,8 +242,10 @@ function HotelDetailsRoomsSelection(props){
         const responseData = await HotelRepository.saveBooking(params);
         if(responseData.success==1){
             Router.push(`${baseStoreURL}/hotels/review?${searchString}`);
+            setActionLoader(false);
         }else{
             return false;
+            setActionLoader(false);
         }
     }
     
@@ -996,6 +1001,9 @@ function HotelDetailsRoomsSelection(props){
                     {roomDetailPopupHTMl}   
                 </div>
             </div>   
+            <div className="loaderbg" style={{display:actionLoader==false?"none":"block"}}>
+                <img src={`${baseStoreURL}/images/purplefare-loader.gif`} alt="purplefare-loader.gif" />
+            </div>
             <ToastContainer autoClose={2000} closeOnClick draggable theme="light"/>
             </Fragment>
         );

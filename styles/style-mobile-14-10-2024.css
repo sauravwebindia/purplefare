@@ -212,13 +212,11 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   
   .wbwUs .col-sm{ flex: inherit; width: 50%;}
 
-  .expText h2{ font-size: 23px;}
-  .expText{bottom: 5px;}
-  
+
   
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .hsearchCover.sticky-element{position: inherit;}
   .hMbhCover .expText h2{font-size: 17px;}
   .aboutImgCvr{height: 195px;}
@@ -241,13 +239,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .testihbox .testi{padding: 25px 20px;}
   .testihbox .testiTitle{font-size: 18px; line-height: 22px; padding-bottom: 0;}
   .qoutes{ width: 26px; height: 26px; right: -14px; top: -18px;}
-
-  .aboutImgCvr{ margin-bottom: 25px;}
-  .wbwUs .col-sm{ margin-bottom: 20px;}
-
-  .footer .row .col-md-6{ width: 50%;}
-  .footer .row .col-md-6:first-child{ width: 100%;}
-
 }
 
 @media screen and (max-width: 575px) {
@@ -355,14 +346,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
     color:#fff;
     text-decoration: none;
   }
-
-  .hSingleSlider .owl-theme .owl-nav button { top: 29%;}
-
-  .hMbhCover .expCover a{max-height: 115px;}
-  .hMbhCover .owl-prev, .hMbhCover .owl-next { top: 25%;}
-
-  .aboutImgCvr{ height: 114px;}
-  .aboutImgCvr img{height: 73%;}
 
 }
 @media screen and (max-width: 414px) {
@@ -487,10 +470,8 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 @media screen and (max-width: 767px) {
   .hListnDtls{ position: relative;}
   .flag{ top: 15px; left: 0;}
-  .hListn .hListnImg{ /*position: initial;*/}
+  .hListn .hListnImg{ position: initial;}
   .hListn .hListnImg .hlWish{ background: #f6f6f6; top:5px; right: 5px;}
-
-
 
   .hListnDtls{padding: 10px 10px 10px 10px;}
   .w-full.mb-3{ margin-bottom: 0!important;}

@@ -78,16 +78,16 @@ function EditProfile(props){
         setUpdateLoading(true);
         const params = { 'token': auth.user.access_token, 'name': name, 'address': address, 'city': city, 'province': province, 'zipcode': zipCode, 'dob': dob, 'gender': gender, 'marital_status': marital_status};
         const responseData = await AuthRepository.updateProfile(params);
-        if (!responseData.error) {
-          toast.success(responseData.message);
-          setTimeout(
-            function () {
-              router.push('/account/profile');
-            }.bind(this),
-            250
-          );
+        if (responseData.success==1) {
+            toast.success(responseData.message);
+            setTimeout(
+                function () {
+                    router.push('/account/profile');
+                }.bind(this),
+                250
+            );
         } else {
-          toast.error(responseData.message);
+            toast.error(responseData.message);
         }
         setUpdateLoading(false);
     }

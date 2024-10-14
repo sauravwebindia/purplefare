@@ -119,17 +119,17 @@ function AccountOverview(props){
         setUpdateLoading(true);
         const params = { 'token': auth.user.access_token, 'email': email, 'phone':phone};
         const responseData = await AuthRepository.updateLoginDetails(params);
-        if (responseData.success) {
-          toast.success(responseData.message);
-          setTimeout(
-            function () {
-                seLoginPopupDisplay(!loginPopupDisplay);
-                fetchMyProfileOverview(auth.user.access_token);
-            }.bind(this),
-            250
-          );
+        if (responseData.success==1) {
+            toast.success(responseData.message);
+            setTimeout(
+                function () {
+                    seLoginPopupDisplay(!loginPopupDisplay);
+                    fetchMyProfileOverview(auth.user.access_token);
+                }.bind(this),
+                250
+            );
         } else {
-          toast.error(responseData.message);
+            toast.error(responseData.message);
         }
         setUpdateLoading(false);
     }

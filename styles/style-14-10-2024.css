@@ -1618,9 +1618,8 @@ ul.hChkList {
 }
 
 .hListnCalActin {
-  /*width: 222px;*/
-  width: 270px;
-  padding: 43px 14px 16px 14px;
+  width: 210px;
+  padding: 43px 20px 16px 20px;
   background: url(../public/images/cal-to-action-bg.jpg) #f3e0ef repeat-y;
   text-align: center;
   position: relative;
@@ -1641,7 +1640,7 @@ ul.hChkList {
 }
 
 .hListnCalActin span {
-  font-size: 13px;
+  font-size: 14px;
   color: #c9248a;
   display: block;
   text-align: center;
@@ -1716,13 +1715,10 @@ ul.hChkList {
 .hListn .owl-item{ width: 220px; height: 180px; display: flex;}
 .hListn .item{ width: 100%;}
 .hListn .hListnImg img{ width: 100%; height: 100%;}
-.hlWish{z-index: 9;}
+.hlWish{z-index: 1;}
 .cd-breadcrumb li > *, .cd-multi-steps li > *{font-size: 12px;}
 .hListn .owl-theme .owl-dots .owl-dot span{ margin: 5px 3px!important;}
 
-@media (max-width: 991px) {
-  .hListnImg .hlWish{top: 8px; z-index: 8;}
-}
 @media (max-width: 769px) {
 .listing { padding-top: 22px;}
 .cd-breadcrumb li > *, .cd-multi-steps li > * {font-size: 12px!important;}
@@ -6370,23 +6366,3 @@ p {
     display: block;
   }
 }
-
-
-/*LOADER CSS*/
-.loaderbg{ 
-  display: flex;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.96);
-  z-index: 9999;
-  transition: all .5s ease;
-}
-.loaderbg img{ max-height: 110px;}
-/*END LOADER CSS*/

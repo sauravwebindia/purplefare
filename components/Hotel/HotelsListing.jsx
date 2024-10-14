@@ -49,6 +49,7 @@ function HotelsListing(props){
         let mounted = true;
         let checkInDate = router.query.checkin;
         let checkOutDate = router.query.checkout;
+        localStorage.removeItem('searchParams');
         if(isMobile){
             setShowMobileFilter(false);
         }

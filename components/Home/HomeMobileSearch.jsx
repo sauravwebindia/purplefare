@@ -454,10 +454,15 @@ export default function HomeMobileSearch(){
             }
 		}
 	};
+
+	const closeMobileSearchPage = () => {
+		Router.back() ?? Router.push('/');
+	}
+	
     return(
         <div className="searchPage">
             <section className="searchPageInn">
-                <Link href={`${baseStoreURL}`} className="searchclose">X</Link>
+                <Link href="javascript:;" onClick={() => closeMobileSearchPage()} className="searchclose">X</Link>
                 <div className="row">
                     <div className="col-md-6">
                         <h1>Search Hotel</h1>

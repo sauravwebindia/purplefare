@@ -5,6 +5,9 @@ import { formatCurrency,generateTempArray } from '@/utilities/common-helpers';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import HotelRepository from '@/repositories/HotelRepository';
+import AuthRepository from '@/repositories/AuthRepository';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
 import {baseStoreURL} from '@/repositories/Repository';
 
@@ -16,16 +19,48 @@ function HotelReview(props){
     const [inclusionPopupDisplay, setInclusionPopupDisplay] = useState(false);
     const [inclusionPopupText, setInclusionPopupText] = useState("");
     const [roomDetailPopupCode,setRoomDetailPopupCode] = useState(null);
+    const [profile,setProfile] = useState(null);
     const [checkInAge,setCheckInAge] = useState("");
+    const [holderName, setHolderName] = useState("");
+    const [holderSurName,setHolderSurName] = useState("");
+    const [holderEmail, setHolderEmail] = useState("");
+    const [holderPhone, setHolderPhone] = useState("");
 	const dispatch = useDispatch();
     useEffect(() => {  
         let mounted = true;
         setLoading(true);
+        if(auth.isLoggedIn){
+            fetchMyProfile(auth.user.access_token);
+        }
         if(localStorage.getItem('uuid')!=null && localStorage.getItem('uuid')!=undefined && localStorage.getItem('uuid')!=''){           
             fetchHotelBookingForReview(localStorage.getItem('uuid'));
         }
         return () => mounted = false;
     }, []); 
+
+
+    async function fetchMyProfile(token){
+        let params = {'token':token};
+        const responseData = await AuthRepository.MyProfile(params);
+        if(responseData.success==1){
+            setProfile(responseData.data.user);
+            let user = responseData.data.user;
+            if(user.email!=''){
+                setHolderEmail(user.email);
+                let name = user.name.split(" ");
+                console.log(user.name);
+                if(name.length>0){
+                    if(name[0]!=null && name[0]!=undefined && name[0]!=''){
+                        setHolderName(name[0]);
+                    }
+                    if(name[1]!=null && name[1]!=undefined && name[1]!=''){
+                        setHolderSurName(name[1]);
+                    }
+                }
+                setHolderPhone(user.phone);
+            }
+        }
+    }
     
     function titleCase(str) {
         var splitStr = str.toLowerCase().split(' ');
@@ -207,6 +242,55 @@ function HotelReview(props){
         e.preventDefault();
     }
 
+    async function updateBooking() {
+        setUpdateLoading(true);
+        let params = "";
+        if(auth.isLoggedIn){
+            params = { 'uuid':localStorage.getItem('uuid'),'token': auth.user.access_token, 'holderFirstName': holderName, 'holderSurName': holderSurName, 'holderEmail': holderEmail, 'holderPhone': holderPhone, 'bookingId': reviewBooking.id};
+        }else{
+            params = { 'uuid':localStorage.getItem('uuid'),'token': "", 'holderFirstName': holderName, 'holderSurName': holderSurName, 'holderEmail': holderEmail, 'holderPhone': holderPhone, 'bookingId': reviewBooking.id};
+        }
+        const responseData = await HotelRepository.updateBooking(params);
+        if (responseData.success==1) {
+            toast.success(responseData.message);
+            setTimeout(
+                function () {
+                    router.push('/account/profile');
+                }.bind(this),
+                250
+            );
+        } else {
+            toast.error(responseData.message);
+        }
+        setUpdateLoading(false);
+    }
+
+    const generateBooking = (e) => {
+        if (holderName == '') {
+            flag = false;
+            toast.error('First Name field is required.');
+            return false;
+        }
+
+        if(holderEmail == ''){
+            flag = false;
+            toast.error('Email field is required');
+            return false;
+        }
+
+        if(holderPhone == ''){
+            flag = false;
+            toast.error('Mobile field is required');
+            return false;
+        }
+        
+        if(flag){
+            updateBooking();
+        }else{
+            setLoading(false);
+        }
+    }
+
     const generateRoomInclusionDetailsPopup = (code) => {
         let room;        
         let roomNewDetails = new Array();        
@@ -331,7 +415,7 @@ function HotelReview(props){
                             </div>
                             <div className="bkInfoBoxText">
                                 <div className="dhName">
-                                    <h2>About {reviewBooking.hotelName} </h2>
+                                    <h2>{reviewBooking.hotelName} </h2>
                                     <p><i className="fas fa-map-marker-alt"></i> {titleCase(hotel.address)}, {titleCase(hotel.city)}, {titleCase(hotel.country)} - <Link href={`https://maps.google.com/maps?z=12&q=loc:${hotel.lat},${hotel.lng}`} target="_blank">View on map</Link></p>
                                     <div className="hdRatingbox cartRate">
                                         <Link href="javascript:;" className="">{parseFloat(hotel.rating).toFixed(1)}</Link>
@@ -367,7 +451,6 @@ function HotelReview(props){
                                 :
                                 <h4>{reviewBooking.totalRooms} Room</h4>
                                 }
-                                <p><strong>2 Bedrooms, 1 Washroom | 2 King Beds, 1 Queen Bed, 3 Mattresses</strong></p>
                                 <div className="hr"></div>
                             </div>
                             {reviewBooking.rooms.length>0?
@@ -401,11 +484,8 @@ function HotelReview(props){
                             <div className="cartInfobox">
                                 <h2>Important Information</h2>
                                 <ul>
-                                    <li>
-                                        <span>Fully Refundable</span> until 11:59pm (property local time) on 07-08-2024. After that time hotel cancellation and change fees apply as stated in the <a className="" title="" href="" >Booking Conditions (this link opens in a modal dialog)</a>.
-                                    </li>
                                     <li>Check-in begins at {reviewBooking.checkInTime} and check-out is at {reviewBooking.checkOutTime}.</li>
-                                    <li>By selecting Book & Pay Later you agree to theBooking Conditions (this link opens in a modal dialog),<a href={`${baseStoreURL}/pages/terms-conditions`} target="_blank">Terms & Conditions</a> and <a href={`${baseStoreURL}/pages/privacy-policy`} target="_blank">Privacy Policy.</a></li>
+                                    <li>By selecting Book & Pay you agree to the Booking Conditions,<a href={`${baseStoreURL}/pages/terms-conditions`} target="_blank">Terms & Conditions</a> and <a href={`${baseStoreURL}/pages/privacy-policy`} target="_blank">Privacy Policy.</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -447,36 +527,38 @@ function HotelReview(props){
                         </div>
                         <div className="boxWithShadow mb-3">
                             <div className="guestBox">
-                                <p className="smallTxt tgcbox">The guest checking into each hotel room must be {checkInAge} or older, present a valid Photo ID and credit card.</p>
+                                {checkInAge!=''?
+                                    <p className="smallTxt tgcbox">The guest checking into each hotel room must be {checkInAge} or older, present a valid Photo ID and credit card.</p>
+                                :''}
                                 <h2>Guest Name</h2>
                                 
                                 <div className="row formbx">
                                     <div className="col-md-6">
                                         <div className="form-floating">
-                                            <input type="text" className="form-control" id="name" placeholder="Name*"/>
+                                            <input type="text" className="form-control" id="holderName" name="holderName" value={holderName} onChange={(e) => setHolderName(e.target.value)} maxLength={50} placeholder="First Name*" required={true}/>
                                             <label for="name">First Name*</label>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-floating">
-                                            <input type="text" className="form-control" id="lastname" placeholder="Last Name*"/>
+                                            <input type="text" className="form-control" id="holderSurName" name="holderSurName" value={holderSurName} onChange={(e)=> setHolderSurName(e.target.value)} maxLength={100} placeholder="Last Name*" required={true}/>
                                             <label for="lastname">Last Name*</label>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-floating">
-                                            <input type="email" className="form-control" id="email" placeholder="Email*"/>
+                                            <input type="email" className="form-control" id="holderEmail" name="holderEmail" value={holderEmail} onChange={(e) => setHolderEmail(e.target.value)} maxLength={191} placeholder="Email*" required={true}/>
                                             <label for="email">Email*</label>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-floating">
-                                            <input type="tel" className="form-control" id="mobile" placeholder="Mobile*"/>
+                                            <input type="tel" className="form-control" id="holderPhone" name="holderPhone" value={holderPhone} onChange={(e) => setHolderPhone(e.target.value)} maxLength={20} placeholder="Mobile*" required={true}/>
                                             <label for="mobile">Mobile*</label>
                                         </div>
                                     </div>
 
-                                    <div className="col-md-12 mb-1">
+                                    <div className="col-md-12 mb-1" style={{display:"none"}}>
                                         <a href="javascript:;" className="adguest-btm" id="ad-guest">+ Add Guest</a>
                                     </div>                                 
 
@@ -501,7 +583,7 @@ function HotelReview(props){
                             <h3>Reservation Summary</h3>
                             <ul className="purchase-props">
                                 <li className="flex-between">
-                                    <span className="cttitle">{hotelBooking.totalRooms} Room x {hotelBooking.totalNight} Nights <span>Base Price</span></span>
+                                    <span className="cttitle">{reviewBooking.totalRooms} Room x {reviewBooking.totalNight} Nights <span>Base Price</span></span>
                                     <span className="ctdtals"><strong className="hsalePrice">{hotelBooking.currency} {formatCurrency(hotelBooking.amount)}</strong></span> 
                                 </li>
                                 {hotelBooking.amount>hotelBooking.saleAmount?
@@ -579,6 +661,7 @@ function HotelReview(props){
                 </div>
             </div>
             {/*** END OF INCLUSION POPUP ***/}
+            <ToastContainer autoClose={2000} closeOnClick draggable theme="light"/>
             </Fragment>
         );
     }else{
