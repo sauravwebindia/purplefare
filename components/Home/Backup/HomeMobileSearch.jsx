@@ -87,7 +87,7 @@ export default function HomeMobileSearch(){
 		checkInOutArray.push(checkInCompleteDate);
 		checkInOutArray.push(checkoutCompleteDate);
 		setCheckInOut(checkInOutArray);
-		if(Router.query.searchSource!='' && Router.query.searchSource!=null && Router.query.searchSource!=undefined && Router.query.checkInDate!=null && Router.query.checkInDate!=undefined && Router.query.checkInDate!='' && Router.query.checkOutDate!=null && Router.query.checkOutDate!='' && Router.query.searchType!='' && Router.query.searchType!=null && Router.query.checkOutDate!=undefined){
+		if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
 			setSearchBtnCursor("");
 			setSearchBtnDisable("");
 		}
@@ -363,8 +363,6 @@ export default function HomeMobileSearch(){
 		setDatePickerCount(0);
 		setDatepickerArray([]);
 		setIsOpen(!isOpen);
-		setSearchBtnCursor("");
-		setSearchBtnDisable("");
 	}
 
 	const handleRangeDatePicker = (value) => {
@@ -555,11 +553,7 @@ export default function HomeMobileSearch(){
                 </div>
 
                 <div className="w-full mt-2 mb-0 flex justify-content-center">
-                   	{searchType=='City'?
-					<Link target="_blank" href={`${baseStoreURL}/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md searchBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Find Your Hotel</Link>
-					:
-					<Link target="_blank" href={`${baseStoreURL}/hotels/hotel-details/${searchValue}/${Math.floor(Math.random() * 10)}/dbbc6a8d58d3c592c419a77caefc0147-${searchSource}?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md findBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Find Your Hotel</Link>
-					}
+                    <Link target="_blank" href={`${baseStoreURL}/hotels/hotel-listing/?checkin=${checkInDate}&checkout=${checkOutDate}&searchType=${searchType}&searchValue=${searchValue}&searchSource=${searchSource}&cityName=${text}&rooms=${roomCount}&adults=${adultCount}&child=${childCount}&childAge=${childAge}`} className="rounded-md searchBtn" style={{pointerEvents:searchBtnDisable,cursor:searchBtnCursor}}>Find Your Hotel</Link>
                 </div>
             </section>
         </div>
