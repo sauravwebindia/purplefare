@@ -492,12 +492,14 @@ function HotelDetailsRoomsSelection(props){
             <div className="dromtypeLeft">
                 {roomDetails['images']!=null?
                 <div className="hdgalleryRoomMobile">
-                    <div className="hdgmroomInn">
-                        {roomDetails['images'].map((item,i) => (
-                            <div className="hdgroomSlide" key={i}>
-                                <img src={`${item.image_base_url}${item.path}`} alt={`${item.roomCode}`}/>
-                            </div>
-                        ))}
+                    <div className="hdgmroomInn">                   
+                        <div className="hdgroomSlide">
+                            <OwlCarousel className='owl-theme' responsive={responsiveObject} slideBy={1} loop={true} lazyLoad={true} autoplay={true} dots={true} margin={10} navText={['<a href="javascript:void(0);" class="ssArrow lSlideArrow"><img src="'+baseStoreURL+'/images/home/left-slider-arrow.png" alt="left-slider-arrow.png" class="img-fluid"/></a>','<a href="javascript:void(0);" class="ssArrow rSlideArrow"><img src="'+baseStoreURL+'/images/home/right-slider-arrow.png" alt="right-slider-arrow.png" class="img-fluid" /></a>']} nav>
+                            {roomDetails['images'].map((item,i) => (
+                                <img  key={i} src={`${item.image_base_url}${item.path}`} alt={`${item.roomCode}`}/>
+                            ))}
+                            </OwlCarousel>
+                        </div>                        
                     </div>
                 </div>
                 :''}
