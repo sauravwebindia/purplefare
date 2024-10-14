@@ -496,9 +496,15 @@ function HotelsListing(props){
                             }
                             <span className="hInfo">1 Room / Per Night</span>
                             {bookingNights==1?
+                                router.query.rooms>1?
+                                <span className="totalPrice">{bookingNights} Night / {router.query.rooms} Rooms: {item.currency} {formatCurrency(item.sale_price*router.query.rooms*bookingNights)}</span>
+                                :
                                 <span className="totalPrice">{bookingNights} Night: {item.currency} {formatCurrency(item.sale_price*router.query.rooms*bookingNights)}</span>
                             :
-                            <span className="totalPrice">{bookingNights} Nights: {item.currency} {formatCurrency(item.sale_price*router.query.rooms*bookingNights)}</span>
+                                router.query.rooms>1?
+                                <span className="totalPrice">{bookingNights} Nights / {router.query.rooms} Rooms: {item.currency} {formatCurrency(item.sale_price*router.query.rooms*bookingNights)}</span>
+                                :
+                                <span className="totalPrice">{bookingNights} Nights: {item.currency} {formatCurrency(item.sale_price*router.query.rooms*bookingNights)}</span>
                             }
                             <Link target="_blank" href={`${baseStoreURL}${item.hotel_url}`} className="btn hButton">See Availability </Link>
                         </div>
