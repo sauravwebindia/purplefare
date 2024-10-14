@@ -25,6 +25,7 @@ function HotelReview(props){
     const [holderSurName,setHolderSurName] = useState("");
     const [holderEmail, setHolderEmail] = useState("");
     const [holderPhone, setHolderPhone] = useState("");
+    const [actionLoader, setActionLoader] = useState(false);
 	const dispatch = useDispatch();
     useEffect(() => {  
         let mounted = true;
@@ -118,22 +119,38 @@ function HotelReview(props){
                 let nextDayCancellation = nextDay.toDateString(); 
                 let date = new Date(cancelItem.from).toDateString();
                 let checkInDateStart = new Date(reviewBooking.checkInDate).toDateString();
+                let checkInDateObject = new Date(reviewBooking.checkInDate);
                 if(rateItem!=undefined && rateItem!=null && rateItem!=''){
-                    if(cancelItem.new_amount==rateItem.new_net && date==checkInDateStart){
+                    if(cancelDateObject>new Date() && cancelDateObject<checkInDateObject){
+                        if(cancelItem.new_amount==rateItem.new_net && date!=checkInDateStart){
+                            return (
+                                <>
+                                <li key={k}>Free Cancellation before {date}</li>
+                                {cancelItem.new_amount==rateItem.new_net?
+                                <li key={k}><span className="text-red">Non Refundable after {date}</span></li>
+                                :
+                                <li key={k}>Cancellation charge start from {nextDayCancellation} {currencySign} {formatCurrency(cancelItem.new_amount)}</li>
+                                }
+                                </>
+                            );
+                        }else if(cancelItem.new_amount==rateItem.new_net && date==checkInDateStart){
+                            return(<li key={k}><span className="text-red">Non Refundable</span></li>);
+                        }else if(date<checkInDateStart){
+                            return(<li key={k}><span className="text-red">Non Refundable</span></li>);
+                        }else if(cancelItem.new_amount==rateItem.new_net && date!=checkInDateStart){
+                            return (
+                                <>
+                                <li key={k}>Free Cancellation before {date}</li>
+                                {cancelItem.new_amount==rateItem.new_net?
+                                <li key={k}><span className="text-red">Non Refundable after {date}</span></li>
+                                :
+                                <li key={k}>Cancellation charge start from {nextDayCancellation} {currencySign} {formatCurrency(cancelItem.new_amount)}</li>
+                                }
+                                </>
+                            );
+                        }
+                    }else{
                         return(<li key={k}><span className="text-red">Non Refundable</span></li>);
-                    }else if(date<checkInDateStart){
-                        return(<li key={k}><span className="text-red">Non Refundable</span></li>);
-                    }else if(cancelItem.new_amount==rateItem.new_net && date!=checkInDateStart){
-                        return (
-                            <>
-                            <li key={k}>Free Cancellation before {date}</li>
-                            {cancelItem.new_amount==rateItem.new_net?
-                            <li key={k}><span className="text-red">Non Refundable after {date}</span></li>
-                            :
-                            <li key={k}>Cancellation charge start from {nextDayCancellation} {currencySign} {formatCurrency(cancelItem.new_amount)}</li>
-                            }
-                            </>
-                        );
                     }
                 }else{
                     return (
@@ -243,29 +260,32 @@ function HotelReview(props){
     }
 
     async function updateBooking() {
-        setUpdateLoading(true);
+        setActionLoader(true);
         let params = "";
         if(auth.isLoggedIn){
-            params = { 'uuid':localStorage.getItem('uuid'),'token': auth.user.access_token, 'holderFirstName': holderName, 'holderSurName': holderSurName, 'holderEmail': holderEmail, 'holderPhone': holderPhone, 'bookingId': reviewBooking.id};
+            params = { 'customerId':'','uuid':localStorage.getItem('uuid'),'token': auth.user.access_token, 'holderFirstName': holderName, 'holderSurName': holderSurName, 'holderEmail': holderEmail, 'holderPhone': holderPhone, 'bookingId': reviewBooking.id};
         }else{
-            params = { 'uuid':localStorage.getItem('uuid'),'token': "", 'holderFirstName': holderName, 'holderSurName': holderSurName, 'holderEmail': holderEmail, 'holderPhone': holderPhone, 'bookingId': reviewBooking.id};
+            params = {  'customerId':'','uuid':localStorage.getItem('uuid'),'token': "", 'holderFirstName': holderName, 'holderSurName': holderSurName, 'holderEmail': holderEmail, 'holderPhone': holderPhone, 'bookingId': reviewBooking.id};
         }
         const responseData = await HotelRepository.updateBooking(params);
         if (responseData.success==1) {
             toast.success(responseData.message);
+            setActionLoader(false);
             setTimeout(
                 function () {
-                    router.push('/account/profile');
+                    router.push(responseData.redirect_url);
                 }.bind(this),
                 250
             );
         } else {
+            setActionLoader(false);
             toast.error(responseData.message);
         }
-        setUpdateLoading(false);
+        setActionLoader(false);
     }
 
     const generateBooking = (e) => {
+        let flag = true;
         if (holderName == '') {
             flag = false;
             toast.error('First Name field is required.');
@@ -364,9 +384,7 @@ function HotelReview(props){
                 let checkInDateStart = new Date(reviewBooking.checkInDate).toDateString();
                 let checkInDateObject = new Date(reviewBooking.checkInDate);
                 if(cancelPolicy.from!=undefined && cancelPolicy.from!=null && cancelPolicy.from!=''){
-                    console.log(cancelDateObject);
-                    console.log(checkInDateObject);
-                    if(cancelDateObject==nextDay){
+                    if(cancelDateObject>new Date() && cancelDateObject<checkInDateObject){
                         return (
                             <div className="container d-flex align-items-center">
                                 <div className="progresCover">
@@ -380,7 +398,7 @@ function HotelReview(props){
                                         <span className="line"></span>
                                         <div className="steps">                                    
                                             <span className="progCircle"></span>
-                                            <strong>{checkInDateStart} | {reviewBooking.checkInTime} <span>Check-in</span></strong>
+                                            <strong>{date}</strong>
                                         </div>
                                             
                                     </div> 
@@ -661,6 +679,9 @@ function HotelReview(props){
                 </div>
             </div>
             {/*** END OF INCLUSION POPUP ***/}
+            <div className="loaderbg" style={{display:actionLoader==false?"none":"block"}}>
+                <img src={`${baseStoreURL}/images/purplefare-loader.gif`} alt="purplefare-loader.gif" />
+            </div>
             <ToastContainer autoClose={2000} closeOnClick draggable theme="light"/>
             </Fragment>
         );

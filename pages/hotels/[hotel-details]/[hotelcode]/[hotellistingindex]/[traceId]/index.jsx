@@ -1,6 +1,6 @@
 import React, {useEffect,useState,Fragment} from 'react';
 import { useRouter } from 'next/router'; 
-import { baseUrl } from '@/repositories/Repository';
+import { baseStoreURL, baseUrl } from '@/repositories/Repository';
 import NavHeader from '@/components/layouts/NavHeader';
 import HotelStickSearch from '@/components/Hotel/HotelStickSearch';
 import Breadcrumb from '@/components/layouts/Breadcrumb';
@@ -27,6 +27,7 @@ const HotelDetails = (props) => {
     const dispatch = useDispatch();
     const [hotelDetails,setHotelDetails] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isRoomLoaded,setIsRoomLoaded] = useState(false);
     useEffect(() => {  
         let mounted = true;
         setLoading(true);
@@ -63,9 +64,10 @@ const HotelDetails = (props) => {
                             Router.push('/');
                         }
                         if(searchParams!='' && searchParams!=null && searchParams!=undefined){
+                            setIsRoomLoaded(true);
                             fetchHotelRooms(searchParams);
-                            setHotelDetails(props.props.data.data.hotel);
-                            setLoading(false);
+                            setHotelDetails(props.props.data.data.hotel);                            
+                            setIsRoomLoaded(false);
                         }                        
                     }else{
                         Router.push('/');
@@ -79,11 +81,11 @@ const HotelDetails = (props) => {
         }else{
             Router.push('/');
         }
-        setLoading(false);
         return () => mounted = false;
     }, []);  
 
     async function fetchHotelRooms(searchParams){
+        setLoading(true);
         let searchObject = searchParams;
         if(searchObject.searchSource=='HotelBeds'){
             const responseData = await HotelRepository.fetchHotelBedsRooms(searchObject);
@@ -96,14 +98,20 @@ const HotelDetails = (props) => {
                 if(responseData.data.rooms.length>0){
                     dispatch(addRoomItem(responseData.data.rooms));
                 }
+                setIsRoomLoaded(false);
+                setLoading(false);
+            }else{
+                setLoading(false);
+                setIsRoomLoaded(false);
             }
         }
+        setLoading(false);
     }
 
     if(!loading){
         if (isMobile) {
             return(
-                <Fragment>
+                <Fragment> 
                     <NavHeader/>
                     <HotelStickSearch/>
                     <section className="innerPage">
@@ -133,9 +141,7 @@ const HotelDetails = (props) => {
                                             <HotelDetailsRoomsSelection hotel={hotelDetails}/>
                                             <HotelAboutOverview hotel={hotelDetails}/>
                                             <HotelAmenities hotel={hotelDetails}/>
-                                            <HotelLocationMap hotel={hotelDetails}/>
                                             <HotelBookingPolicy hotel={hotelDetails}/>
-                                            <HotelReviewsRatings hotel={hotelDetails}/>
                                             <MobileStickyHotelPrice hotel={hotelDetails}/>
                                         </div>
                                     </div>
@@ -148,7 +154,7 @@ const HotelDetails = (props) => {
         }else{              
             return (            
                 <Fragment>
-                    <NavHeader/>
+                    <NavHeader/>                    
                     <HotelStickSearch/>
                     <HotelModifySearch/>
                     <section className="innerPage">
@@ -177,9 +183,7 @@ const HotelDetails = (props) => {
                                             <HotelDetailsRoomsSelection hotel={hotelDetails}/>
                                             <HotelAboutOverview hotel={hotelDetails}/>
                                             <HotelAmenities hotel={hotelDetails}/>
-                                            <HotelLocationMap hotel={hotelDetails}/>
                                             <HotelBookingPolicy hotel={hotelDetails}/>
-                                            <HotelReviewsRatings hotel={hotelDetails}/>
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +199,9 @@ const HotelDetails = (props) => {
         ));
         return (            
             <Fragment>
-                {skeletonView}
+            <div className="loaderbg">
+                <img src={`${baseStoreURL}/images/purplefare-loader.gif`} alt="purplefare-loader.gif" />
+            </div>
             </Fragment>
         );
     }

@@ -586,22 +586,38 @@ function HotelDetailsRoomsSelection(props){
                 let nextDayCancellation = nextDay.toDateString(); 
                 let date = new Date(cancelItem.from).toDateString();
                 let checkInDateStart = new Date(Router.query.checkInDate).toDateString();
+                let checkInDateObject = new Date(Router.query.checkInDate);
                 if(rateItem!=undefined && rateItem!=null && rateItem!=''){
-                    if(cancelItem.new_amount==rateItem.new_net && date==checkInDateStart){
+                    if(cancelDateObject>new Date() && cancelDateObject<checkInDateObject){
+                        if(cancelItem.new_amount==rateItem.new_net && date!=checkInDateStart){
+                            return (
+                                <>
+                                <li key={k}>Free Cancellation before {date}</li>
+                                {cancelItem.new_amount==rateItem.new_net?
+                                <li key={k}><span className="text-red">Non Refundable after {date}</span></li>
+                                :
+                                <li key={k}>Cancellation charge start from {nextDayCancellation} {currencySign} {formatCurrency(cancelItem.new_amount)}</li>
+                                }
+                                </>
+                            );
+                        }else if(cancelItem.new_amount==rateItem.new_net && date==checkInDateStart){
+                            return(<li key={k}><span className="redColor">Non Refundable</span></li>);
+                        }else if(date<checkInDateStart){
+                            return(<li key={k}><span className="redColor">Non Refundable</span></li>);
+                        }else if(cancelItem.new_amount==rateItem.new_net && date!=checkInDateStart){
+                            return (
+                                <>
+                                <li key={k}>Free Cancellation before {date}</li>
+                                {cancelItem.new_amount==rateItem.new_net?
+                                <li key={k}><span className="redColor">Non Refundable after {date}</span></li>
+                                :
+                                <li key={k}>Cancellation charge start from {nextDayCancellation} {currencySign} {formatCurrency(cancelItem.new_amount)}</li>
+                                }
+                                </>
+                            );
+                        }
+                    }else{
                         return(<li key={k}><span className="redColor">Non Refundable</span></li>);
-                    }else if(date<checkInDateStart){
-                        return(<li key={k}><span className="redColor">Non Refundable</span></li>);
-                    }else if(cancelItem.new_amount==rateItem.new_net && date!=checkInDateStart){
-                        return (
-                            <>
-                            <li key={k}>Free Cancellation before {date}</li>
-                            {cancelItem.new_amount==rateItem.new_net?
-                            <li key={k}><span className="redColor">Non Refundable after {date}</span></li>
-                            :
-                            <li key={k}>Cancellation charge start from {nextDayCancellation} {currencySign} {formatCurrency(cancelItem.new_amount)}</li>
-                            }
-                            </>
-                        );
                     }
                 }else{
                     return (
