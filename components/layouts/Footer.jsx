@@ -28,8 +28,8 @@ export default function Footer(){
 								<h2>Quick Links</h2>
 								<ul>
 									<li><a href={`${baseStoreURL}/pages/about-us`}>About us</a></li>
-									<li><a href={`${baseStoreURL}/pages/careers`}>Careers</a></li>
-									<li><a href={`${baseStoreURL}/pages/privacy-policy`}>Privacy</a></li>
+									<li style={{display:"none"}}><a href={`${baseStoreURL}/pages/careers`}>Careers</a></li>
+									<li><a href={`${baseStoreURL}/pages/privacy-policy`}>Privacy Policy</a></li>
 									<li><a href={`${baseStoreURL}/pages/terms-conditions`}>Terms of use</a></li>
 								</ul>
 							</div>
@@ -38,9 +38,9 @@ export default function Footer(){
 							<div className="footer-tags">
 								<h2>Services</h2>
 								<ul>
-									<li><a href="#">Flights</a></li>
-									<li><a href="#">Hotels</a></li>
-									<li><a href="#">Holiday Packages</a></li>
+									<li><a href={`${baseStoreURL}`}>Hotels</a></li>
+									<li style={{display:"none"}}><a href="#">Flights</a></li>
+									<li style={{display:"none"}}><a href="#">Holiday Packages</a></li>
 								</ul>
 							</div>
 						</div>
@@ -48,9 +48,9 @@ export default function Footer(){
 							<div className="footer-tags">
 								<h2>Customer service</h2>
 								<ul>
-									<li><a href={`${baseStoreURL}/pages/contact-us`}>Contact us</a></li>
-									<li><a href="#">Help center</a></li>
-									<li><a href="#">Feedback</a></li>
+									<li><a href={`${baseStoreURL}/pages/contact-us`}>Contact Us</a></li>
+									<li style={{display:"none"}}><a href="#">Help center</a></li>
+									<li><a href={`${baseStoreURL}/pages/feedback`}>Feedback</a></li>
 								</ul>
 							</div>
 						</div>
