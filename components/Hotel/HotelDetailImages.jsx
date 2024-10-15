@@ -102,7 +102,7 @@ function HotelDetailImages(props){
 
     async function fetchHotelRooms(searchParams){
         let searchObject = searchParams;
-        if(searchObject.searchSource=='HotelBeds'){
+        if(searchObject.searchSource=='Alpha'){
             setAdults(searchObject.adults);
             setChild(searchObject.child);
             searchObject.hotelCode = Router.query.hotelcode;            

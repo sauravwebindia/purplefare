@@ -602,7 +602,7 @@ function HotelReview(props){
                             <ul className="purchase-props">
                                 <li className="flex-between">
                                     <span className="cttitle">{reviewBooking.totalRooms} Room x {reviewBooking.totalNight} Nights <span>Base Price</span></span>
-                                    <span className="ctdtals"><strong className="hsalePrice">{hotelBooking.currency} {formatCurrency(hotelBooking.amount)}</strong></span> 
+                                    <span className="ctdtals"><strong className="hsalePrice">{hotelBooking.currency} {formatCurrency(parseFloat(hotelBooking.amount)-parseFloat(hotelBooking.taxes))}</strong></span> 
                                 </li>
                                 {hotelBooking.amount>hotelBooking.saleAmount?
                                     <>
@@ -612,7 +612,7 @@ function HotelReview(props){
                                         </li>                                
                                         <li className="flex-between">
                                             <span className="cttitle">Price after Discount</span>
-                                            <span className="ctdtals">{hotelBooking.currency} {formatCurrency(hotelBooking.saleAmount)}</span> 
+                                            <span className="ctdtals">{hotelBooking.currency} {formatCurrency(parseFloat(hotelBooking.saleAmount)-parseFloat(hotelBooking.taxes))}</span> 
                                         </li>
                                     </>
                                 :''}
@@ -622,7 +622,7 @@ function HotelReview(props){
                                 </li>
                                 <li className="flex-between">
                                     <span className="cttitle">Total Amount to be paid</span>
-                                    <span className="ctdtals">{hotelBooking.currency} {formatCurrency(parseFloat(hotelBooking.saleAmount)+parseFloat(hotelBooking.taxes))}</span> 
+                                    <span className="ctdtals">{hotelBooking.currency} {formatCurrency(hotelBooking.saleAmount)}</span> 
                                 </li>
                                 </ul>
                         </div>

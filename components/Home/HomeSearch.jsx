@@ -1,4 +1,4 @@
-import React, {useState,useEffect, Fragment} from 'react';
+import React, {useState,useEffect, useRef, Fragment} from 'react';
 import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import Tabs from '@mui/material/Tabs';
@@ -75,24 +75,39 @@ function HomeSearch(){
 	const [datepickerCount, setDatePickerCount] = useState(0);
 	const [autocompleteLoading, setAutoCompleteLoading] = useState(false);
 	const [isShrunk, setIsShrunk] = useState(false);
+	const [showDropdown, setShowDropdown] = useState(false);
+  	// create a React ref for the dropdown element
+  	const dropdown = useRef(null);
 
 	useEffect(() => {  
         let mounted = true;
 		const handleScroll = () => {
 			setIsShrunk(window.scrollY > 50);
 		};
-	
+
+		if (!showDropdown) return;
+		function handleClick(event) {
+			if (dropdown.current && !dropdown.current.contains(event.target)) {
+				setShowDropdown(false);
+				setIsOpen(false);
+			}
+		}
+		window.addEventListener("click", handleClick);
+		// clean up
 		// Attach scroll event listener
 		window.addEventListener("scroll", handleScroll);
 		window.addEventListener("touchmove", handleScroll); // for touch devices
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
 			window.removeEventListener("touchmove", handleScroll);
+			window.removeEventListener("click", handleClick);
 			mounted = false;
 		};
-	}, []);
+	}, [showDropdown]);
 
 	const handleAdultDropdown = () => {
+		setIsOpen(false);
+		setShowDropdown(true);
 		setAdultDropdownToogle(true);
 	}
 	const handleChange = (event, newValue) => {
@@ -100,6 +115,7 @@ function HomeSearch(){
 	};
 
 	const onTextChanged = (e) => {
+		setIsOpen(false);	
 		try{
 			localStorage.removeItem('cityName');
 			localStorage.removeItem('traceId');
@@ -111,7 +127,8 @@ function HomeSearch(){
 			if(e.target!=null && e.target!=undefined && e.target!=''){
 				if(e.target.value!=null && e.target.value!=undefined && e.target.value!=''){
 					const lowercasedValue = e.target.value.toLowerCase().trim();
-					if(e.target.value.length>2){
+					if(e.target.value.length>2){		
+						setIsOpen(false);	
 						setAutoCompleteLoading(true);
 						fetchDestinations(lowercasedValue);
 					}
@@ -375,8 +392,22 @@ function HomeSearch(){
 				temp.push(previouseValue[i]);
 			}
 			temp.push(value);
-			setCheckInOut(temp);
-			handleCheckInOut(temp);
+			let checkIn = temp[0];
+			let checkOut = temp[1];
+			if(new Date(checkIn)< new Date(checkOut)){
+				setCheckInOut(temp);
+				handleCheckInOut(temp);
+			}else{
+				let tempVar = checkIn;
+				temp = new Array();
+				temp.push(checkOut);
+				temp.push(checkIn);
+				checkIn = checkOut;
+				checkOut = tempVar;
+				setDatepickerArray(temp);
+				setCheckInOut(temp);
+				handleCheckInOut(temp);
+			}			
 		}else if(previouseValue.length==0){
 			temp.push(value);
 		}
@@ -398,7 +429,16 @@ function HomeSearch(){
 			setCheckInDate(checkInDateString);			
 		}
 		if(count==2){
-			let checkOut = value;
+			let checkIn = temp[0];
+			let checkIndDate = new Date(checkIn);
+			let checkInDateString = checkIndDate.toLocaleDateString("en-US", { // you can use undefined as first argument
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+			});
+			setCheckInDate(checkInDateString);
+
+			let checkOut = temp[1];
 			let checkOutdDate = new Date(checkOut);
 			let checkOutDateString = checkOutdDate.toLocaleDateString("en-US", { // you can use undefined as first argument
 				year: "numeric",
@@ -407,12 +447,15 @@ function HomeSearch(){
 			});
 			setCheckOutDate(checkOutDateString);
 			setIsOpen(!isOpen);
-			setAdultDropdownToogle(true);	
-			if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+			if(searchSource!='' && searchSource!=null && searchSource!=undefined){
 				setSearchBtnCursor("");
-				setSearchBtnDisable("");		
+				setSearchBtnDisable("");	
 			}
 		}
+	}
+
+	const onExitDatepicker = (e) => {
+		setIsOpen(false);
 	}
 
 	const handleCheckInOut = (value) => {
@@ -441,13 +484,14 @@ function HomeSearch(){
 	}
 
 	const handleInputChange = (event, value) => {
+		setIsOpen(false);		
 		if(value!=null && value!=undefined && value!=''){			
 			setSearchType(value.searchType);
 			setText(value.label);
 			localStorage.setItem('cityName',value.label);
 			setSearchValue(value.id);
 			setSearchSource(value.source);
-			if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+			if(checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && checkOutDate!=undefined){
 				setSearchBtnCursor("");
 				setSearchBtnDisable("");		
 			}
@@ -491,7 +535,7 @@ function HomeSearch(){
 						  <Tab className="htabIcons htCruiseIcon" label="Cruise" id="simple-tab-3" aria-controls="simple-tabpanel-3"/>
 						  <Tab className="htabIcons htHotelPackIcon" label="Holiday Packages" id="simple-tab-4" aria-controls="simple-tabpanel-4"/>
 						</Tabs>
-						<CustomTabPanel value={value} index={0} className="tab-content borderRadiComman tabinn">
+						<CustomTabPanel value={value} defaultValue={value} index={0} className="tab-content borderRadiComman tabinn">
 							<form>
 								<div className="w-full mb-3 hSearchFild">
 									<Autocomplete
@@ -539,10 +583,11 @@ function HomeSearch(){
 								</div>
 								<div className="flex items-center gap-3 fildTwoCover">
 									<div className="fildTwo">
-										<DateRangePicker placeholder="Check-In & Check-Out" onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} value={checkInOut} defaultValue={checkInOut} name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" open={isOpen} format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
+										<DateRangePicker placeholder="Check-In & Check-Out" onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} defaultValue={[new Date(checkInDate),new Date(checkOutDate)]} value={[new Date(checkInDate),new Date(checkOutDate)]} name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon" open={isOpen} format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
 									</div>
-									<div className="fildTwo">
+									<div className="fildTwo" ref={dropdown} >
 										<input placeholder={roomInputPlaceHolder} readonly={true} onClick={handleAdultDropdown} className="border-0 rounded w-full adultsIcon hFormIcon"	type="text"/>
+										{showDropdown && (
 										<div className="acdropdownCover" style={{display: adultDropDownToogle? "block" : "none"}}>
 											<div className="addLine">
 												<span className="addLineTitle">Rooms</span> 
@@ -576,6 +621,7 @@ function HomeSearch(){
 											</div>
 											<div className="addLine"><button type="button" className="rounded-md findBtn right" onClick={disableAdultDropdown}>Apply</button></div>
 										</div>
+										)}
 									</div>
 								</div>
 								<div className="w-full mt-4 mb-0 flex justify-content-end hSearchBtn">
@@ -587,7 +633,7 @@ function HomeSearch(){
 								</div>
 							</form>	
 						</CustomTabPanel>
-						<CustomTabPanel value={value} index={1} className="tab-content borderRadiComman tabinn">	
+						<CustomTabPanel value={value} defaultValue={value} index={1} className="tab-content borderRadiComman tabinn">	
 							<div className="flex items-center gap-3 fildTwoCover">
 								<div className="fildTwo">
 									<input placeholder="From" className="border-0 rounded w-full searchIcon hFormIcon" type="text"/>

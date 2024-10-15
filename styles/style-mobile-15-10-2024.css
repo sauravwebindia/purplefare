@@ -180,31 +180,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   text-align: center;
   padding: 2%;
   margin-bottom: 6px;
-  position: relative;
 }
-.hServIcons .hServIconsBox:first-child:before{
-  display: none;
-}
-.hServIcons .hServIconsBox:before {
-  line-height: 10px;
-  content: 'Coming Soon';
-  background: #faa9c1;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 2px 2px;
-  font-size: 11px;
-  border-radius: 8px;
-  position: absolute;
-  bottom: -6px;
-  z-index: 9;
-  margin-top: -11px;
-  margin-bottom: -4px;
-  height: 15px;
-  left: 0;
-  right: 0;
-}
-
-
 .hServIconsBox a{ color:#424242; text-decoration: none;}
 .hServIconsBox img{
   height: 33px;
@@ -239,7 +215,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .expText h2{ font-size: 23px;}
   .expText{bottom: 5px;}
   
-  .nhBox {}
+  
 }
 
 @media screen and (max-width: 768px) {
@@ -269,16 +245,12 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .aboutImgCvr{ margin-bottom: 25px;}
   .wbwUs .col-sm{ margin-bottom: 20px;}
 
-  .footer .row .col-md-6{ width: 50%; margin-bottom: 18px;}
+  .footer .row .col-md-6{ width: 50%;}
   .footer .row .col-md-6:first-child{ width: 100%;}
-  .footerBox h2{ padding-bottom: 0;}
-
 
 }
 
 @media screen and (max-width: 575px) {
-  .modal__container{ display: block;}
-
   .expCover a{ width: 100%;}
   .hSingleSlider .ssArrow{ left: 0px;}
   .owl-next{right: 5px;}
@@ -286,9 +258,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .gdCover .lSlideArrow, .gdCover .row .lSlideArrow{ left: 0!important;}
   .hLogoCover .ssArrow, .hLogoCover .row .ssArrow{ left: 0!important;}
   .hLogoCover .rSlideArrow, .hLogoCover .row .rSlideArrow{right: 0!important; left: -12px !important;}
-  .mdRoomInfo span{width: 48%}
-
-
 }
 
 @media screen and (max-width: 480px) {
@@ -612,10 +581,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 .searchPageInn .col-md-6{ flex: 0 0 auto; width: 100%; max-width: 480px; margin-left: auto; margin-right: auto;}
 .searchPageInn .col-md-3{width: 100%; max-width: 480px; margin-left: auto; margin-right: auto;}
 }
-.searchPageInn .w-full{width: 100%; max-width: 450px; margin-left: auto; margin-right: auto;}
-.searchPageInn .w-full .searchBtn{ width: 100%; }
-.searchPageInn .findBtn{     background: #c8238b;   font-size: 16px !important;  width: 108px;}
-
 .searchPageInn .rs-input-group.rs-input-group-inside{ background: none;}
 .searchPageInn .rs-input-group.rs-input-group-inside input{ background: none;}
 /*END MOBILE SEARCH SCREEN*/
@@ -770,8 +735,8 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
       box-sizing: content-box;
       gap: 8px;
     }
-    .hdgroomSlide{ /*width: 187px;*/ width: 100%; display: flex; align-items: center;}
-    .hdgroomSlide img{max-width: 100%; max-height: 100%; display: block; border-radius: 10px;}
+    .hdgroomSlide{ width: 187px;}
+    .hdgroomSlide img{width: 100%; display: block; border-radius: 10px;}
   
   
     .hdgmInn{
@@ -881,11 +846,8 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   @media (max-width: 768px){
 
     /*7OCT2024*/
-    .mdRoomInfo span img{ display: block; margin: 0 10px 5px 0;}
-    .mdRoomInfo span{font-size: 11px; line-height: 14px; text-align: left;
-      display: flex;
-      align-items: center;
-    }
+    .mdRoomInfo span img{ display: block; margin: 0 0 5px 0;}
+    .mdRoomInfo span{font-size: 11px; line-height: 14px; text-align: left;}
     /*End 7OCT2024*/
 
 
@@ -917,8 +879,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
    @media (max-width:576px) {
     .hdgallery .owl-nav .lSlideArrow { left: -5px !important;}
     .hdgallery .owl-next{right: -8px!important;}
-
-    .mdRoomInfo span{ width: 48%;}
   }
   
   @media (max-width: 525px){
@@ -1051,7 +1011,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   .dromtypeLeft{ padding: 0;}
   .hdgmroomInn{ margin-top:10px;}
 
-  .hdgroomSlide{ width: 100%;}
+  .hdgroomSlide{ width: 94%;}
   .dtblehdLine .hcancelPolicy{ text-align: left;}
 
   .dtbleRowInsitwo .dtbleRowLine li{ padding-left: 0;}
@@ -1430,7 +1390,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   top: 10px;
   right: 10px;
   text-decoration: none;
-  background: #424242;
+  background: #c2268e;
   color: #fff;
   padding: 4px;
   border-radius: 50px;

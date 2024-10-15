@@ -69,7 +69,7 @@ function HotelsListing(props){
         let cityName = "";
         try{
             traceId = localStorage.getItem('traceId');
-            cityName = localStorage.getItem('cityName');
+            cityName = localStorage.getItem('cityName');            
         }catch(e){
             traceId = "";
             cityName = "";
@@ -433,7 +433,7 @@ function HotelsListing(props){
         if(hotelsListing.length>0){
             HotelsView = hotelsListing.map((item,i) => (
                 <div className="hListn" key={i}>
-                    <Link target="_blank" href={`${baseStoreURL}${item.hotel_url}?${hotelSearchParams}`} className="ldlink"></Link>
+                    <Link target="_blank" href={`${baseStoreURL}${item.hotel_url}`} className="ldlink"></Link>
                     <div className="hListnDtls">
                         <div className="hListnImg">
                             <span className="flag" style={{display:"none"}}>Breakfast Included</span>

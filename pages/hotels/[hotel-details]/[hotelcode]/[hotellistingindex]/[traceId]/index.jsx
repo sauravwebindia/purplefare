@@ -28,6 +28,7 @@ const HotelDetails = (props) => {
     const [hotelDetails,setHotelDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isRoomLoaded,setIsRoomLoaded] = useState(false);
+    const [roomPopupDisplay, setRoomPopupDisplay] =  useState(false);
     useEffect(() => {  
         let mounted = true;
         setLoading(true);
@@ -87,9 +88,9 @@ const HotelDetails = (props) => {
     async function fetchHotelRooms(searchParams){
         setLoading(true);
         let searchObject = searchParams;
-        if(searchObject.searchSource=='HotelBeds'){
+        if(searchObject.searchSource=='Alpha'){
             const responseData = await HotelRepository.fetchHotelBedsRooms(searchObject);
-            if(responseData.success){
+            if(responseData.success==1){
                 try{
                     localStorage.removeItem('hotel_beds_rooms'); 
                 }catch(e){
@@ -103,9 +104,14 @@ const HotelDetails = (props) => {
             }else{
                 setLoading(false);
                 setIsRoomLoaded(false);
+                setRoomPopupDisplay(true);
             }
         }
         setLoading(false);
+    }
+
+    const handleRoomPopup = (e) => {
+        setRoomPopupDisplay(false);
     }
 
     if(!loading){
@@ -149,6 +155,17 @@ const HotelDetails = (props) => {
                             </div>
                         </section>                    
                     </section>
+                    {/* ROOM NOT FOUND POPUP FOR TEXT */}
+                    <div className={`modal__container ${roomPopupDisplay==true?`show-modal`:``}`} id="text-popup-popup">
+                        <div className="modal__content modal-sm">
+                            <div className="modal__close close-modal5" title="Close" onClick={() => handleRoomPopup()}>
+                                <img src={`${baseStoreURL}/images/close.png`} alt="close.png" className="modal__img"/>
+                            </div>
+                            <h2 className="modal__title">Alert</h2>
+                            <p>No Rooms between {Router.query.checkInDate} - {Router.query.checkOutDate}</p>
+                        </div>
+                    </div>
+                    {/* END OF ROOM NOT FOUND POPUP FOR TEXT*/} 
                 </Fragment>
             );
         }else{              
@@ -190,6 +207,17 @@ const HotelDetails = (props) => {
                             </div>
                         </section>
                     </section>
+                    {/* ROOM NOT FOUND POPUP FOR TEXT */}
+                    <div className={`modal__container ${roomPopupDisplay==true?`show-modal`:``}`} id="text-popup-popup">
+                        <div className="modal__content modal-sm">
+                            <div className="modal__close close-modal5" title="Close" onClick={() => handleRoomPopup()}>
+                                <img src={`${baseStoreURL}/images/close.png`} alt="close.png" className="modal__img"/>
+                            </div>
+                            <h2 className="modal__title">Alert</h2>
+                            <p>No Rooms between {Router.query.checkInDate} - {Router.query.checkOutDate}</p>
+                        </div>
+                    </div>
+                    {/* END OF ROOM NOT FOUND POPUP FOR TEXT*/} 
                 </Fragment>
             );
         }

@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,useRef} from 'react';
 import Link from 'next/link';
 import Skeleton from '@mui/material/Skeleton';
 import Tabs from '@mui/material/Tabs';
@@ -53,6 +53,9 @@ export default function HomeMobileSearch(){
 	const [isOpen, setIsOpen] = useState(false);
 	const [datepickerCount, setDatePickerCount] = useState(0);
 	const [autocompleteLoading, setAutoCompleteLoading] = useState(false);
+	const [showDropdown, setShowDropdown] = useState(false);
+  	// create a React ref for the dropdown element
+  	const dropdown = useRef(null);
 
 	useEffect(() => {  
         let mounted = true;
@@ -91,10 +94,23 @@ export default function HomeMobileSearch(){
 			setSearchBtnCursor("");
 			setSearchBtnDisable("");
 		}
-		return () => mounted = false;
-	}, []);
+		if (!showDropdown) return;
+		function handleClick(event) {
+			if (dropdown.current && !dropdown.current.contains(event.target)) {
+				setShowDropdown(false);
+				setIsOpen(false);
+			}
+		}
+		window.addEventListener("click", handleClick);
+		return () => {
+			window.removeEventListener("click", handleClick);
+			mounted = false;
+		};
+	}, [showDropdown]);
 
 	const handleAdultDropdown = () => {
+		setIsOpen(false);
+		setShowDropdown(true);
 		setAdultDropdownToogle(true);
 	}
 	const handleChange = (event, newValue) => {
@@ -102,6 +118,8 @@ export default function HomeMobileSearch(){
 	};
 
 	const onTextChanged = (e) => {
+		setIsOpen(false);
+		setAdultDropdownToogle(false);
 		try{
 			localStorage.removeItem('cityName');
 			localStorage.removeItem('traceId');
@@ -360,9 +378,10 @@ export default function HomeMobileSearch(){
 	}
 
 	const handleDatePicker = (e) => {
+		setAdultDropdownToogle(false);
 		setDatePickerCount(0);
 		setDatepickerArray([]);
-		setIsOpen(!isOpen);
+		setIsOpen(true);
 		setSearchBtnCursor("");
 		setSearchBtnDisable("");
 	}
@@ -375,8 +394,22 @@ export default function HomeMobileSearch(){
 				temp.push(previouseValue[i]);
 			}
 			temp.push(value);
-			setCheckInOut(temp);
-			handleCheckInOut(temp);
+			let checkIn = temp[0];
+			let checkOut = temp[1];
+			if(new Date(checkIn)< new Date(checkOut)){
+				setCheckInOut(temp);
+				handleCheckInOut(temp);
+			}else{
+				let tempVar = checkIn;
+				temp = new Array();
+				temp.push(checkOut);
+				temp.push(checkIn);
+				checkIn = checkOut;
+				checkOut = tempVar;
+				setDatepickerArray(temp);
+				setCheckInOut(temp);
+				handleCheckInOut(temp);
+			}			
 		}else if(previouseValue.length==0){
 			temp.push(value);
 		}
@@ -398,7 +431,16 @@ export default function HomeMobileSearch(){
 			setCheckInDate(checkInDateString);			
 		}
 		if(count==2){
-			let checkOut = value;
+			let checkIn = temp[0];
+			let checkIndDate = new Date(checkIn);
+			let checkInDateString = checkIndDate.toLocaleDateString("en-US", { // you can use undefined as first argument
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+			});
+			setCheckInDate(checkInDateString);
+
+			let checkOut = temp[1];
 			let checkOutdDate = new Date(checkOut);
 			let checkOutDateString = checkOutdDate.toLocaleDateString("en-US", { // you can use undefined as first argument
 				year: "numeric",
@@ -407,10 +449,10 @@ export default function HomeMobileSearch(){
 			});
 			setCheckOutDate(checkOutDateString);
 			setIsOpen(!isOpen);
-            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
-                setSearchBtnCursor("");
-                setSearchBtnDisable("");		
-            }
+			if(searchSource!='' && searchSource!=null && searchSource!=undefined){
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");	
+			}
 		}
 	}
 
@@ -442,13 +484,15 @@ export default function HomeMobileSearch(){
 	}
 
 	const handleInputChange = (event, value) => {
+		setAdultDropdownToogle(false);
+		setIsOpen(false);
 		if(value!=null && value!=undefined && value!=''){			
 			setSearchType(value.searchType);
 			setText(value.label);
 			localStorage.setItem('cityName',value.label);
 			setSearchValue(value.id);
 			setSearchSource(value.source);
-            if(searchSource!='' && searchSource!=null && searchSource!=undefined && checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && searchType!='' && searchType!=null && searchType!=undefined){
+            if(checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && checkOutDate!=undefined){
                 setSearchBtnCursor("");
                 setSearchBtnDisable("");		
             }
@@ -516,12 +560,13 @@ export default function HomeMobileSearch(){
                     </div>
                     <div className="col-md-3">
                         <div className="">
-                            <DateRangePicker placeholder="Check-In & Check-Out" showOneCalendar={true} onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} value={checkInOut} defaultValue={checkInOut} name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon calmobbtn" open={isOpen} format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
+                            <DateRangePicker placeholder="Check-In & Check-Out" showOneCalendar={true} onOpen={(e) => handleDatePicker(e)} onSelect={(e) => handleRangeDatePicker(e)} onChange={(e) => handleCheckInOut(e)} value={[new Date(checkInDate),new Date(checkOutDate)]} defaultValue={checkInOut} name="checkinout" className="border-0 rounded w-full calenderIcon hFormIcon calmobbtn" open={isOpen} format="MM/dd/yyyy" character=" – " shouldDisableDate={combine(allowedMaxDays(7), beforeToday())}/>
                         </div>
                     </div>
                     <div className="col-md-3">
-                        <div className="sadultsBox">
+                        <div className="sadultsBox" ref={dropdown}>
                             <input placeholder={roomInputPlaceHolder} readonly={true} onClick={handleAdultDropdown} className="border-0 rounded w-full adultsIcon hFormIcon"	type="text"/>
+							{showDropdown && (
                             <div className="acdropdownCover" style={{display: adultDropDownToogle? "block" : "none"}}>
                                 <div className="addLine">
                                     <span className="addLineTitle">Rooms</span> 
@@ -555,6 +600,7 @@ export default function HomeMobileSearch(){
                                 </div>
                                 <div className="addLine"><button type="button" className="rounded-md findBtn right" onClick={disableAdultDropdown}>Apply</button></div>
                             </div>
+							)}
                         </div>
                     </div>
                 </div>

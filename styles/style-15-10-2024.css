@@ -580,8 +580,6 @@ h2.title-2 {
   font-size: 24px;
   font-weight: 300;
   text-align: center;
-
-  padding-top: 2.5rem !important;
 }
 
 .nhBox span {
@@ -934,7 +932,6 @@ h2.title-2 {
 }
 
 .testihbox .testi {
-  min-height: 323px;
   padding: 25px;
   border: 1px solid #c9c9c9;
   overflow: hidden;
@@ -2153,7 +2150,7 @@ ul.hChkList {
 .mdgBtns .mdgLeft, .mdgBtns .mdgRight{ position: relative;}
 .mdgBtns .mdgLeft img, .mdgBtns .mdgRight img{ width: 38px;}
 
-.mdRoomInfo{ display: flex; flex-wrap: wrap; justify-content: left; border-bottom: 1px solid #ccc; margin: 10px 0 0 0;}
+.mdRoomInfo{ display: flex; flex-wrap: wrap; justify-content: center; border-bottom: 1px solid #ccc; margin: 10px 0 0 0;}
 .mdRoomInfo span{ /*width: 48%;*/ width: 31%; margin: 0 1%; display: flex; margin-bottom: 6px;}
 .mdRoomInfo span img{ height: 19px; margin-right: 10px;}
 
@@ -6373,6 +6370,7 @@ p {
     display: block;
   }
 }
+
 
 /*LOADER CSS*/
 .loaderbg{ 

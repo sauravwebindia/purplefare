@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, useRef, Fragment } from 'react';
 import { useRouter } from 'next/router';
 import {baseStoreURL} from '@/repositories/Repository';
 import { DateRangePicker } from 'rsuite';
@@ -33,7 +33,7 @@ function HotelModifySearch(props){
 	const [searchBtnCursor, setSearchBtnCursor] = useState("");
     const [cityName,setCityName] = useState(Router.query.cityName);
 	const [loading, setLoading] = useState(false);	
-	const [text,setText] = useState('');
+	const [text,setText] = useState(Router.query.cityName);
 	const [destinations, setDestinations] = useState([]);
 	const [adultDropDownToogle,setAdultDropdownToogle] = useState(false);
 	const [adultCount,setAdultsCount] = useState(parseInt(Router.query.adults));
@@ -52,7 +52,12 @@ function HotelModifySearch(props){
 	const [isOpen, setIsOpen] = useState(false);
 	const [datepickerCount, setDatePickerCount] = useState(0);
 	const [autocompleteLoading, setAutoCompleteLoading] = useState(false);
+	const [showDropdown, setShowDropdown] = useState(false);
+  	// create a React ref for the dropdown element
+  	const dropdown = useRef(null);
 	const handleAdultDropdown = () => {
+		setIsOpen(false);
+		setShowDropdown(true);
 		setAdultDropdownToogle(true);
 	}
 	const handleChange = (event, newValue) => {
@@ -76,7 +81,7 @@ function HotelModifySearch(props){
 		setTimeout(function(){location.reload()},500);*/
 	}
 
-	const onTextChanged = (e) => {
+	const onTextChanged = (e) => {		
 		if(e!=null && e!=undefined && e!=''){
 			if(e.target!=null && e.target!=undefined && e.target!=''){
 				if(e.target.value!=null && e.target.value!=undefined && e.target.value!=''){
@@ -87,7 +92,9 @@ function HotelModifySearch(props){
 					}
 					setText(e.target.value);	
 					dispatch(clearHotelBooking());	
-					dispatch(getHotelBooking());		
+					dispatch(getHotelBooking());
+					setIsOpen(false);
+					setAdultDropdownToogle(false);		
 					setSearchBtnCursor("");
 					setSearchBtnDisable("");
 				}
@@ -239,17 +246,21 @@ function HotelModifySearch(props){
 						}else{
 							childAgeOutput = temp;
 						}
-						if(childAgeOutput.length>0){
+						if(childAgeOutput.length>0 && Array.isArray(childAgeOutput)){
 							childAgeOutput.pop();
 						}
 					}else{
 						childAgeOutput = temp.split(",");
-						if(childAgeOutput.length>0){
+						if(childAgeOutput.length>0 && Array.isArray(childAgeOutput)){
 							childAgeOutput.pop();
 						}
-					}					
-					let childAgeString = childAgeOutput.join(",");	
-					setChildAge(childAgeString);
+					}
+					if(childAgeOutput.length>0 && Array.isArray(childAgeOutput)){	
+						let childAgeString = childAgeOutput.join(",");	
+						setChildAge(childAgeString);
+					}else{
+						setChildAge("");
+					}
 				}
 			}else{
 				setChildAge("");
@@ -333,6 +344,7 @@ function HotelModifySearch(props){
 
 
 	const handleDatePicker = (e) => {
+		setAdultDropdownToogle(false);
 		setDatePickerCount(0);
 		setDatepickerArray([]);
 		setIsOpen(!isOpen);		
@@ -351,17 +363,20 @@ function HotelModifySearch(props){
 			temp.push(value);
 			let checkIn = temp[0];
 			let checkOut = temp[1];
-			console.log(temp);
-			if(new Date(checkIn)< new Date(checkOut)){			
+			if(new Date(checkIn)< new Date(checkOut)){
 				setCheckInOut(temp);
+				handleCheckInOut(temp);
 			}else{
-				let newTemp = new Array();
-				newTemp.push(temp[1]);
-				newTemp.push(temp[0]);
-				console.log(newTemp);
-				setCheckInOut(newTemp);
-			}
-			handleCheckInOut(temp);
+				let tempVar = checkIn;
+				temp = new Array();
+				temp.push(checkOut);
+				temp.push(checkIn);
+				checkIn = checkOut;
+				checkOut = tempVar;
+				setDatepickerArray(temp);
+				setCheckInOut(temp);
+				handleCheckInOut(temp);
+			}			
 		}else if(previouseValue.length==0){
 			temp.push(value);
 		}
@@ -383,7 +398,16 @@ function HotelModifySearch(props){
 			setCheckInDate(checkInDateString);			
 		}
 		if(count==2){
-			let checkOut = value;
+			let checkIn = temp[0];
+			let checkIndDate = new Date(checkIn);
+			let checkInDateString = checkIndDate.toLocaleDateString("en-US", { // you can use undefined as first argument
+				year: "numeric",
+				month: "2-digit",
+				day: "2-digit",
+			});
+			setCheckInDate(checkInDateString);
+
+			let checkOut = temp[1];
 			let checkOutdDate = new Date(checkOut);
 			let checkOutDateString = checkOutdDate.toLocaleDateString("en-US", { // you can use undefined as first argument
 				year: "numeric",
@@ -392,6 +416,10 @@ function HotelModifySearch(props){
 			});
 			setCheckOutDate(checkOutDateString);
 			setIsOpen(!isOpen);
+			if(searchSource!='' && searchSource!=null && searchSource!=undefined){
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");	
+			}
 		}
 	}
 
@@ -419,12 +447,17 @@ function HotelModifySearch(props){
 		setCheckOutDate(checkOutDateString);
 	}
 
-	const handleInputChange = (event, value) => {
+	const handleInputChange = (event, value) => {		
 		if(value!=null && value!=undefined && value!=''){			
 			setSearchType(value.searchType);
 			setText(value.label);
 			setSearchValue(value.id);
 			setSearchSource(value.source);
+			setIsOpen(false);
+			if(checkInDate!=null && checkInDate!=undefined && checkInDate!='' && checkOutDate!=null && checkOutDate!='' && checkOutDate!=undefined){
+				setSearchBtnCursor("");
+				setSearchBtnDisable("");		
+			}
 		}
 	};
 
@@ -433,6 +466,14 @@ function HotelModifySearch(props){
 		const handleScroll = () => {
 			setIsShrunk(window.scrollY > 50);
 		};
+		if (!showDropdown) return;
+		function handleClick(event) {
+			if (dropdown.current && !dropdown.current.contains(event.target)) {
+				setShowDropdown(false);
+				setIsOpen(false);
+			}
+		}
+		window.addEventListener("click", handleClick);
 		// Attach scroll event listener
 		window.addEventListener("scroll", handleScroll);
 		window.addEventListener("touchmove", handleScroll); // for touch devices
@@ -444,8 +485,11 @@ function HotelModifySearch(props){
         }catch(e){
             city = "";
         }
-        setCityName(city);
-		setText(city);
+		
+		if(city!='' && city!=null && city!=undefined){
+			setCityName(city);
+			setText(city);
+		}		
 		let checkInOutArray  = new Array();
 		let checkInCompleteDate = new Date(checkOutDate);
 		let checkoutCompleteDate = new Date(checkInDate);
@@ -455,9 +499,10 @@ function HotelModifySearch(props){
         return () => {
 			window.removeEventListener("scroll", handleScroll);
       		window.removeEventListener("touchmove", handleScroll);
+			window.removeEventListener("click", handleClick);
 			mounted = false;
 		};
-    }, []);
+    }, [showDropdown]);
 
     return (
 		<Fragment>
@@ -526,8 +571,9 @@ function HotelModifySearch(props){
 										</div>
 									</div>
 									<div className="col-md-3">
-										<div className="">
+										<div className="" ref={dropdown}>
 											<input placeholder={roomInputPlaceHolder} readonly={true} onClick={handleAdultDropdown} className="border-0 rounded w-full adultsIcon hFormIcon"	type="text"/>
+											{showDropdown && (
 											<div className="acdropdownCover" style={{display: adultDropDownToogle? "block" : "none"}}>
 												<div className="addLine">
 													<span className="addLineTitle">Rooms</span> 
@@ -561,6 +607,7 @@ function HotelModifySearch(props){
 												</div>
 												<div className="addLine"><button type="button" className="rounded-md findBtn right" onClick={disableAdultDropdown}>Apply</button></div>
 											</div>
+											)}
 										</div>
 									</div>
 								</div>
