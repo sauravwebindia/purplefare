@@ -200,10 +200,19 @@ function HotelDetailsRoomsSelection(props){
         if(addedAdults>searchAdults){
             error = true;
         }
+        if(addedAdults<searchAdults){
+            error = true;
+        }
         if(hotelBooking.totalRooms>searchRooms){
             error = true;
         }
+        if(hotelBooking.totalRooms<searchRooms){
+            error = true;
+        }
         if(hotelBooking.totalChild>searchChild){
+            error = true;
+        }
+        if(hotelBooking.totalChild<searchChild){
             error = true;
         }
         let alertText = "";
@@ -211,11 +220,23 @@ function HotelDetailsRoomsSelection(props){
             setErrorBooking(true);
             if(addedRooms>searchRooms){
                 alertText = `You searched for ${searchRooms} Rooms with ${searchAdults} Guests but you added ${addedRooms} Rooms with ${addedAdults} Guests.`;
-            }
-            if(addedRooms==searchRooms && addedAdults>searchAdults){
+            }else if(addedRooms<searchRooms && addedAdults<searchAdults){
+                alertText = `Current selection doesn't accommodate ${searchAdults} Guests.`;
+            }else if(addedRooms==searchRooms && addedAdults>searchAdults){
                 alertText = `Current selection doesn't accommodate ${addedAdults} Guests.`;
-            }
-            if(addedRooms<searchRooms || addedAdults<searchAdults){
+            }else if(addedRooms<searchRooms || addedAdults<searchAdults){
+                alertText = `You searched for ${searchRooms} Rooms with ${searchAdults} Guests but you added ${addedRooms} Rooms with ${addedAdults} Guests.`;
+            }else if(addedRooms==searchRooms || addedAdults<searchAdults){
+                alertText = `You searched for ${searchRooms} Rooms with ${searchAdults} Guests but you added ${addedRooms} Rooms with ${addedAdults} Guests.`;
+            }else if(addedRooms==searchRooms || addedAdults<searchAdults){
+                alertText = `You searched for ${searchRooms} Rooms with ${searchAdults} Guests but you added ${addedRooms} Rooms with ${addedAdults} Guests.`;
+            }else if(addedRooms<searchRooms || addedAdults==searchAdults){
+                alertText = `You searched for ${searchRooms} Rooms with ${searchAdults} Guests but you added ${addedRooms} Rooms with ${addedAdults} Guests.`;
+            }else if(addedRooms>searchRooms || addedAdults==searchAdults){
+                alertText = `You searched for ${searchRooms} Rooms with ${searchAdults} Guests but you added ${addedRooms} Rooms with ${addedAdults} Guests.`;
+            }else if(addedRooms>searchRooms || addedAdults>searchAdults){
+                alertText = `You searched for ${searchRooms} Rooms with ${searchAdults} Guests but you added ${addedRooms} Rooms with ${addedAdults} Guests.`;
+            }else if(addedRooms==searchRooms || addedAdults>searchAdults){
                 alertText = `You searched for ${searchRooms} Rooms with ${searchAdults} Guests but you added ${addedRooms} Rooms with ${addedAdults} Guests.`;
             }
             setErrorBookingText(alertText);
@@ -491,9 +512,9 @@ function HotelDetailsRoomsSelection(props){
         return (           
             <div className="dromtypeLeft">
                 {roomDetails['images']!=null?
-                <div className="hdgalleryRoomMobile">
-                    <div className="hdgmroomInn">                   
-                        <div className="hdgroomSlide">
+                <div className="smallImageGal">
+                    <div>                   
+                        <div>
                             <OwlCarousel className='owl-theme' responsive={responsiveObject} slideBy={1} loop={true} lazyLoad={true} autoplay={true} dots={true} margin={10} navText={['<a href="javascript:void(0);" class="ssArrow lSlideArrow"><img src="'+baseStoreURL+'/images/home/left-slider-arrow.png" alt="left-slider-arrow.png" class="img-fluid"/></a>','<a href="javascript:void(0);" class="ssArrow rSlideArrow"><img src="'+baseStoreURL+'/images/home/right-slider-arrow.png" alt="right-slider-arrow.png" class="img-fluid" /></a>']} nav>
                             {roomDetails['images'].map((item,i) => (
                                 <img  key={i} src={`${item.image_base_url}${item.path}`} alt={`${item.roomCode}`}/>

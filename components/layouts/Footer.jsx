@@ -39,8 +39,9 @@ export default function Footer(){
 								<h2>Services</h2>
 								<ul>
 									<li><a href={`${baseStoreURL}`}>Hotels</a></li>
-									<li style={{display:"none"}}><a href="#">Flights</a></li>
-									<li style={{display:"none"}}><a href="#">Holiday Packages</a></li>
+									<li><a href="#">Flights(Coming Soon)</a></li>
+									<li><a href="#">Holiday Packages(Coming Soon)</a></li>
+									<li><a href="#">Cruise(Coming Soon)</a></li>
 								</ul>
 							</div>
 						</div>

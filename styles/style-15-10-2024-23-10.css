@@ -6157,44 +6157,6 @@ input.proUpdateBtn{
 /*END CONTENT PAGES*/
 
 /*CONTACT US*/
-.contactPage{ padding-top: 15px;}
-.gradient-brand-color {
-  background: linear-gradient(56deg, rgba(243, 177, 100, 1) 0%, rgba(184, 145, 254, 1));
-  color: #fff;
-}
-.ctBtn{ font-size: 17px; letter-spacing: .2px; line-height: 26px; padding: 10px 35px;}
-
-
-.contact-info__list span.position-absolute {
-  left: 0
-}
-
-.list-style--none {
-  list-style: none;
-}
-.contact-info__wrapper {
-  overflow: hidden;
-  border-radius: .625rem .625rem 0 0;
-}
-.formShadow {
-  box-shadow: 0 1rem 3rem rgb(132 138 163 / 41%) !important;
-}
-
-@media (min-width: 1024px) {
-  .contact-form__wrapper {
-      padding: 5rem !important
-  }
-}
-
-@media (min-width: 991px) {
-  .contact-info__wrapper{border-radius: .625rem .625rem;}
-  .ctBtn{font-size: 17px!important; padding: 10px 35px!important;}
-}
-
-
-
-
-
 .contactForm{ max-width: 800px; margin: 20px auto 0 auto;}
 
 .helpCenterInn{
@@ -6247,6 +6209,7 @@ input.proUpdateBtn{
   color: #fff;
   background: linear-gradient(96deg, rgba(131, 29, 152, 1) 0%, #3d0969 100%);
 }
+
 
 /*END CONTACT US*/
 

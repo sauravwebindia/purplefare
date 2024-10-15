@@ -1,4 +1,4 @@
-import Repository, { baseStoreURL, serializeQuery } from './Repository';
+import Repository, { baseUrl ,baseStoreURL, serializeQuery } from './Repository';
 
 class StoreRepository {
     constructor(callback) {
@@ -57,6 +57,15 @@ class StoreRepository {
             })
             .catch((error) => ({ error: JSON.stringify(error) }));
         return reponse;
+    }
+
+    async saveContactQuery(params){
+        const reponse = await Repository.post(`${baseUrl}/save-contact-query`,params)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => ({ error: JSON.stringify(error) }));
+        return reponse; 
     }
 }
 

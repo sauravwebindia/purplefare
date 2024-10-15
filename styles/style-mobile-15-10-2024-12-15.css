@@ -628,16 +628,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 
 /*DETAILS*/
 @media (max-width: 992px){
-  .dtbleCover.dtbleCoverNew .dtbleRow{ border-radius: 6px;}
-  .hdgalleryRoomMobile{ max-width: 98%; margin: auto auto 14px auto!important;}
-  .hdgalleryRoomMobile .hdgroomSlide .owl-item { display: flex; align-items: center; height: 260px; overflow: hidden;}
-  .hdgalleryRoomMobile .hdgroomSlide .owl-item img{ 
-    max-height: 100%;
-    max-width: 100%;
-  }
-  .smallImageGal button.owl-next{ right: 0;}
-  .smallImageGal button.owl-next:hover{ background: none;}
-
   .aminitiesBoxInn{}
   .amiLine { width: 50%;}
 

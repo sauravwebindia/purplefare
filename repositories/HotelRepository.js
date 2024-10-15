@@ -85,6 +85,15 @@ class HotelRepository {
         return reponse; 
     }
 
+    async fetchBooking(params){
+        const reponse = await Repository.post(`${baseUrl}/fetch-hotel-booking`,params)
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => ({ error: JSON.stringify(error) }));
+        return reponse; 
+    }
+
     async fetchMyBookings(params){
         const reponse = await Repository.post(`${baseUrl}/fetch-my-bookings`,params)
         .then((response) => {

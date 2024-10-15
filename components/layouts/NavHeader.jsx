@@ -14,8 +14,8 @@ function NavHeader (props) {
 	const dispatch = useDispatch();
     const { auth } = props;
 	const [isShrunk, setIsShrunk] = useState(false);
-	const [loginUserEmail,setLoginUserEmail] = auth.isLoggedIn?useState(auth.user.user.email):useState("");
-	const [loginUserName,setLoginUserName] = auth.isLoggedIn?useState(auth.user.user.name):useState("");
+	const [loginUserEmail,setLoginUserEmail] = useState("");
+	const [loginUserName,setLoginUserName] = useState("");
 	const [isLoggedIn,setIsLoggedIn] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [showMenu, setShowMenu] = useState(false);
@@ -37,19 +37,35 @@ function NavHeader (props) {
 	useEffect(() => {  
         let mounted = true;
 		setIsLoggedIn(auth.isLoggedIn);
-		const handleScroll = () => {
-			setIsShrunk(window.scrollY > 50);
-		};
-	
-		// Attach scroll event listener
-		window.addEventListener("scroll", handleScroll);
-		window.addEventListener("touchmove", handleScroll); // for touch devices
+		if (auth.isLoggedIn) {
+			setLoginUserEmail(auth.user.user.email);
+			setLoginUserName(auth.user.user.name);
+		} else {
+			setLoginUserEmail("");
+			setLoginUserName("");
+		}
 		return () => {
-			window.removeEventListener("scroll", handleScroll);
-			window.removeEventListener("touchmove", handleScroll);
 			mounted = false;
 		};
-	}, []);
+	}, [auth]);
+
+
+	useEffect(() => {
+		let mounted = true;
+        const handleScroll = () => {
+            setIsShrunk(window.scrollY > 50);
+        };
+
+        // Attach scroll event listener
+        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("touchmove", handleScroll);
+        
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("touchmove", handleScroll);
+			mounted = false;
+        };
+    }, []);
 
 	const handleMobileMenu = () => {
 		setShowMenu(!showMenu);
@@ -239,91 +255,79 @@ function NavHeader (props) {
 	}
 
 	function AfterLogin(){
-		if(auth.isLoggedIn){
-			return (
-				<div className="logedInUser">
-					<div className="lgdUserCover lgoddbtn" onClick={handleAccountDropdown}><span className="lgdUser">{auth.user.user.name.slice(0,1)}</span><span className="lgdUserText">{loginUserName}</span> </div>
-					<ul className="logedInUserdd" style={{display: accountDropdown? "block" : "none"}}>
-						<li><img src={`${baseStoreURL}/images/user-icon.png`} alt="user-icon.png"/> <Link href={`${baseStoreURL}/account/profile`}>My Profile</Link></li>
-						<li><img src={`${baseStoreURL}/images/holiday-packages.png`} alt="holiday-packages.png"/> <Link href={`${baseStoreURL}/account/bookings`}>My Trips</Link></li>
-						<li><img src={`${baseStoreURL}/images/logout-icon.png`} alt="logout-icon.png"/> <Link href="javascript:;" onClick={(e) => handleLogout(e)}>Logout</Link></li>
-					</ul>
-				</div>
-			);
-		}else{
-			return (
-				<button type="button" className="btn me-2" onClick={handleSignInUpPopup}>
-					<img src={`${baseStoreURL}/images/home/user-icon.png`} alt="user-icon.png" /> Login
-				</button>
-			);
-		}
+		return isLoggedIn ? (
+			<div className="logedInUser">
+				<div className="lgdUserCover lgoddbtn" onClick={() => handleAccountDropdown()}><span className="lgdUser">{auth.user.user.name.slice(0,1)}</span><span className="lgdUserText">{loginUserName}</span> </div>
+				<ul className="logedInUserdd" style={{display: accountDropdown? "block" : "none"}}>
+					<li><img src={`${baseStoreURL}/images/user-icon.png`} alt="user-icon.png"/> <Link href={`${baseStoreURL}/account/profile`}>My Profile</Link></li>
+					<li><img src={`${baseStoreURL}/images/holiday-packages.png`} alt="holiday-packages.png"/> <Link href={`${baseStoreURL}/account/bookings`}>My Trips</Link></li>
+					<li><img src={`${baseStoreURL}/images/logout-icon.png`} alt="logout-icon.png"/> <Link href="javascript:;" onClick={(e) => handleLogout(e)}>Logout</Link></li>
+				</ul>
+			</div>
+		) : (
+			<button type="button" className="btn me-2" onClick={() => handleSignInUpPopup()}>
+				<img src={`${baseStoreURL}/images/home/user-icon.png`} alt="user-icon.png" /> Login
+			</button>
+		);
 	}
 
 	function MenuAfterLogin(){
-		if(auth.isLoggedIn){
-			return (
-				<Fragment>
-					<div className="navmheader">
-						<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {loginUserEmail}</Link>
-					</div>
-					<ul className="nav col-12 col-md-auto">
-						<li><Link href={`${baseStoreURL}/hotel-search`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/hotel.png`} alt="" />
-								Hotels</Link></li>
-						<li><Link href="javascript:;" className="nav-link px-2 link-secondary"><img src={`${baseStoreURL}/images/flight.png`}
-									alt="flight.png" /> Flights</Link></li>
-						<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/cruise.png`} alt="cruise.png" />
-								Cruise</Link></li>
-						<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
-									alt="holiday-packages.png" /> Holiday Packages</Link></li>
+		return isLoggedIn ? (
+			<Fragment>
+				<div className="navmheader">
+					<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {loginUserEmail}</Link>
+				</div>
+				<ul className="nav col-12 col-md-auto">
+					<li><Link href={`${baseStoreURL}/hotel-search`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/hotel.png`} alt="" />
+							Hotels</Link></li>
+					<li><Link href="javascript:;" className="nav-link px-2 link-secondary"><img src={`${baseStoreURL}/images/flight.png`}
+								alt="flight.png" /> Flights</Link></li>
+					<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/cruise.png`} alt="cruise.png" />
+							Cruise</Link></li>
+					<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
+								alt="holiday-packages.png" /> Holiday Packages</Link></li>
 
-						<li><Link href={`${baseStoreURL}/account/profile`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
-							alt="" /> My Profile</Link></li>
+					<li><Link href={`${baseStoreURL}/account/profile`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
+						alt="" /> My Profile</Link></li>
 
-						<li><Link href={`${baseStoreURL}/account/overview`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/login-details.png`}
-							alt="" />  Login Details</Link></li>
+					<li><Link href={`${baseStoreURL}/account/overview`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/login-details.png`}
+						alt="" />  Login Details</Link></li>
 
-						<li><Link href="javascript:;" onClick={(e) => handleLogout(e)} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/user-icon.png`} alt="" />
-							logout</Link></li>
-					</ul>
-				</Fragment>
-			);
-		}else{
-			return (
-				<Fragment>
-					<div className="navmheader">
-						<Link href="javascript:;" className="loginBtnMob" onClick={handleMobileSignInUpPopup}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
-					</div>
-					<ul className="nav col-12 col-md-auto">
-						<li><Link href={`${baseStoreURL}/hotel-search`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/hotel.png`} alt="" />
-								Hotels</Link></li>
-						<li><Link href="javascript:;" className="nav-link px-2 link-secondary"><img src={`${baseStoreURL}/images/flight.png`}
-									alt="flight.png" /> Flights</Link></li>
-						<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/cruise.png`} alt="cruise.png" />
-								Cruise</Link></li>
-						<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
-									alt="holiday-packages.png" /> Holiday Packages</Link></li>
-					</ul>
-				</Fragment>
-			)
-		}
+					<li><Link href="javascript:;" onClick={(e) => handleLogout(e)} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/user-icon.png`} alt="" />
+						logout</Link></li>
+				</ul>
+			</Fragment>
+		) : (
+			<Fragment>
+				<div className="navmheader">
+					<Link href="javascript:;" className="loginBtnMob" onClick={() => handleMobileSignInUpPopup()}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
+				</div>
+				<ul className="nav col-12 col-md-auto">
+					<li><Link href={`${baseStoreURL}/hotel-search`} className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/hotel.png`} alt="" />
+							Hotels</Link></li>
+					<li><Link href="javascript:;" className="nav-link px-2 link-secondary"><img src={`${baseStoreURL}/images/flight.png`}
+								alt="flight.png" /> Flights</Link></li>
+					<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/cruise.png`} alt="cruise.png" />
+							Cruise</Link></li>
+					<li><Link href="javascript:;" className="nav-link px-2 link-dark"><img src={`${baseStoreURL}/images/holiday-packages.png`}
+								alt="holiday-packages.png" /> Holiday Packages</Link></li>
+				</ul>
+			</Fragment>
+		);
 	}
 
 	function BtnAfterLogin(){
-		if(auth.isLoggedIn){
-			return (
-				<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {loginUserEmail}</Link>
-			);
-		}else{
-			return (
-				<Link href="javascript:;" className="loginBtnMob" onClick={handleMobileSignInUpPopup}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
-			);
-		}
+		return isLoggedIn ? (		
+			<Link href="javascript:;" className="loginBtnMob"><img src={`${baseStoreURL}/images/my-account/profile-pic.jpg`} alt="profile-pic.jpg" /> {loginUserEmail}</Link>
+		) : (
+			<Link href="javascript:;" className="loginBtnMob" onClick={() => handleMobileSignInUpPopup()}><img src={`${baseStoreURL}/images/user.png`} alt="CasioIndiaShop"/> Login</Link>
+		);
 	}
 
 	return (
 		<Fragment>
 		<div className="mb-2 justify-content-center mb-md-0 navboxmobile mobileMenu" style={{display: showMenu? "block" : "none"}}>
-			<a href="javascript:void(0);" className="navboxclose" onClick={handleMobileMenu}>X</a>
+			<a href="javascript:void(0);" className="navboxclose" onClick={() => handleMobileMenu()}>X</a>
 			<MenuAfterLogin/>
 		</div>
 		<header className={isShrunk ? "shrink" : "headerLine"}>
@@ -334,7 +338,7 @@ function NavHeader (props) {
 							<Link href="/" className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
 								<img src={`${baseStoreURL}/images/home/logo.png`} alt="logo.png" className="hdLogo" />
 							</Link>
-							<Link href="javascript:;" className="navbar-toggler navmobile" onClick={handleMobileMenu}>
+							<Link href="javascript:;" className="navbar-toggler navmobile" onClick={() => handleMobileMenu()}>
 								<span className="navbar-toggler-icon"></span>
 							</Link>
 							<div className="mb-2 justify-content-center mb-md-0 desktopMenu">

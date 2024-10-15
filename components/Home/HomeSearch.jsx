@@ -23,7 +23,6 @@ import match from 'autosuggest-highlight/match';
 import HotelRepository from '@/repositories/HotelRepository';
 import { useRouter } from 'next/router';
 import { baseStoreURL } from '@/repositories/Repository';
-import parseHTML from 'html-react-parser';
 import StickyObserver from '@/utilities/StickyObserver';
 
 function CustomTabPanel(props) {

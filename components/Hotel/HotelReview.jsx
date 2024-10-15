@@ -273,7 +273,7 @@ function HotelReview(props){
             setActionLoader(false);
             setTimeout(
                 function () {
-                    router.push(responseData.redirect_url);
+                    router.push(baseStoreURL+responseData.redirect_url);
                 }.bind(this),
                 250
             );
