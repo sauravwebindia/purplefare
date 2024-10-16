@@ -481,14 +481,14 @@ function HotelReview(props){
                                         </div>
                                         {room.roomAdults>1?
                                             room.roomChild>0?
-                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adults & {room.roomChild} Child</p>
+                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adults & {room.roomChild} Child {room.quantity>1?`X ${room.quantity} Rooms`:''}</p>
                                             :
-                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adults</p>
+                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adults {room.quantity>1?`X ${room.quantity} Rooms`:''}</p>
                                         :
                                             room.roomChild>0?
-                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adult & {room.roomChild} Child</p>
+                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adult & {room.roomChild} Child {room.quantity>1?`X ${room.quantity} Rooms`:''}</p>
                                             :
-                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adult</p>
+                                            <p className="smallTxt grayColor mb-2">{room.roomAdults} Adult {room.quantity>1?`X ${room.quantity} Rooms`:''}</p>
                                         }
                                         <HotelRoomFacilitiesInformation room={room}/>
                                         <HotelRoomCancellationProgressBar room={room}/>                                     

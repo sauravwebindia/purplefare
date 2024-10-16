@@ -441,14 +441,14 @@ function HotelThanks(props){
                                                 <h2>{room.roomName}</h2>
                                                 {room.roomAdults>1?
                                                     room.roomChild>0?
-                                                    <span className="smallTxt gray">{room.roomAdults} Adults & {room.roomChild} Child</span>
+                                                    <span className="smallTxt gray">{room.roomAdults} Adults & {room.roomChild} Child {room.quantity>1?`X ${room.quantity} Rooms`:''}</span>
                                                     :
-                                                    <span className="smallTxt gray">{room.roomAdults} Adults</span>
+                                                    <span className="smallTxt gray">{room.roomAdults} Adults {room.quantity>1?`X ${room.quantity} Rooms`:''}</span>
                                                 :
                                                     room.roomChild>0?
-                                                    <span className="smallTxt gray">{room.roomAdults} Adult & {room.roomChild} Child</span>
+                                                    <span className="smallTxt gray">{room.roomAdults} Adult & {room.roomChild} Child {room.quantity>1?`X ${room.quantity} Rooms`:''}</span>
                                                     :
-                                                    <span className="smallTxt gray">{room.roomAdults} Adult</span>
+                                                    <span className="smallTxt gray">{room.roomAdults} Adult {room.quantity>1?`X ${room.quantity} Rooms`:''}</span>
                                                 }
                                             </li>
                                             <li>
