@@ -110,16 +110,14 @@ export default function HomeMobileSearch(){
 
 	const handleAdultDropdown = () => {
 		setIsOpen(false);
-		setShowDropdown(true);
+		//setShowDropdown(true);
 		setAdultDropdownToogle(true);
 	}
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
 
-	const onTextChanged = (e) => {
-		setIsOpen(false);
-		setAdultDropdownToogle(false);
+	const onTextChanged = (e) => {		
 		try{
 			localStorage.removeItem('cityName');
 			localStorage.removeItem('traceId');
@@ -136,6 +134,8 @@ export default function HomeMobileSearch(){
 						fetchDestinations(lowercasedValue);
 					}
 					setText(e.target.value);
+					setIsOpen(false);
+					setAdultDropdownToogle(false);
 				}
 			}
 		}
