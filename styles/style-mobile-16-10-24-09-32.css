@@ -134,9 +134,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 
 
 /*FOOTER*/
-@media screen and (max-width: 500px) {
-  .copyContainer { display: block; text-align: center;}
-}
+
 /*END FOOTER*/
 
 /*HOME*/
@@ -217,7 +215,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 
 .tabBox{display: none;}  
 .hsearchCover .tabinn{ display: none;}
-.hsearchCover .tabBox{ display: none!important;}
+
 
   h2.title-2 { font-size: 32px;}
 
@@ -616,10 +614,7 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
 }
 .searchPageInn .w-full{width: 100%; max-width: 450px; margin-left: auto; margin-right: auto;}
 .searchPageInn .w-full .searchBtn{ width: 100%; }
-.searchPageInn .findBtn{        width: 108px;}
-.searchPage .addLine .findBtn{ font-size: 16px !important;  background: #c8238b; width:108px!important;}
-.searchPage .searchPageInn .findBtn{ font-size: 18px; width: 100%; text-align: center;}
-
+.searchPageInn .findBtn{     background: #c8238b;   font-size: 16px !important;  width: 108px;}
 
 .searchPageInn .rs-input-group.rs-input-group-inside{ background: none;}
 .searchPageInn .rs-input-group.rs-input-group-inside input{ background: none;}
@@ -895,9 +890,6 @@ a.loginBtnMob{ font-size: 18px; color: #fff; text-decoration: none;}
   
   
   @media (max-width: 768px){
-    .hsearchCover{ padding-top: 13px !important;}
-    .hsearchCover img{height: 29px; margin-right: 10px;}
-    .hsearchCover h1{font-size: 1.2rem; padding-bottom: 0px; margin-bottom: 0;}
 
     /*7OCT2024*/
     .mdRoomInfo span img{ display: block; margin: 0 10px 5px 0;}
