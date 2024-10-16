@@ -74,13 +74,31 @@ export default function HomeMobileSearch(){
 		}else{
 			setRoomCount(1);
 		}
-		setCheckInDate(Router.query.checkInDate!=undefined?Router.query.checkInDate:"");		
-		setCheckOutDate(Router.query.checkOutDate!=undefined?Router.query.checkOutDate:"");
-		setChildAge(Router.query.childAge!=undefined?Router.query.childAge.split(","):"");
-		setSearchType(Router.query.searchType!=undefined?Router.query.searchType:null);
-		setSearchValue(Router.query.searchValue!=undefined?Router.query.searchValue:null);
-		setSearchSource(Router.query.searchSource!=undefined?Router.query.searchSource:null);
-		setRoomInputPlaceHolder(adultCount+" Adults, "+roomCount+" Room");
+		if(Router.query.checkInDate!=undefined && Router.query.checkInDate!='' && Router.query.checkInDate!=null){
+			setCheckInDate(Router.query.checkInDate);		
+		}
+		if(Router.query.checkOutDate!=undefined && Router.query.checkOutDate!='' && Router.query.checkOutDate!=null){
+			setCheckOutDate(Router.query.checkOutDate!=undefined?Router.query.checkOutDate:"");
+		}
+		if(Router.query.childAge!=undefined && Router.query.childAge!='' && Router.query.childAge!=null){
+			if(Array.isArray(Router.query.childAge)){
+				setChildAge(Router.query.childAge.split(","));
+			}else{
+				setChildAge(Router.query.childAge);
+			}
+		}
+		if(Router.query.searchType!=undefined && Router.query.searchType!='' && Router.query.searchType!=null){
+			setSearchType(Router.query.searchType);
+		}
+		if(Router.query.searchValue!=undefined && Router.query.searchValue!='' && Router.query.searchValue!=null){
+			setSearchValue(Router.query.searchValue);
+		}
+		if(Router.query.searchSource!=undefined && Router.query.searchSource!='' && Router.query.searchSource!=null){
+			setSearchSource(Router.query.searchSource);
+		}
+		if(adultCount>0 && roomCount>0){
+			setRoomInputPlaceHolder(adultCount+" Adults, "+roomCount+" Room");
+		}
 		let city = Router.query.cityName;
 		if(city!=null && city!=undefined && city!=''){
 			setCityName(city);
