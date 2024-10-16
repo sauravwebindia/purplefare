@@ -14,6 +14,7 @@ export default function HotelStickSearch () {
     const [checkOutDate,setCheckOutDate] = useState(null);
     const [totalNights, setTotalNights] = useState(1);
     const [searchString,setSearchParams] = useState("");
+    const [bookingNight,setBookingNights] = useState(1);
     useEffect(() => {  
         let mounted = true;        
         let searchParams = "";
@@ -37,6 +38,11 @@ export default function HotelStickSearch () {
         setTotalAdults(router.query.adults);
         setCheckInDate(router.query.checkin!=undefined?router.query.checkin:router.query.checkInDate);
         setCheckOutDate(router.query.checkout!=undefined?router.query.checkout:router.query.checkOutDate);
+        var date1 = new Date(checkInDate);
+        var date2 = new Date(checkOutDate);
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var numberOfNights = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+        setBookingNights(numberOfNights);
         return () => mounted = false;
     }, []);
 
@@ -51,7 +57,7 @@ export default function HotelStickSearch () {
                 <Link href="javascript:;" onClick={() => router.back()}><img src={`${baseStoreURL}/images/back-button.png`} alt="back-button.png" className="dmBack" /></Link>
                 <div className="dsearch">
                     <span className="dshotelName">{cityName}</span>
-                    <span className="dsotherInfo">{checkInDate} - {checkOutDate}(1 night, {totalAdults} adults)</span>
+                    <span className="dsotherInfo">{checkInDate} - {checkOutDate}({bookingNight} night, {totalAdults} adults)</span>
                 </div>
             </div>
         </div>
