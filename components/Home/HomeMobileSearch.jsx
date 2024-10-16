@@ -82,8 +82,10 @@ export default function HomeMobileSearch(){
 		setSearchSource(Router.query.searchSource!=undefined?Router.query.searchSource:null);
 		setRoomInputPlaceHolder(adultCount+" Adults, "+roomCount+" Room");
 		let city = Router.query.cityName;
-		setCityName(city);
-		setText(city);
+		if(city!=null && city!=undefined && city!=''){
+			setCityName(city);
+			setText(city);
+		}
 		let checkInOutArray  = new Array();
 		let checkInCompleteDate = new Date(checkOutDate);
 		let checkoutCompleteDate = new Date(checkInDate);
@@ -110,8 +112,8 @@ export default function HomeMobileSearch(){
 
 	const handleAdultDropdown = () => {
 		setIsOpen(false);
-		//setShowDropdown(true);
-		setAdultDropdownToogle(true);
+		setShowDropdown(true);
+		setAdultDropdownToogle(true);		
 	}
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -130,12 +132,11 @@ export default function HomeMobileSearch(){
 				if(e.target.value!=null && e.target.value!=undefined && e.target.value!=''){
 					const lowercasedValue = e.target.value.toLowerCase().trim();
 					if(e.target.value.length>2){
+						setIsOpen(false);
 						setAutoCompleteLoading(true);
 						fetchDestinations(lowercasedValue);
 					}
 					setText(e.target.value);
-					setIsOpen(false);
-					setAdultDropdownToogle(false);
 				}
 			}
 		}
